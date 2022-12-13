@@ -1,0 +1,1 @@
+# nft-meta-widget-front
