@@ -17,10 +17,10 @@ const Dropzone = () => {
     });
   }, []);
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
-
+  const otherAttr = { directory: "", webkitdirectory: "" };
   return (
     <div {...getRootProps()}>
-      <input {...getInputProps()} />
+      <input {...getInputProps()} {...otherAttr} />
       <p>Drag 'n' drop some files here, or click to select files</p>
     </div>
   );
