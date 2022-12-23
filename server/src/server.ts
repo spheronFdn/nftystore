@@ -1,5 +1,5 @@
-import * as bodyParser from "body-parser";
-import * as cors from "cors";
+import bodyParser from "body-parser";
+import cors from "cors";
 import config from "./config/config";
 import App from "./app";
 import uploadController from "./controllers/UploadController";

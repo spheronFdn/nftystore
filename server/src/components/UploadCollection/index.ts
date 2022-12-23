@@ -1,5 +1,10 @@
 import { Request, Response, NextFunction } from "express";
+import UploadService from "./service";
 import Logger from "../../logger/logger";
+import {
+  ApiError,
+  ApiErrorTypeEnum,
+} from "../middlewares/error-handling-middleware";
 
 export async function uploadCollection(
   req: Request,
@@ -7,9 +12,30 @@ export async function uploadCollection(
   next: NextFunction
 ): Promise<void> {
   try {
-    Logger.info(`Upload Request Received: ${req}`);
+    Logger.info(`Upload Request Received: ${req.query.protocol} `);
 
-    res.status(200).json({});
+    if (!req.query.protocol) {
+      throw new ApiError(
+        ApiErrorTypeEnum.VALIDATION,
+        "Required query parameters are missing. Required query parameters are: [protocol]"
+      );
+    }
+
+    const protocol = String(req.query.protocol);
+    if (Object.values(ProtocolEnum).indexOf(protocol as ProtocolEnum) === -1) {
+      throw new ApiError(
+        ApiErrorTypeEnum.VALIDATION,
+        `Protocol '${protocol}' is not supported. Please choose from our supported protocols - 'arweave', 'ipfs-filecoin', 'ipfs-pinata'.`
+      );
+    }
+
+    const { deploymentId, url }: { deploymentId: string; url: string } =
+      await UploadService.uploadCollection(protocol, req);
+
+    res.status(200).json({
+      uploadId: deploymentId,
+      url: url,
+    });
   } catch (error) {
     Logger.error(
       `Error in ${__filename} - uploadCollection - ${error.message}`
@@ -24,7 +50,14 @@ export async function uploadCollectionStatus(
   next: NextFunction
 ): Promise<void> {
   try {
-    Logger.info(`Upload Request Received: ${req}`);
+    Logger.info(`Upload Request Received: ${req.query.uploadId} `);
+
+    if (!req.query.uploadId) {
+      throw new ApiError(
+        ApiErrorTypeEnum.VALIDATION,
+        "Required query parameters are missing. Required query parameters are: [protocol]"
+      );
+    }
 
     res.status(200).json({});
   } catch (error) {
@@ -33,4 +66,10 @@ export async function uploadCollectionStatus(
     );
     next(error);
   }
+}
+
+export enum ProtocolEnum {
+  ARWEAVE = "arweave",
+  FILECOIN = "ipfs-filecoin",
+  PINATA = "ipfs-pinata",
 }

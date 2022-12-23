@@ -1,4 +1,5 @@
-import * as express from "express";
+import fs from "fs";
+import express from "express";
 import { Application } from "express";
 import { Server } from "http";
 import config from "./config/config";
@@ -10,6 +11,10 @@ class App {
   public server!: Server;
 
   constructor(appInit: { port: number; middlewares: any; controllers: any }) {
+    if (!fs.existsSync(config.rootUploadDirectory)) {
+      fs.mkdirSync(config.rootUploadDirectory);
+    }
+
     this.app = express();
     this.port = appInit.port;
     this.middlewares(appInit.middlewares);
@@ -29,7 +34,7 @@ class App {
           " Authorization," +
           " Access-Control-Allow-Credentials"
       );
-      res.header("Access-Control-Allow-Origin", config.uiUrl);
+      // res.header("Access-Control-Allow-Origin", config.uiUrl);
       res.header("Access-Control-Allow-Credentials", "true");
       next();
     });
