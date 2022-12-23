@@ -16,30 +16,45 @@ class UploadService {
     req: Request,
     projectName?: string
   ): Promise<{ deploymentId: string; url: string }> {
-    projectName = projectName ? projectName : `fileUpload-${uuidv4()}`;
+    let uploadDir: string = "";
+    try {
+      projectName = projectName ? projectName : `fileUpload-${uuidv4()}`;
 
-    const uploadDir: string = await this.getDedicatedUploadDir();
+      Logger.info(
+        `Uploading collection: ${projectName}, using protocol: ${protocol}`
+      );
 
-    const files: Files = await this.getFiles(req, uploadDir);
+      uploadDir = await this.getDedicatedUploadDir();
 
-    let i = 0;
-    const form = new FormData();
+      await this.getFiles(req, uploadDir);
 
-    await fs.readdirSync(uploadDir).map((fileName) => {
-      const newFileName = `${uploadDir}/${i}.${fileName.split(".")[1]}`;
-      fs.renameSync(`${uploadDir}/${fileName}`, newFileName);
+      let i = 0;
+      const form = new FormData();
 
-      form.append("my_logo", fs.createReadStream(newFileName));
-      i++;
-    });
+      await fs.readdirSync(uploadDir).map((fileName) => {
+        const newFileName = `${i}.${fileName.split(".")[1]}`;
+        const newFilePath = `${uploadDir}/${newFileName}`;
 
-    const { deploymentId, url }: { deploymentId: string; url: string } =
-      await HostingApi.uploadFiles(protocol, projectName, form);
+        fs.renameSync(`${uploadDir}/${fileName}`, newFilePath);
 
-    return {
-      deploymentId: deploymentId,
-      url: url,
-    };
+        form.append(newFileName, fs.createReadStream(newFilePath));
+        i++;
+      });
+
+      const { deploymentId, url }: { deploymentId: string; url: string } =
+        await HostingApi.uploadFiles(protocol, projectName, form);
+
+      return {
+        deploymentId: deploymentId,
+        url: url,
+      };
+    } catch (error) {
+      Logger.error(
+        `Error in ${__filename} - uploadCollection - ${error.message}`
+      );
+    } finally {
+      await this.deleteDir(uploadDir);
+    }
   }
 
   private async getFiles(req: Request, uploadDir: string): Promise<Files> {
@@ -51,14 +66,6 @@ class UploadService {
         multiples: true,
         filter: this.filterFiles,
       });
-
-      // let i: number = 0;
-      // form.on("file", function (field, file) {
-      //   //rename the incoming file to the file's name
-      //   const fileExtension: string = file.filepath.split(".")[1];
-      //   file.filepath = `${i}.${fileExtension}`;
-      //   i++;
-      // });
 
       const { files }: { files: formidable.Files } = await new Promise(
         (resolve, reject) =>
@@ -116,34 +123,6 @@ class UploadService {
       Logger.error(`Error in ${__filename} - deleteDir - ${error.message}`);
       throw error;
     }
-  }
-
-  private getFilename(uploadDir: string) {
-    return (
-      name: string,
-      ext: string,
-      part: formidable.Part,
-      form: IncomingForm
-    ) => {
-      try {
-        // Creates subdirectories, if they exist
-
-        const nameWithPath = part.originalFilename;
-        const subDirs = part.originalFilename?.split("/");
-
-        if (subDirs && subDirs?.length > 1) {
-          subDirs.length = subDirs.length - 1;
-          const directoryPath = `${uploadDir}/${subDirs.join("/")}`;
-          if (!fs.existsSync(directoryPath)) {
-            fs.mkdirSync(directoryPath, { recursive: true });
-          }
-        }
-        return nameWithPath as string;
-      } catch (error) {
-        Logger.error(`Error in ${__filename} - getFilename - ${error}`);
-        throw error;
-      }
-    };
   }
 }
 
