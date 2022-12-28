@@ -1,0 +1,21 @@
+.container {
+  background: #e9eefe;
+}
+.plus__icon {
+  color: #4978f979;
+}
+
+.thumb__container {
+  width: 80%;
+  height: 400px;
+  overflow-y: scroll;
+  margin: 10px auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.thumb__container img {
+  height: 200px;
+  width: 200px;
+  object-fit: contain;
+}
