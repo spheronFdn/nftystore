@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import Dropzone from "./components/dropzone";
+import Dropzone from "./components/Dropzone";
+import ProtocolProvider from "./components/ProtocolProvider";
 
 function App() {
+  const [files, setFiles] = useState([]);
+  const [apitoken, setApitoken] = useState<string>("");
+  const [protocol, setProtocol] = useState<string>("");
+  // Arweave, Filecoin, Pinata
+
+  // const handleSubmit = () => {
+  //   uploadFiles(files);
+  // };
+
   return (
     <div className="App">
-      NFT
-      <Dropzone />
+      <div className="hero-text">NFT-Meta-Widget</div>
+      <ProtocolProvider selectedProtocol={protocol} setProtocol={setProtocol} />
+      <Dropzone files={files} setFiles={setFiles} />
+      {/* API TOKEN TEXT FIELD */}
+      <button className="upload__button" onClick={() => {}}>
+        Upload Files
+      </button>
     </div>
   );
 }
