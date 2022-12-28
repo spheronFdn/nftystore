@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useEffect, SetStateAction } from "react";
 import { useDropzone } from "react-dropzone";
 import { ReactComponent as PlusIcon } from "../../assets/icons/plus.svg";
+import DropzoneStyles from "../../styles/dropzone.module.css";
 
 interface IProps {
   files: Blob[] | MediaSource[];
@@ -93,11 +94,15 @@ const Dropzone = ({ files, setFiles }: IProps) => {
 
   return (
     <>
-      <div {...getRootProps({ style })}>
+      <div className={DropzoneStyles.container} {...getRootProps({ style })}>
         <input {...getInputProps()} {...otherAttr} />
-        <PlusIcon height={200} width={200} />
+        <PlusIcon
+          className={DropzoneStyles.plus__icon}
+          height={100}
+          width={100}
+        />
       </div>
-      {/* <div className={DropzoneStyles.thumb__container}>{thumbs}</div> */}
+      <div className={DropzoneStyles.thumb__container}>{thumbs}</div>
     </>
   );
 };
