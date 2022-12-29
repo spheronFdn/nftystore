@@ -38,6 +38,9 @@ class App {
       res.header("Access-Control-Allow-Credentials", "true");
       next();
     });
+
+    this.app.use(express.json({ limit: "50mb" }));
+    this.app.use(express.urlencoded({ limit: "50mb" }));
   }
   private middlewares(middleWares: {
     forEach: (arg0: (middleWare: any) => void) => void;
