@@ -5,6 +5,7 @@ import {
   ApiError,
   ApiErrorTypeEnum,
 } from "../middlewares/error-handling-middleware";
+import HostingApi from "../HostingApi/service";
 
 export async function uploadCollection(
   req: Request,
@@ -17,7 +18,7 @@ export async function uploadCollection(
     if (!req.query.protocol) {
       throw new ApiError(
         ApiErrorTypeEnum.VALIDATION,
-        "Required query parameters are missing. Required query parameters are: [protocol]"
+        "Required query parameters are missing. Required query parameter is protocol"
       );
     }
 
@@ -29,12 +30,17 @@ export async function uploadCollection(
       );
     }
 
-    const { deploymentId, url }: { deploymentId: string; url: string } =
+    const {
+      deploymentId,
+      normalisedFiles,
+      url,
+    }: { deploymentId: string; normalisedFiles: string[]; url: string } =
       await UploadService.uploadCollection(protocol, req);
 
     res.status(200).json({
       uploadId: deploymentId,
-      url: url,
+      normalisedFiles: normalisedFiles,
+      baseUrl: url,
     });
   } catch (error) {
     Logger.error(
@@ -50,16 +56,13 @@ export async function uploadCollectionStatus(
   next: NextFunction
 ): Promise<void> {
   try {
-    Logger.info(`Upload Request Received: ${req.query.uploadId} `);
+    Logger.info(`Upload Request Received: ${req.params} `);
 
-    if (!req.query.uploadId) {
-      throw new ApiError(
-        ApiErrorTypeEnum.VALIDATION,
-        "Required query parameters are missing. Required query parameters are: [protocol]"
-      );
-    }
+    const { uploadId } = req.params;
 
-    res.status(200).json({});
+    const { status } = await HostingApi.getDeploymentStatus(uploadId);
+
+    res.status(200).json({ status: status });
   } catch (error) {
     Logger.error(
       `Error in ${__filename} - uploadCollectionStatus - ${error.message}`

@@ -78,4 +78,27 @@ export default abstract class HostingApi {
       throw error;
     }
   }
+
+  public static async getDeploymentStatus(
+    deploymentId: string
+  ): Promise<{ status: string }> {
+    try {
+      const { error, message, data } = await this.sendRequest(
+        HttpMethods.GET,
+        `/v1/deployment/${deploymentId}`,
+        {}
+      );
+
+      if (error) {
+        throw new ApiError(ApiErrorTypeEnum.VALIDATION, message);
+      }
+
+      return {
+        status: data.status,
+      };
+    } catch (error) {
+      Logger.error(`Error in ${__filename} - uploadFiles - ${error.message}`);
+      throw error;
+    }
+  }
 }
