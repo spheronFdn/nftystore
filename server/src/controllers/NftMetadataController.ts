@@ -2,7 +2,7 @@
 import config from "../config/config";
 import { Router, Request, Response } from "express";
 import Logger from "../logger/logger";
-import { UploadCollectionComponent } from "../components";
+import { NftMetadataComponent, UploadCollectionComponent } from "../components";
 
 class NftMetadataController {
   public router = Router();
@@ -14,11 +14,9 @@ class NftMetadataController {
   public intializeRoutes() {
     this.router.post(
       "/generateMetadataURI",
-      UploadCollectionComponent.uploadCollection
+      NftMetadataComponent.generateMetadataURI
     );
   }
 }
 
-const nftMetadataController: NftMetadataController =
-  new NftMetadataController();
-export default nftMetadataController;
+export default new NftMetadataController();

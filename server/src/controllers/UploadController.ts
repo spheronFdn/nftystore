@@ -17,7 +17,7 @@ class UploadController {
       UploadCollectionComponent.uploadCollection
     );
     this.router.get(
-      "/uploadCollection/status",
+      "/uploadCollection/:uploadId/status",
       UploadCollectionComponent.uploadCollectionStatus
     );
   }
