@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useEffect, SetStateAction } from "react";
+import React, { useCallback, useMemo, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { ReactComponent as PlusIcon } from "../../assets/icons/plus.svg";
 import DropzoneStyles from "../../styles/dropzone.module.css";
@@ -10,13 +10,24 @@ interface IProps {
 
 const Dropzone = ({ files, setFiles }: IProps) => {
   const onDrop = useCallback((acceptedFiles: any) => {
-    setFiles(
-      acceptedFiles.map((file: Blob | MediaSource) =>
-        Object.assign(file, {
-          preview: URL.createObjectURL(file),
-        })
-      )
-    );
+    acceptedFiles.forEach((file: any) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setFiles((prevState: any) => [
+          ...prevState,
+          { ...file, preview: reader.result },
+        ]);
+      };
+      reader.readAsDataURL(file);
+    });
+    console.log("ACCEPTED FILES,", files);
+    // setFiles(
+    //   acceptedFiles.map((file: Blob | MediaSource) =>
+    //     Object.assign(file, {
+    //       preview: URL.createObjectURL(file),
+    //     })
+    //   )
+    // );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -67,9 +78,9 @@ const Dropzone = ({ files, setFiles }: IProps) => {
     },
   });
 
-  const thumbs = acceptedFiles.map((file: any) => (
-    <div key={file.name}>
-      <img src={file.preview} alt={file.name} />
+  const thumbs = files.map((file: any) => (
+    <div key={file.path}>
+      <img src={file.preview} alt={file.path} />
     </div>
   ));
   const otherAttr = { directory: "", webkitdirectory: "" };
@@ -95,14 +106,28 @@ const Dropzone = ({ files, setFiles }: IProps) => {
   return (
     <>
       <div className={DropzoneStyles.container} {...getRootProps({ style })}>
-        <input {...getInputProps()} {...otherAttr} />
-        <PlusIcon
-          className={DropzoneStyles.plus__icon}
-          height={100}
-          width={100}
-        />
+        {files.length === 0 ? (
+          <>
+            <input {...getInputProps()} {...otherAttr} />
+            <PlusIcon
+              className={DropzoneStyles.plus__icon}
+              height={100}
+              width={100}
+            />
+          </>
+        ) : (
+          <div
+            onClick={() => {
+              setFiles([]);
+            }}
+          >
+            REMOVE
+          </div>
+        )}
       </div>
-      <div className={DropzoneStyles.thumb__container}>{thumbs}</div>
+      {files.length > 0 && (
+        <div className={DropzoneStyles.thumb__container}>{thumbs}</div>
+      )}
     </>
   );
 };

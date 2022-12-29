@@ -6,16 +6,23 @@
 }
 
 .thumb__container {
-  width: 80%;
-  height: 400px;
+  width: 60%;
+  height: 600px;
   overflow-y: scroll;
   margin: 10px auto;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
 }
 
 .thumb__container img {
   height: 200px;
-  width: 200px;
+  width: 100%;
   object-fit: contain;
+}
+
+@media (max-width: 1024px) {
+  .thumb__container {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 }
