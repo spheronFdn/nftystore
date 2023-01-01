@@ -24,17 +24,10 @@ class UploadService {
 
       await FileUtils.getFiles(req, uploadDir);
 
-      let i = 0;
       const form = new FormData();
 
       fs.readdirSync(uploadDir).map((fileName) => {
-        const newFileName = `${i}.${fileName.split(".")[1]}`;
-        const newFilePath = `${uploadDir}/${newFileName}`;
-
-        fs.renameSync(`${uploadDir}/${fileName}`, newFilePath);
-
-        form.append(newFileName, fs.createReadStream(newFilePath));
-        i++;
+        form.append(fileName, fs.createReadStream(`${uploadDir}/${fileName}`));
       });
 
       const fileNames: string[] = fs.readdirSync(uploadDir);
