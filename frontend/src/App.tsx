@@ -3,6 +3,8 @@ import { uploadFiles } from "./api";
 import "./App.css";
 import Dropzone from "./components/Dropzone";
 import ProtocolProvider from "./components/ProtocolProvider";
+import UploadNft from "./pages/UploadNft";
+import Router from "./Routes";
 
 function App() {
   const [files, setFiles] = useState([]);
@@ -17,12 +19,14 @@ function App() {
   return (
     <div className="App">
       <div className="hero-text">NFT-Meta-Widget</div>
-      <ProtocolProvider selectedProtocol={protocol} setProtocol={setProtocol} />
+      {/* <ProtocolProvider selectedProtocol={protocol} setProtocol={setProtocol} />
       <Dropzone files={files} setFiles={setFiles} />
-      {/* API TOKEN TEXT FIELD */}
+
       <button className="upload__button" onClick={handleSubmit}>
         Upload Files
-      </button>
+      </button> */}
+      <Router />
+      {/* <UploadNft /> */}
     </div>
   );
 }
