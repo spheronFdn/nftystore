@@ -28,17 +28,10 @@ class UploadService {
 
       await this.getFiles(req, uploadDir);
 
-      let i = 0;
       const form = new FormData();
 
       await fs.readdirSync(uploadDir).map((fileName) => {
-        const newFileName = `${i}.${fileName.split(".")[1]}`;
-        const newFilePath = `${uploadDir}/${newFileName}`;
-
-        fs.renameSync(`${uploadDir}/${fileName}`, newFilePath);
-
-        form.append(newFileName, fs.createReadStream(newFilePath));
-        i++;
+        form.append(fileName, fs.createReadStream(`${uploadDir}/${fileName}`));
       });
 
       const { deploymentId, url }: { deploymentId: string; url: string } =
