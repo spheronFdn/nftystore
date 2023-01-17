@@ -1,7 +1,6 @@
 {
   "name": "container-rest",
   "version": "1.0.0",
-  "description": "[![CircleCI](https://circleci.com/gh/argoapp-live/argo-payment-api/tree/main.svg?style=shield&circle-token=56eaeb188f686b17d70d6778f5c328c3fd87a1d6)](https://circleci.com/gh/argoapp-live/argo-payment-api/tree/main)",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
@@ -20,8 +19,6 @@
     "express": "^4.18.1",
     "form-data": "^4.0.0",
     "formidable": "^2.1.1",
-    "mongoose": "^6.3.3",
-    "rimraf": "^3.0.2",
     "uuid": "^9.0.0",
     "winston": "^3.7.2"
   },
@@ -32,7 +29,6 @@
     "@types/express": "^4.17.11",
     "@types/formidable": "^2.0.5",
     "@types/mocha": "^8.2.2",
-    "@types/mongoose": "^5.10.5",
     "@types/uuid": "^9.0.0",
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",

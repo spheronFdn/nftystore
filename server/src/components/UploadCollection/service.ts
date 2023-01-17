@@ -26,7 +26,7 @@ class UploadService {
 
       const form = new FormData();
 
-      fs.readdirSync(uploadDir).map((fileName) => {
+      await fs.readdirSync(uploadDir).map((fileName) => {
         form.append(fileName, fs.createReadStream(`${uploadDir}/${fileName}`));
       });
 

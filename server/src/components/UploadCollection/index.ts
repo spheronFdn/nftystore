@@ -26,7 +26,7 @@ export async function uploadCollection(
     if (Object.values(ProtocolEnum).indexOf(protocol as ProtocolEnum) === -1) {
       throw new ApiError(
         ApiErrorTypeEnum.VALIDATION,
-        `Protocol '${protocol}' is not supported. Please choose from our supported protocols - 'arweave', 'ipfs-filecoin', 'ipfs-pinata'.`
+        `Protocol '${protocol}' is not supported. Please choose from our supported protocols - 'arweave', 'ipfs-filecoin', 'ipfs'.`
       );
     }
 
@@ -39,7 +39,6 @@ export async function uploadCollection(
 
     res.status(200).json({
       uploadId: deploymentId,
-      normalisedFiles: normalisedFiles,
       baseUrl: url,
     });
   } catch (error) {
@@ -74,5 +73,5 @@ export async function uploadCollectionStatus(
 export enum ProtocolEnum {
   ARWEAVE = "arweave",
   FILECOIN = "ipfs-filecoin",
-  PINATA = "ipfs-pinata",
+  IPFS = "ipfs",
 }
