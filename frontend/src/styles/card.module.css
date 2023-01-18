@@ -1,0 +1,16 @@
+.card__container {
+  display: block;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  padding: 2rem 3rem;
+  border-radius: 6px;
+  background-color: #353535;
+}
+
+.card h1 {
+  font-weight: 600;
+}

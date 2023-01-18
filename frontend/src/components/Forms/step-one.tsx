@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import ProtocolProvider from "../ProtocolProvider";
 
 const StepOne = () => {
-  return <div>StepOne</div>;
+  const [protocol, setProtocol] = useState<string>("");
+
+  return (
+    <div>
+      Select Protocol
+      <ProtocolProvider setProtocol={setProtocol} selectedProtocol={protocol} />
+    </div>
+  );
 };
 
 export default StepOne;

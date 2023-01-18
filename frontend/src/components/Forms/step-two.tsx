@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import Dropzone from "../Dropzone";
 
-const StepTwo = () => {
-  return <div>StepTwo</div>;
+const StepOne = () => {
+  const [files, setFiles] = useState([]);
+  return (
+    <div>
+      <Dropzone files={files} setFiles={setFiles} />
+    </div>
+  );
 };
 
-export default StepTwo;
+export default StepOne;

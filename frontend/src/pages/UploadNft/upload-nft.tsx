@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 const UploadNft = () => {
   return (
     <div>
-      UploadNft
+      STEPS
       <Outlet />
     </div>
   );

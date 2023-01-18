@@ -1,5 +1,15 @@
 .App {
   text-align: center;
+  height: 100vh;
+  background-color: #1d1d1d;
+}
+
+.text-primary {
+  color: #888888;
+}
+
+.text-white {
+  color: #fff;
 }
 
 .font-xs {
@@ -39,8 +49,11 @@
   align-items: center;
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .hero-text {
   font-size: 1.5rem;
   font-weight: 600;
-  margin: 2rem 0;
 }
