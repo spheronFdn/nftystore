@@ -20,7 +20,8 @@ export default abstract class HostingApi {
     url: string,
     // contentType: string,
     data?: any,
-    params?: any
+    params?: any,
+    baseUrl?: string
   ): Promise<{
     error: boolean;
     message?: string;
@@ -29,7 +30,7 @@ export default abstract class HostingApi {
     try {
       const response = await axios({
         method,
-        url: `${config.hostingApi.hostAddress}${url}`,
+        url: `${baseUrl ? baseUrl : config.hostingApi.hostAddress}${url}`,
         data,
         params: params,
         headers: {
@@ -88,7 +89,9 @@ export default abstract class HostingApi {
       const { error, message, data } = await this.sendRequest(
         HttpMethods.GET,
         `/v1/deployment/${deploymentId}`,
-        {}
+        {},
+        null,
+        "http://localhost:8080"
       );
 
       if (error) {

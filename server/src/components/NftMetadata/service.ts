@@ -38,20 +38,25 @@ class MetadataService {
 
       const deployment: IDeployment = await HostingApi.getDeployment(uploadId);
 
-      const { deploymentId, url }: { deploymentId: string; url: string } =
-        await HostingApi.uploadFiles(protocol, deployment.project.name, form);
+      // const { deploymentId, url }: { deploymentId: string; url: string } =
+      //   await HostingApi.uploadFiles(protocol, deployment.project.name, form);
 
+      // return {
+      //   deploymentId: deploymentId,
+      //   url: url,
+      //   spheronUrl: url,
+      // };
       return {
-        deploymentId: deploymentId,
-        url: url,
-        spheronUrl: url,
+        deploymentId: "deploymentId",
+        url: "url",
+        spheronUrl: "url",
       };
     } catch (error) {
       Logger.error(
         `Error in ${__filename} - uploadCollection - ${error.message}`
       );
     } finally {
-      await FileUtils.deleteDir(uploadDir);
+      // await FileUtils.deleteDir(uploadDir);
     }
   }
 }
