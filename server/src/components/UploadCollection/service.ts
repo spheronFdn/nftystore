@@ -11,10 +11,15 @@ class UploadService {
     protocol: string,
     req: Request,
     projectName?: string
-  ): Promise<{ deploymentId: string; normalisedFiles: string[]; url: string }> {
+  ): Promise<{
+    uploadId: string;
+    fileNames: string[];
+    url: string;
+    spheronUrl: string;
+  }> {
     let uploadDir: string = "";
     try {
-      projectName = projectName ? projectName : `fileUpload-${uuidv4()}`;
+      projectName = projectName ? projectName : `nft-${uuidv4()}`;
 
       Logger.info(
         `Uploading collection: ${projectName}, using protocol: ${protocol}`
@@ -36,16 +41,24 @@ class UploadService {
         await HostingApi.uploadFiles(protocol, projectName, form);
 
       return {
-        deploymentId: deploymentId,
-        normalisedFiles: fileNames,
-        url: url,
+        uploadId: deploymentId,
+        fileNames,
+        url,
+        spheronUrl: url,
       };
+
+      // return {
+      //   uploadId: "deploymentId",
+      //   fileNames,
+      //   url: "url",
+      //   spheronUrl: "url",
+      // };
     } catch (error) {
       Logger.error(
         `Error in ${__filename} - uploadCollection - ${error.message}`
       );
     } finally {
-      await FileUtils.deleteDir(uploadDir);
+      // await FileUtils.deleteDir(uploadDir);
     }
   }
 }

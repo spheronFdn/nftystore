@@ -16,13 +16,14 @@ export async function generateMetadataURI(
   try {
     Logger.info(`Upload Request Received: ${req.query.protocol} `);
 
-    if (!req.query.protocol) {
+    if (!req.query.protocol || !req.query.uploadId) {
       throw new ApiError(
         ApiErrorTypeEnum.VALIDATION,
-        "Required query parameters are missing. Required query parameter is protocol"
+        "Required query parameters are missing. Required query parameter are protocol and uploadId"
       );
     }
 
+    const uploadId = String(req.query.uploadId);
     const protocol = String(req.query.protocol);
     if (Object.values(ProtocolEnum).indexOf(protocol as ProtocolEnum) === -1) {
       throw new ApiError(
@@ -35,14 +36,13 @@ export async function generateMetadataURI(
 
     const metadataReq: NftMetadataRequest = req.body;
 
-    const { deploymentId, url } = await MetadataService.generateMetadata(
-      metadataReq,
-      protocol
-    );
+    const { deploymentId, url, spheronUrl } =
+      await MetadataService.generateMetadata(uploadId, protocol, req);
 
     res.status(200).json({
-      nftMetadata: JSON.stringify(metadataReq),
-      url: url,
+      uploadId: deploymentId,
+      spheronUrl,
+      url,
     });
   } catch (error) {
     Logger.error(

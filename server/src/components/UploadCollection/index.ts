@@ -6,6 +6,7 @@ import {
   ApiErrorTypeEnum,
 } from "../middlewares/error-handling-middleware";
 import HostingApi from "../HostingApi/service";
+import IDeployment from "../HostingApi/deployment-interface";
 
 export async function uploadCollection(
   req: Request,
@@ -30,16 +31,14 @@ export async function uploadCollection(
       );
     }
 
-    const {
-      deploymentId,
-      normalisedFiles,
-      url,
-    }: { deploymentId: string; normalisedFiles: string[]; url: string } =
+    const { uploadId, fileNames, url, spheronUrl } =
       await UploadService.uploadCollection(protocol, req);
 
     res.status(200).json({
-      uploadId: deploymentId,
+      uploadId,
+      fileNames,
       baseUrl: url,
+      spheronUrl,
     });
   } catch (error) {
     Logger.error(
@@ -55,13 +54,12 @@ export async function uploadCollectionStatus(
   next: NextFunction
 ): Promise<void> {
   try {
-    Logger.info(`Upload Request Received: ${req.params} `);
-
     const { uploadId } = req.params;
+    Logger.info(`Get upload status request received: ${uploadId} `);
 
-    const { status } = await HostingApi.getDeploymentStatus(uploadId);
+    const deployment: IDeployment = await HostingApi.getDeployment(uploadId);
 
-    res.status(200).json({ status: status });
+    res.status(200).json({ status: deployment.status });
   } catch (error) {
     Logger.error(
       `Error in ${__filename} - uploadCollectionStatus - ${error.message}`

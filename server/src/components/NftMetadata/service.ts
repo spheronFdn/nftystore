@@ -1,34 +1,51 @@
 import fs from "fs";
 import Logger from "../../logger/logger";
 import { FileUtils } from "../Utils/FileUtils";
-import { NftMetadataRequest } from "./interface";
+import { Request } from "express";
 import FormData from "form-data";
 import { v4 as uuidv4 } from "uuid";
 import HostingApi from "../HostingApi/service";
+import { IProject } from "../HostingApi/project-interface";
+import IDeployment from "../HostingApi/deployment-interface";
 
 class MetadataService {
   async generateMetadata(
-    metadataReq: NftMetadataRequest,
-    protocol: string
-  ): Promise<{ deploymentId: string; url: string }> {
+    uploadId: string,
+    protocol: string,
+    req: Request
+  ): Promise<{
+    deploymentId: string;
+    url: string;
+    spheronUrl: string;
+  }> {
     let uploadDir: string = "";
     try {
-      const projectName: string = `fileUpload-${uuidv4()}`;
-
       Logger.info(
-        `Uploading collection: ${projectName}, using protocol: ${protocol}`
+        `Uploading json files for : ${uploadId}, using protocol: ${protocol}`
       );
 
       uploadDir = await FileUtils.getDedicatedUploadDir();
 
-      const fileName: string = `${uploadDir}/${metadataReq.name}.json`;
-
-      FileUtils.createFile(fileName, JSON.stringify(metadataReq));
+      await FileUtils.getFiles(req, uploadDir);
 
       const form = new FormData();
-      form.append(`${metadataReq.name}.json`, fs.createReadStream(fileName));
 
-      return await HostingApi.uploadFiles(protocol, projectName, form);
+      await fs.readdirSync(uploadDir).map((fileName) => {
+        form.append(fileName, fs.createReadStream(`${uploadDir}/${fileName}`));
+      });
+
+      const fileNames: string[] = fs.readdirSync(uploadDir);
+
+      const deployment: IDeployment = await HostingApi.getDeployment(uploadId);
+
+      const { deploymentId, url }: { deploymentId: string; url: string } =
+        await HostingApi.uploadFiles(protocol, deployment.project.name, form);
+
+      return {
+        deploymentId: deploymentId,
+        url: url,
+        spheronUrl: url,
+      };
     } catch (error) {
       Logger.error(
         `Error in ${__filename} - uploadCollection - ${error.message}`
