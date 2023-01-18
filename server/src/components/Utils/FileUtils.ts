@@ -29,6 +29,7 @@ export const FileUtils = {
         keepExtensions: true,
         multiples: true,
         filter: this.filterFiles,
+        filename: getFilename(uploadDir),
       });
 
       const { files }: { files: formidable.Files } = await new Promise(
@@ -78,3 +79,31 @@ export const FileUtils = {
     fs.writeFileSync(fileName, content);
   },
 };
+
+function getFilename(uploadDir: string) {
+  return (
+    name: string,
+    ext: string,
+    part: formidable.Part,
+    form: IncomingForm
+  ) => {
+    try {
+      // Creates subdirectories, if they exist
+
+      const nameWithPath = part.originalFilename;
+      const subDirs = part.originalFilename?.split("/");
+
+      if (subDirs && subDirs?.length > 1) {
+        subDirs.length = subDirs.length - 1;
+        const directoryPath = `${uploadDir}/${subDirs.join("/")}`;
+        if (!fs.existsSync(directoryPath)) {
+          fs.mkdirSync(directoryPath, { recursive: true });
+        }
+      }
+      return nameWithPath as string;
+    } catch (error) {
+      Logger.error(`Error in ${__filename} - getFilename - ${error}`);
+      throw error;
+    }
+  };
+}
