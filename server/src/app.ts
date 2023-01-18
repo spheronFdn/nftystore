@@ -19,8 +19,6 @@ class App {
     this.port = appInit.port;
     this.middlewares(appInit.middlewares);
     this.routes(appInit.controllers);
-    this.assets();
-    this.template();
 
     this.app.use((req, res, next) => {
       res.header(
@@ -56,15 +54,6 @@ class App {
     controllers.forEach((controller) => {
       this.app.use("/", controller.router);
     });
-  }
-
-  private assets() {
-    this.app.use(express.static("public"));
-    this.app.use(express.static("views"));
-  }
-
-  private template() {
-    this.app.set("view engine", "pug");
   }
 
   public listen() {

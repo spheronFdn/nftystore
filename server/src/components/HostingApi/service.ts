@@ -7,6 +7,7 @@ import {
 import config from "../../config/config";
 import IDeployment, { DeploymentStatusEnum } from "./deployment-interface";
 import Logger from "../../logger/logger";
+import { IProject } from "./project-interface";
 
 enum HttpMethods {
   GET = "GET",
@@ -52,7 +53,7 @@ export default abstract class HostingApi {
     protocol: string,
     projectName: string,
     fileData: any
-  ): Promise<{ deploymentId: string; url: string }> {
+  ): Promise<{ projectId: string; deploymentId: string; url: string }> {
     try {
       const { error, message, data } = await this.sendRequest(
         HttpMethods.POST,
@@ -70,6 +71,7 @@ export default abstract class HostingApi {
       }
 
       return {
+        projectId: data.projectId,
         deploymentId: data.deploymentId,
         url: data.sitePreview,
       };
@@ -79,9 +81,9 @@ export default abstract class HostingApi {
     }
   }
 
-  public static async getDeploymentStatus(
+  public static async getDeployment(
     deploymentId: string
-  ): Promise<{ status: string }> {
+  ): Promise<IDeployment> {
     try {
       const { error, message, data } = await this.sendRequest(
         HttpMethods.GET,
@@ -93,9 +95,7 @@ export default abstract class HostingApi {
         throw new ApiError(ApiErrorTypeEnum.VALIDATION, message);
       }
 
-      return {
-        status: data.status,
-      };
+      return data.deployment;
     } catch (error) {
       Logger.error(`Error in ${__filename} - uploadFiles - ${error.message}`);
       throw error;

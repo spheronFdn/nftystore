@@ -19,9 +19,9 @@ const development: IEnvironmentConfig = {
   rootUploadDirectory:
     process.env.ROOT_UPLOAD_DIRECTORY || "./uploaded-content",
   hostingApi: {
-    hostAddress: "http://localhost:8002",
-    apiToken:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiIwZTZmY2U5OGNmY2RjY2Y5OWU0NjU5MmIwNGZlZTEwMzkwMGU5YmNjZWUxNzk0ZDViYmE4NDBiYjA3OWY1ZjIyZjhjMDg3OGNkYjlmMjBkOGVmYmNlNGMwN2NlMmNiMzhlNmVhYjZmZTY4OTk5ZDBhZDQyZDMwY2JiNDg0NWZjNyIsImlhdCI6MTY3MTEyMjUxNiwiaXNzIjoid3d3LnNwaGVyb24ubmV0d29yayJ9.oasTsRUcXEWD39mZgS7T99os0ekYu8rpzGFQh8PKTK4",
+    hostAddress:
+      process.env.HOSTING_API_HOST_ADDRESS || "http://localhost:8002",
+    apiToken: process.env.API_TOKEN,
   },
 };
 

@@ -21,7 +21,7 @@ export const FileUtils = {
       throw error;
     }
   },
-  async getFiles(req: Request, uploadDir: string): Promise<void> {
+  async getFiles(req: Request, uploadDir: string): Promise<Files> {
     try {
       const form: IncomingForm = formidable({
         uploadDir: uploadDir,
@@ -31,33 +31,17 @@ export const FileUtils = {
         filter: this.filterFiles,
       });
 
-      const fields: any[] = [];
-
-      form.on("field", (fieldName, value) => {
-        fields.push({ fieldName, value });
-      });
-
-      await new Promise<void>((resolve, reject) =>
-        form.parse(req, (err, fields, files) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-          resolve();
-        })
+      const { files }: { files: formidable.Files } = await new Promise(
+        (resolve, reject) =>
+          form.parse(req, (err, fields, files) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve({ files });
+          })
       );
-
-      let i: number = 0;
-      fields.forEach((field) => {
-        const [base64, base64Image] = field.value.split(";base64,");
-
-        fs.writeFileSync(
-          `${uploadDir}/${i}.${base64.split("/")[1]}`,
-          base64Image,
-          "base64"
-        );
-        i++;
-      });
+      return files;
     } catch (error) {
       Logger.error(`Error in ${__filename} - parseForm - ${error.message}`);
       throw error;
