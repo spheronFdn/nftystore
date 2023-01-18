@@ -8,7 +8,7 @@ interface IProps {
   handleClick: () => void;
 }
 
-const FilledPrimaryButton = ({
+const HeroPrimaryButton = ({
   title,
   loading,
   disabled,
@@ -16,14 +16,14 @@ const FilledPrimaryButton = ({
 }: IProps) => {
   return (
     <button
-      className={ButtonStyle.primary__button}
+      className={ButtonStyle.hero__button}
       disabled={disabled}
       onClick={handleClick}
     >
       {title}
-      {loading && <div>Loading...</div>}
+      {loading && <>Loading...</>}
     </button>
   );
 };
 
-export default FilledPrimaryButton;
+export default HeroPrimaryButton;

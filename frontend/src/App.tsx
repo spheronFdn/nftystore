@@ -18,7 +18,6 @@ function App() {
 
   return (
     <div className="App">
-      <div className="hero-text">NFT-Meta-Widget</div>
       {/* <ProtocolProvider selectedProtocol={protocol} setProtocol={setProtocol} />
       <Dropzone files={files} setFiles={setFiles} />
 

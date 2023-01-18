@@ -1,7 +1,6 @@
 .App {
   text-align: center;
   height: 100vh;
-  background-color: #1d1d1d;
 }
 
 .text-primary {
@@ -43,6 +42,10 @@
 
 .justify-center {
   justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
 
 .items-center {

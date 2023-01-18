@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import HeroButton from "../../components/Buttons/hero-primary";
 import CardStyle from "../../styles/card.module.css";
+import HomeStyle from "../../styles/home.module.css";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -10,12 +12,18 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-white">Get Started</h1>
-      <div className={CardStyle.card__container} onClick={nextStep}>
-        <div className={CardStyle.card}>
-          <h1>Click here to get started</h1>
+    <div className={HomeStyle.container}>
+      <div className={HomeStyle.container__content}>
+        <div>
+          <h1>Mint your NFT</h1>
+          <p>in three simple steps</p>
         </div>
+        <HeroButton
+          title="Get Started"
+          loading={false}
+          disabled={false}
+          handleClick={nextStep}
+        />
       </div>
     </div>
   );

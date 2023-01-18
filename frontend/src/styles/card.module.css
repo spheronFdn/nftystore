@@ -1,16 +1,45 @@
-.card__container {
-  display: block;
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
+.protocol__provider__card__container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4.8rem;
 }
 
-.card {
-  padding: 2rem 3rem;
-  border-radius: 6px;
-  background-color: #353535;
+.protocol__provider__card {
+  text-align: left;
+  cursor: pointer;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid var(--primary);
+  transition: all 0.3s ease-in-out;
+  margin-right: 34px;
 }
 
-.card h1 {
-  font-weight: 600;
+.protocol__provider__card p {
+  margin-top: 0.5rem;
+  color: var(--text-gray-500);
+}
+
+.protocol__provider__card h3 {
+  margin-top: 1.25rem;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  color: var(--text-gray-900);
+}
+
+.protocol__provider__card:hover {
+  background-color: var(--primary-card-hover);
+}
+
+.protocol__provider__card__selected {
+  background: var(--primary);
+}
+
+.protocol__provider__card__selected h3,
+.protocol__provider__card__selected p {
+  color: white !important;
+}
+
+.protocol__provider__card__selected:hover {
+  background: var(--primary);
 }
