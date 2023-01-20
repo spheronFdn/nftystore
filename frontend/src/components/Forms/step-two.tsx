@@ -24,7 +24,8 @@ const StepOne = () => {
 
   return (
     <div>
-      {errorFiles && (
+      <h1>Drop your files</h1>
+      {/* {errorFiles && (
         <>
           Files{" "}
           {errorFiles.map((file: any) => (
@@ -32,9 +33,11 @@ const StepOne = () => {
           ))}{" "}
           do not have a corresponding json
         </>
-      )}
-      <Dropzone files={images} setFiles={setImages} />
-      <JsonDropzone files={metadata} setFiles={setMetadata} />
+      )} */}
+      <div className="grid grid-cols-2">
+        <Dropzone files={images} setFiles={setImages} />
+        <JsonDropzone files={metadata} setFiles={setMetadata} />
+      </div>
       <button onClick={handleSubmit}>Click</button>
     </div>
   );

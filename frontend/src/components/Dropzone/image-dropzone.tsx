@@ -35,7 +35,7 @@ const ImageDropzone = ({ files, setFiles }: IProps) => {
     borderRadius: 2,
     borderColor: "#eeeeee",
     borderStyle: "dashed",
-    backgroundColor: "#fafafa",
+    backgroundColor: "rgb(181 215 239 / 40%);",
     color: "#bdbdbd",
     transition: "border .3s ease-in-out",
     cursor: "pointer",
@@ -65,7 +65,6 @@ const ImageDropzone = ({ files, setFiles }: IProps) => {
   } = useDropzone({
     onDrop,
     accept: {
-      "application/json": [".json"],
       "image/jpeg": [],
       "image/png": [],
     },

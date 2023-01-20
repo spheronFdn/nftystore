@@ -13,10 +13,10 @@ code {
 }
 
 :root {
-  --primary: #7f56d9;
-  --primary-hover: #6941c6;
-  --primary-disabled: #6941c6a8;
-  --primary-card-hover: rgba(244, 235, 255, 0.69);
+  --primary: #6172f3;
+  --primary-hover: #444ce7;
+  --primary-disabled: #6172f3a8;
+  --primary-card-hover: #eef4ff;
   --text-gray-500: #667085;
   --text-gray-900: #101828;
 }
