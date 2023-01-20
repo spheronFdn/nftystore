@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { uploadFiles } from "./api";
 import "./App.css";
-import Dropzone from "./components/Dropzone";
 import ProtocolProvider from "./components/ProtocolProvider";
 import UploadNft from "./pages/UploadNft";
 import Router from "./Routes";

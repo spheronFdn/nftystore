@@ -8,19 +8,11 @@ interface IProps {
   setFiles: any;
 }
 
-const Dropzone = ({ files, setFiles }: IProps) => {
+const ImageDropzone = ({ files, setFiles }: IProps) => {
   const onDrop = useCallback((acceptedFiles: any) => {
-    acceptedFiles.forEach((file: any) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setFiles((prevState: any) => [
-          ...prevState,
-          { ...file, preview: reader.result },
-        ]);
-      };
-      reader.readAsDataURL(file);
-    });
+    setFiles(acceptedFiles);
     console.log("ACCEPTED FILES,", files);
+
     // setFiles(
     //   acceptedFiles.map((file: Blob | MediaSource) =>
     //     Object.assign(file, {
@@ -73,6 +65,7 @@ const Dropzone = ({ files, setFiles }: IProps) => {
   } = useDropzone({
     onDrop,
     accept: {
+      "application/json": [".json"],
       "image/jpeg": [],
       "image/png": [],
     },
@@ -132,4 +125,4 @@ const Dropzone = ({ files, setFiles }: IProps) => {
   );
 };
 
-export default Dropzone;
+export default ImageDropzone;
