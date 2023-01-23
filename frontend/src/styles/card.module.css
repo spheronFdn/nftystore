@@ -27,6 +27,7 @@
   color: var(--text-gray-900);
 }
 
+.contenturl__card:hover,
 .protocol__provider__card:hover {
   background-color: var(--primary-card-hover);
 }
@@ -42,4 +43,86 @@
 
 .protocol__provider__card__selected:hover {
   background: var(--primary);
+}
+
+.contenturl__card {
+  padding: 38px 30px;
+  border-radius: 0.625rem;
+  transition: all 0.3s ease-in-out;
+  margin-left: auto;
+  margin-right: auto;
+  width: 604px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.contenturl__card__focused {
+  border: 2px solid var(--primary) !important;
+}
+
+.contenturl__card__content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.contenturl__card__content__icon {
+  height: 28px;
+  width: 28px;
+  border-radius: 100%;
+  margin-right: 14px;
+}
+
+.contenturl__card__focused .contenturl__card__content__icon {
+  color: var(--primary) !important;
+}
+
+.contenturl__card__link__con {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.contenturl__card h4 {
+  color: var(--text-gray-800);
+  font-size: 16px;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+}
+
+.contenturl__card.contenturl__card__focused h4 {
+  color: var(--primary) !important;
+}
+
+.contenturl__card h4 + a {
+  color: var(--text-gray-500);
+  font-size: 14px;
+}
+
+.contenturl__card__radio {
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  border: 2px solid #bcc3fb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenturl__card__radio__active {
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--primary) !important;
+}
+
+.contenturl__card__radio__circle {
+  height: 13px;
+  width: 13px;
+  background: var(--primary);
+  border-radius: 100%;
 }
