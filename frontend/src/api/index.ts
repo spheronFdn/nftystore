@@ -3,16 +3,16 @@ import axios from "axios";
 const BASE_URI = "http://localhost:8088";
 
 export const uploadFiles = async (protocol: string, files: any) => {
-  const formdata = new FormData();
-  files.forEach((file: any) => {
-    formdata.append(file.path, file.preview);
-  });
-  console.log("FORM DATA1: ", formdata);
+  let formData = new FormData();
+
+  files.forEach((file: any) => formData.append(file.name, file));
+  formData.append("protocol", protocol);
   try {
     const response = await axios({
       url: `${BASE_URI}/uploadCollection?protocol=${protocol}`,
-      data: formdata,
+      data: formData,
       method: "POST",
+      headers: { "Content-Type": "multipart/form-data" },
       onUploadProgress: (progress: any) => {
         console.log(progress);
       },
