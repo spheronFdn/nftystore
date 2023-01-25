@@ -1,5 +1,6 @@
 import React from "react";
 import ButtonStyle from "../../styles/button.module.css";
+import SpinLoader from "../Loaders/spin-loader";
 
 interface IProps {
   title: string;
@@ -17,11 +18,11 @@ const FilledPrimaryButton = ({
   return (
     <button
       className={ButtonStyle.primary__button}
-      disabled={disabled}
+      disabled={disabled || loading}
       onClick={handleClick}
     >
       {title}
-      {loading && <div>Loading...</div>}
+      {loading && <SpinLoader />}
     </button>
   );
 };

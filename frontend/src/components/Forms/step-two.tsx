@@ -1,46 +1,81 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { uploadFiles } from "../../api";
+import FilledPrimaryButton from "../Buttons/filled-primary";
+import DropzoneStyle from "../../styles/dropzone.module.css";
 import Dropzone from "../Dropzone/image-dropzone";
 import JsonDropzone from "../Dropzone/json-dropzone";
 
-const StepOne = () => {
-  const [images, setImages] = useState([]);
+const StepTwo = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [images, setImages] = useState<any>([]);
+  const [badImages, setBadImages] = useState<any>([]);
   const [metadata, setMetadata] = useState([]);
-  const [errorFiles, setErrorFiles] = useState<any>([]);
+  const [badMetaData, setBadMetaData] = useState<any>([]);
+  const params = new URLSearchParams(location.search);
 
-  const handleSubmit = async () => {
-    let badFiles: any = [];
-    images.forEach((image: any) => {
-      const found = metadata.find((mtd: any) => mtd.name === image.name);
-      if (!found) {
-        badFiles = [...badFiles, image.name];
-      }
-    });
-    setErrorFiles(badFiles);
-    await uploadFiles("filecoin-ipfs", images);
-  };
-
-  console.log(errorFiles);
+  useEffect(() => {
+    if (!params.get("protocol")) {
+      navigate("/nft-upload/1");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  // const handleSubmit = async () => {
+  //   let badFiles: any = [];
+  //   images.forEach((image: any) => {
+  //     const found = metadata.find((mtd: any) => mtd.name === image.name);
+  //     if (!found) {
+  //       badFiles = [...badFiles, image.name];
+  //     }
+  //   });
+  //   setErrorFiles(badFiles);
+  //   await uploadFiles("ipfs-filecoin", images);
+  // };
 
   return (
-    <div>
+    <>
       <h1>Drop your files</h1>
-      {/* {errorFiles && (
-        <>
-          Files{" "}
-          {errorFiles.map((file: any) => (
-            <div>{file}</div>
-          ))}{" "}
-          do not have a corresponding json
-        </>
-      )} */}
       <div className="grid grid-cols-2">
-        <Dropzone files={images} setFiles={setImages} />
-        <JsonDropzone files={metadata} setFiles={setMetadata} />
+        <div>
+          <Dropzone
+            files={images}
+            setFiles={setImages}
+            setBadFiles={setBadImages}
+          />
+        </div>
+        <div>
+          <JsonDropzone
+            files={metadata}
+            setFiles={setMetadata}
+            setBadFiles={setBadMetaData}
+          />
+        </div>
+        <div className={DropzoneStyle.errorFile}>
+          {badImages.map((file: any) => (
+            <span>{file.file.name}</span>
+          ))}{" "}
+          {badImages.length > 0 && <>not accepted</>}
+        </div>
+        <div className={DropzoneStyle.errorFile}>
+          {badMetaData.map((file: any) => (
+            <span>{file.file.name}</span>
+          ))}{" "}
+          {badMetaData.length > 0 && <>not accepted</>}
+        </div>
       </div>
-      <button onClick={handleSubmit}>Click</button>
-    </div>
+      <div className="flex items-center justify-center button-container">
+        <FilledPrimaryButton
+          title={"Upload"}
+          loading={false}
+          disabled={!metadata.length || !images.length}
+          handleClick={() =>
+            navigate(`/nft-upload/3?protocol=${params.get("protocol")}`)
+          }
+        />
+      </div>
+    </>
   );
 };
 
-export default StepOne;
+export default StepTwo;

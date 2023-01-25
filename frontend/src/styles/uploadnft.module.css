@@ -1,16 +1,18 @@
 .container {
   width: 70%;
   margin: auto;
+  margin-top: 5.9rem;
 }
 
 .container > h1 {
-  color: #000;
+  color: #fff;
   font-size: 3rem;
   font-weight: 700;
   margin: 0;
   padding: 0;
-  text-align: left;
+  text-align: center;
   line-height: 3.625rem;
+  margin-bottom: 3.125rem;
 }
 
 @media (max-width: 1366px) {

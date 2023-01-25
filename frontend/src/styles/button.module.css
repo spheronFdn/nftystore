@@ -18,13 +18,14 @@
   align-items: center;
   cursor: pointer;
   background: var(--primary);
-  font-size: 36px;
-  font-weight: 700;
-  padding: 1.7rem 2.9rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 1.25rem 3.375rem;
   border-radius: 8px;
   border: 0;
   color: white;
   transition: all 0.3s ease-in-out;
+  margin-top: 3rem;
 }
 
 .hero__button:hover {

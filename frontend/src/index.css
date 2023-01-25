@@ -13,11 +13,14 @@ code {
 }
 
 :root {
-  --primary: #6172f3;
-  --primary-hover: #444ce7;
+  --primary: #1d4ae0;
+  --primary-hover: #0c37c7;
   --primary-disabled: #6172f3a8;
   --primary-card-hover: #eef4ff;
-  --text-gray-800: #344054;
-  --text-gray-500: #667085;
-  --text-gray-900: #101828;
+  --secondary: #03d3ff;
+  --card-bg: #071132;
+  --text-dark: #0c1946;
+  --text-link: #d6c8dd;
+  --text-gray-500: #b3b6c2;
+  --text-gray-400: #cbc7d3;
 }

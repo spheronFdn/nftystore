@@ -1,56 +1,65 @@
 import React, { useCallback, useMemo, useEffect } from "react";
-import { useDropzone } from "react-dropzone";
-import { ReactComponent as PlusIcon } from "../../assets/icons/plus.svg";
+import { FileRejection, useDropzone } from "react-dropzone";
+import { ReactComponent as CloudIcon } from "../../assets/icons/cloud.svg";
 import DropzoneStyles from "../../styles/dropzone.module.css";
+import FileBar from "../Misc/file-bar";
 
 interface IProps {
-  files: Blob[] | MediaSource[];
+  files: any;
   setFiles: any;
+  setBadFiles: (files: any[]) => void;
 }
 
-const JsonDropzone = ({ files, setFiles }: IProps) => {
-  const onDrop = useCallback((acceptedFiles: any) => {
-    acceptedFiles.forEach((file: any) => {
-      console.log("FF: ", file);
-      const reader = new FileReader();
-      reader.onload = () => {
-        setFiles((prevState: any) => [
-          ...prevState,
-          { name: file.name, data: reader.result },
-        ]);
-      };
-      reader.readAsText(file);
-    });
-    console.log("ACCEPTED FILES,", files);
-    // setFiles(
-    //   acceptedFiles.map((file: Blob | MediaSource) =>
-    //     Object.assign(file, {
-    //       preview: URL.createObjectURL(file),
-    //     })
-    //   )
-    // );
+const JsonDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
+  const onDrop = useCallback(
+    (
+      acceptedFiles: Blob[] | MediaSource[],
+      fileRejections: FileRejection[]
+    ) => {
+      acceptedFiles.forEach((file: any) => {
+        console.log("FF: ", file);
+        const reader = new FileReader();
+        reader.onload = () => {
+          setFiles((prevState: any) => [
+            ...prevState,
+            { name: file.name, data: reader.result },
+          ]);
+        };
+        reader.readAsText(file);
+      });
+      setBadFiles(fileRejections);
+
+      // setFiles(
+      //   acceptedFiles.map((file: Blob | MediaSource) =>
+      //     Object.assign(file, {
+      //       preview: URL.createObjectURL(file),
+      //     })
+      //   )
+      // );
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    []
+  );
 
   const baseStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "20px",
+    padding: "80px 140px 50px 140px",
     width: "40%",
     marginLeft: "auto",
     marginRight: "auto",
-    borderWidth: 2,
-    borderRadius: 2,
-    borderColor: "#eeeeee",
+    borderWidth: 1,
+    borderRadius: 12,
+    borderColor: "rgba(255, 255, 255, 0.44)",
     borderStyle: "dashed",
-    backgroundColor: "#fafafa",
+    backgroundColor: "rgba(7, 17, 50, 0.56)",
     color: "#bdbdbd",
     transition: "border .3s ease-in-out",
     cursor: "pointer",
     marginTop: "2rem",
   };
-
   const activeStyle = {
     borderColor: "#2196f3",
   };
@@ -62,12 +71,10 @@ const JsonDropzone = ({ files, setFiles }: IProps) => {
   const rejectStyle = {
     borderColor: "#ff1744",
   };
-  console.log(files);
 
   const {
     getRootProps,
     getInputProps,
-    acceptedFiles,
     isDragActive,
     isDragAccept,
     isDragReject,
@@ -75,8 +82,6 @@ const JsonDropzone = ({ files, setFiles }: IProps) => {
     onDrop,
     accept: {
       "application/json": [".json"],
-      "image/jpeg": [],
-      "image/png": [],
     },
   });
 
@@ -100,25 +105,33 @@ const JsonDropzone = ({ files, setFiles }: IProps) => {
     [files]
   );
 
+  const removeFile = (fileName: string) => {
+    setFiles(files.filter((file: any) => file.name !== fileName));
+  };
+
   return (
     <>
       <div className={DropzoneStyles.container} {...getRootProps({ style })}>
         {files.length === 0 ? (
           <>
             <input {...getInputProps()} {...otherAttr} />
-            <PlusIcon
-              className={DropzoneStyles.plus__icon}
-              height={100}
-              width={100}
-            />
+            <div className={DropzoneStyles.container__content}>
+              <CloudIcon />
+              <div className={DropzoneStyles.container__content__text}>
+                <h3>
+                  Drag & drop your files or <span>Browse</span>
+                </h3>
+                <div>
+                  Please upload in .json format with image associated <br />
+                </div>
+              </div>
+            </div>
           </>
         ) : (
-          <div
-            onClick={() => {
-              setFiles([]);
-            }}
-          >
-            REMOVE
+          <div className={DropzoneStyles.filebar__container}>
+            {files.map((file: any) => (
+              <FileBar fileName={file.name} handleRemove={removeFile} />
+            ))}
           </div>
         )}
       </div>
