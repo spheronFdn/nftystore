@@ -43,10 +43,7 @@ export default abstract class HostingApi {
       Logger.error(
         `Error in ${__filename} - sendRequest - url: ${url} - ${error.message}`
       );
-      return {
-        error: true,
-        message: error?.response?.data.message ?? error.message,
-      };
+      throw error;
     }
   }
 

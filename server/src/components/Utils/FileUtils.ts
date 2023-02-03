@@ -88,19 +88,7 @@ function getFilename(uploadDir: string) {
     form: IncomingForm
   ) => {
     try {
-      // Creates subdirectories, if they exist
-
-      const nameWithPath = part.originalFilename;
-      const subDirs = part.originalFilename?.split("/");
-
-      if (subDirs && subDirs?.length > 1) {
-        subDirs.length = subDirs.length - 1;
-        const directoryPath = `${uploadDir}/${subDirs.join("/")}`;
-        if (!fs.existsSync(directoryPath)) {
-          fs.mkdirSync(directoryPath, { recursive: true });
-        }
-      }
-      return nameWithPath as string;
+      return part.originalFilename.split("/").pop();
     } catch (error) {
       Logger.error(`Error in ${__filename} - getFilename - ${error}`);
       throw error;
