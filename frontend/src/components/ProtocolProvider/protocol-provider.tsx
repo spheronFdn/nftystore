@@ -1,7 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { ReactComponent as ArweaveIcon } from "../../assets/icons/arweave.svg";
 import { ReactComponent as FilecoinIcon } from "../../assets/icons/filecoin.svg";
+import { ReactComponent as IpfsIcon } from "../../assets/icons/ipfs.svg";
 import ProtocolProviderStyle from "../../styles/protocol-provider.module.css";
 import CardStyle from "../../styles/card.module.css";
 
@@ -18,17 +18,15 @@ interface IProtocol {
 }
 
 const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
-  const navigate = useNavigate();
-
   const isSelectedProtocol = (protocolName: string): boolean =>
     protocolName === selectedProtocol;
 
   const protocols: IProtocol[] = [
     {
       id: 1,
-      name: "arweave",
+      name: "Arweave",
       description:
-        "Whether you have a team of 2 or 200, our shared team inboxes keep everyone on the same page and in the loop.",
+        "Specializes in data storage, blockchain, and serverless web.",
       icon: (
         <ArweaveIcon
           className={`${
@@ -40,9 +38,9 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
     },
     {
       id: 2,
-      name: "filecoin",
+      name: "Filecoin",
       description:
-        "Whether you have a team of 2 or 200, our shared team inboxes keep everyone on the same page and in the loop.",
+        "Specializes in data storage, blockchain, and serverless web.",
       icon: (
         <FilecoinIcon
           className={`${
@@ -54,11 +52,11 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
     },
     {
       id: 3,
-      name: "ipfs",
+      name: "Ipfs",
       description:
-        "Whether you have a team of 2 or 200, our shared team inboxes keep everyone on the same page and in the loop.",
+        "Specializes in data storage, blockchain, and serverless web.",
       icon: (
-        <FilecoinIcon
+        <IpfsIcon
           className={`${
             isSelectedProtocol("ipfs") &&
             ProtocolProviderStyle.protocol__icon__selected

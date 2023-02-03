@@ -1,41 +1,41 @@
 import React, { useCallback, useMemo, useEffect } from "react";
-import { useDropzone } from "react-dropzone";
-import { ReactComponent as PlusIcon } from "../../assets/icons/plus.svg";
+import { FileRejection, useDropzone } from "react-dropzone";
+import { ReactComponent as CloudIcon } from "../../assets/icons/cloud.svg";
 import DropzoneStyles from "../../styles/dropzone.module.css";
+import FileBar from "../Misc/file-bar";
 
 interface IProps {
-  files: Blob[] | MediaSource[];
-  setFiles: any;
+  files: any[];
+  setFiles: (files: any[]) => void;
+  setBadFiles: (files: any[]) => void;
 }
 
-const ImageDropzone = ({ files, setFiles }: IProps) => {
-  const onDrop = useCallback((acceptedFiles: any) => {
-    setFiles(acceptedFiles);
-    console.log("ACCEPTED FILES,", files);
-
-    // setFiles(
-    //   acceptedFiles.map((file: Blob | MediaSource) =>
-    //     Object.assign(file, {
-    //       preview: URL.createObjectURL(file),
-    //     })
-    //   )
-    // );
+const ImageDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
+  const onDrop = useCallback(
+    (
+      acceptedFiles: Blob[] | MediaSource[],
+      fileRejections: FileRejection[]
+    ) => {
+      setFiles(acceptedFiles);
+      setBadFiles(fileRejections);
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    []
+  );
 
   const baseStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "20px",
+    padding: "80px 140px 50px 140px",
     width: "40%",
     marginLeft: "auto",
     marginRight: "auto",
-    borderWidth: 2,
-    borderRadius: 2,
-    borderColor: "#eeeeee",
+    borderWidth: 1,
+    borderRadius: 12,
+    borderColor: "rgba(255, 255, 255, 0.44)",
     borderStyle: "dashed",
-    backgroundColor: "rgb(181 215 239 / 40%);",
+    backgroundColor: "rgba(7, 17, 50, 0.56)",
     color: "#bdbdbd",
     transition: "border .3s ease-in-out",
     cursor: "pointer",
@@ -58,7 +58,6 @@ const ImageDropzone = ({ files, setFiles }: IProps) => {
   const {
     getRootProps,
     getInputProps,
-    acceptedFiles,
     isDragActive,
     isDragAccept,
     isDragReject,
@@ -70,11 +69,6 @@ const ImageDropzone = ({ files, setFiles }: IProps) => {
     },
   });
 
-  const thumbs = files.map((file: any) => (
-    <div key={file.path}>
-      <img src={file.preview} alt={file.path} />
-    </div>
-  ));
   const otherAttr = { directory: "", webkitdirectory: "" };
 
   const style: any = useMemo(
@@ -95,31 +89,35 @@ const ImageDropzone = ({ files, setFiles }: IProps) => {
     [files]
   );
 
+  console.log(files);
+  const removeFile = (id: string) => {
+    setFiles(files.filter((file: any) => file.name !== id));
+  };
+
   return (
     <>
       <div className={DropzoneStyles.container} {...getRootProps({ style })}>
         {files.length === 0 ? (
           <>
             <input {...getInputProps()} {...otherAttr} />
-            <PlusIcon
-              className={DropzoneStyles.plus__icon}
-              height={100}
-              width={100}
-            />
+            <div className={DropzoneStyles.container__content}>
+              <CloudIcon />
+              <div className={DropzoneStyles.container__content__text}>
+                <h3>
+                  Drag & drop your files or <span>Browse</span>
+                </h3>
+                <div>Please upload in .png/.jpeg/.jpg format</div>
+              </div>
+            </div>
           </>
         ) : (
-          <div
-            onClick={() => {
-              setFiles([]);
-            }}
-          >
-            REMOVE
+          <div className={DropzoneStyles.filebar__container}>
+            {files.map((file: any) => (
+              <FileBar fileName={file.name} handleRemove={removeFile} />
+            ))}
           </div>
         )}
       </div>
-      {files.length > 0 && (
-        <div className={DropzoneStyles.thumb__container}>{thumbs}</div>
-      )}
     </>
   );
 };

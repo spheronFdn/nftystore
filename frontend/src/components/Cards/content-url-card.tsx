@@ -23,35 +23,30 @@ const ContentUrlCard = ({
   return (
     <div
       role="presentation"
-      onClick={() => setActive(cardId)}
+      onClick={() => setActive(contentProvider)}
       className={`${isFocused && CardStyle.contenturl__card__focused} ${
         CardStyle.contenturl__card
       }`}
     >
       <div className={CardStyle.contenturl__card__content}>
-        <div className={CardStyle.contenturl__card__link__con}>
-          <div className="flex">
-            <div className={CardStyle.contenturl__card__content__icon}>
-              {contentIcon}
-            </div>
-            <div>
-              <h4>{contentProvider}</h4>
-              <a href={link} target="_blank" rel="noreferrer">
-                {link}
-              </a>
-            </div>
+        <div>
+          <span>{contentProvider} Generated</span>
+          <div
+            className={
+              !isActive
+                ? CardStyle.contenturl__card__radio
+                : CardStyle.contenturl__card__radio__active
+            }
+          >
+            {isActive && (
+              <div className={CardStyle.contenturl__card__radio__circle} />
+            )}
           </div>
         </div>
-        <div
-          className={
-            !isActive
-              ? CardStyle.contenturl__card__radio
-              : CardStyle.contenturl__card__radio__active
-          }
-        >
-          {isActive && (
-            <div className={CardStyle.contenturl__card__radio__circle} />
-          )}
+        <div className={CardStyle.contenturl__card__link__container}>
+          <a href={link} rel="noreferrer" target="_blank">
+            https://dasjfl;ajf;ldsj;fja;dfjaifhohdcah
+          </a>
         </div>
       </div>
     </div>
