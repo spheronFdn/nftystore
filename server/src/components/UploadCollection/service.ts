@@ -25,33 +25,43 @@ class UploadService {
         `Uploading collection: ${projectName}, using protocol: ${protocol}`
       );
 
-      uploadDir = await FileUtils.getDedicatedUploadDir();
+      uploadDir = await FileUtils.getDedicatedUploadDir(projectName);
 
       await FileUtils.getFiles(req, uploadDir);
 
       const form = new FormData();
+      const fileNames: string[] = [];
 
       await fs.readdirSync(uploadDir).map((fileName) => {
-        form.append(fileName, fs.createReadStream(`${uploadDir}/${fileName}`));
+        const extension: string = fileName.split(".")[1];
+
+        if (extension != "json") {
+          form.append(
+            fileName,
+            fs.createReadStream(`${uploadDir}/${fileName}`)
+          );
+          fileNames.push(fileName);
+        }
       });
 
-      const fileNames: string[] = fs.readdirSync(uploadDir);
-
-      const { deploymentId, url }: { deploymentId: string; url: string } =
-        await HostingApi.uploadFiles(protocol, projectName, form);
+      const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
+        protocol,
+        projectName,
+        form
+      );
 
       return {
         uploadId: deploymentId,
         fileNames,
         url,
-        spheronUrl: url,
+        spheronUrl: spheronUrl,
       };
 
       // return {
       //   uploadId: "deploymentId",
       //   fileNames,
       //   url: "url",
-      //   spheronUrl: "url",
+      //   spheronUrl: "spheronUrl",
       // };
     } catch (error) {
       Logger.error(

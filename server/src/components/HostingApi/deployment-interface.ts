@@ -3,6 +3,7 @@ import { IProject } from "./project-interface";
 export default interface IDeployment {
   _id: string;
   project: IProject;
+  protocol: string;
   status: DeploymentStatusEnum;
 }
 

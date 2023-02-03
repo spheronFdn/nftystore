@@ -57,9 +57,9 @@ export const FileUtils = {
     return true;
   },
 
-  async getDedicatedUploadDir(): Promise<string> {
+  async getDedicatedUploadDir(projectName: string): Promise<string> {
     try {
-      const folderName = `${config.rootUploadDirectory}/${uuidv4()}`;
+      const folderName = `${config.rootUploadDirectory}/${projectName}`;
       try {
         await fs.promises.access(folderName);
       } catch (error) {

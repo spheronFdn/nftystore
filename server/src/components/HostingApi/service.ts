@@ -54,7 +54,12 @@ export default abstract class HostingApi {
     protocol: string,
     projectName: string,
     fileData: any
-  ): Promise<{ projectId: string; deploymentId: string; url: string }> {
+  ): Promise<{
+    projectId: string;
+    deploymentId: string;
+    url: string;
+    spheronUrl: string;
+  }> {
     try {
       const { error, message, data } = await this.sendRequest(
         HttpMethods.POST,
@@ -75,6 +80,7 @@ export default abstract class HostingApi {
         projectId: data.projectId,
         deploymentId: data.deploymentId,
         url: data.sitePreview,
+        spheronUrl: data.affectedDomains ? data.affectedDomains[0] : null,
       };
     } catch (error) {
       Logger.error(`Error in ${__filename} - uploadFiles - ${error.message}`);
