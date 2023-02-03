@@ -103,11 +103,11 @@ class MetadataService {
         form
       );
 
-      // return {
-      //   deploymentId: "deploymentId",
-      //   url: "url",
-      //   spheronUrl: "url",
-      // };
+      return {
+        deploymentId: deploymentId,
+        url: url,
+        spheronUrl: spheronUrl,
+      };
     } catch (error) {
       Logger.error(
         `Error in ${__filename} - uploadCollection - ${error.message}`
