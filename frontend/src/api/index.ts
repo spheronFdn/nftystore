@@ -1,11 +1,15 @@
 import axios from "axios";
+import { IUploadFilePayloadDto } from "../common/types";
 
 const BASE_URI = "http://localhost:8088";
 
-export const uploadFiles = async (protocol: string, files: any) => {
+export const uploadFiles = async (
+  protocol: string,
+  files: IUploadFilePayloadDto
+) => {
   let formData = new FormData();
-
-  files.forEach((file: any) => formData.append(file.name, file));
+  files.images.forEach((image: any) => formData.append("", image));
+  files.metadata.forEach((metadata: any) => formData.append("", metadata));
   formData.append("protocol", protocol);
   try {
     const response = await axios({

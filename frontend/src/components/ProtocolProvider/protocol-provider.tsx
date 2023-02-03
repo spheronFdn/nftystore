@@ -78,9 +78,9 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
       {protocols.map((protocol) => (
         <div
           key={protocol.id}
-          onClick={() => handleProtocolClick(protocol.name)}
+          onClick={() => handleProtocolClick(protocol.name.toLowerCase())}
           className={`${
-            isSelectedProtocol(protocol.name) &&
+            isSelectedProtocol(protocol.name.toLowerCase()) &&
             CardStyle.protocol__provider__card__selected
           } ${CardStyle.protocol__provider__card}`}
         >

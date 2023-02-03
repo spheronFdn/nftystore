@@ -9,6 +9,7 @@ import JsonDropzone from "../Dropzone/json-dropzone";
 const StepTwo = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState<boolean>(false);
   const [images, setImages] = useState<any>([]);
   const [badImages, setBadImages] = useState<any>([]);
   const [metadata, setMetadata] = useState([]);
@@ -21,6 +22,11 @@ const StepTwo = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleSubmit = async () => {
+    await uploadFiles(params.get("protocol") || "", { images, metadata });
+    navigate(`/nft-upload/3?protocol=${params.get("protocol")}`);
+  };
   // const handleSubmit = async () => {
   //   let badFiles: any = [];
   //   images.forEach((image: any) => {
@@ -69,9 +75,7 @@ const StepTwo = () => {
           title={"Upload"}
           loading={false}
           disabled={!metadata.length || !images.length}
-          handleClick={() =>
-            navigate(`/nft-upload/3?protocol=${params.get("protocol")}`)
-          }
+          handleClick={handleSubmit}
         />
       </div>
     </>

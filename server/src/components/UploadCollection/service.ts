@@ -26,7 +26,7 @@ class UploadService {
       );
 
       uploadDir = await FileUtils.getDedicatedUploadDir(projectName);
-
+      console.log("UPLOADDIR: ", uploadDir);
       await FileUtils.getFiles(req, uploadDir);
 
       const form = new FormData();
