@@ -97,23 +97,23 @@ class MetadataService {
         form.append(`${fileName}.json`, JSON.stringify(metadata));
       }
 
-      // const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
-      //   deployment.protocol,
-      //   uploadDir.replace("nft-", "meta-"),
-      //   form
-      // );
+      const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
+        deployment.protocol,
+        uploadDir.replace("nft-", "meta-"),
+        form
+      );
 
-      return {
-        deploymentId: "deploymentId",
-        url: "url",
-        spheronUrl: "url",
-      };
+      // return {
+      //   deploymentId: "deploymentId",
+      //   url: "url",
+      //   spheronUrl: "url",
+      // };
     } catch (error) {
       Logger.error(
         `Error in ${__filename} - uploadCollection - ${error.message}`
       );
     } finally {
-      // await FileUtils.deleteDir(uploadDir);
+      await FileUtils.deleteDir(uploadDir);
     }
   }
 }
