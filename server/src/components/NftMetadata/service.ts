@@ -94,7 +94,7 @@ class MetadataService {
 
         fs.writeFileSync(fullPathMetaFile, JSON.stringify(metadata));
 
-        form.append(`${fileName}.json`, JSON.stringify(metadata));
+        form.append(`${fileName}.json`, fs.createReadStream(fullPathMetaFile));
       }
 
       const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
@@ -113,7 +113,7 @@ class MetadataService {
         `Error in ${__filename} - uploadCollection - ${error.message}`
       );
     } finally {
-      await FileUtils.deleteDir(uploadDir);
+      // await FileUtils.deleteDir(uploadDir);
     }
   }
 }
