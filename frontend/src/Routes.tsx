@@ -16,9 +16,9 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/nft-upload" element={<UploadNft />}>
-            <Route path="1" element={<StepOne />} />
-            <Route path="2" element={<StepTwo />} />
-            <Route path="3" element={<StepThree />} />
+            <Route path="select-provider" element={<StepOne />} />
+            <Route path="upload-files" element={<StepTwo />} />
+            <Route path="choose-url" element={<StepThree />} />
           </Route>
           <Route path="/success" element={<Success />} />
         </Routes>

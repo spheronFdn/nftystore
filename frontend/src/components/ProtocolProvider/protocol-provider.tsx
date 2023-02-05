@@ -68,7 +68,6 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
 
   const handleProtocolClick = (protocol: string): void => {
     setProtocol(protocol);
-    // navigate(`/nft-upload/2?protocol=${protocol}`);
   };
 
   return (

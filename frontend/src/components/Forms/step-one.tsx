@@ -7,7 +7,7 @@ const StepOne = () => {
   const navigate = useNavigate();
   const [protocol, setProtocol] = useOutletContext<any>();
   const handleNext = (protocol: string): void => {
-    navigate(`/nft-upload/2?protocol=${protocol}`);
+    navigate(`/nft-upload/upload-files?protocol=${protocol}`);
   };
 
   return (

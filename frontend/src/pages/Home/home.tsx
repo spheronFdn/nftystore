@@ -7,7 +7,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const nextStep = () => {
-    navigate("/nft-upload/1");
+    navigate("/nft-upload/select-provider");
   };
 
   return (

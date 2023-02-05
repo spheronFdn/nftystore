@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { IUploadResponse } from "../../common/types";
+import { getStepNumber } from "../../common/utils";
 import StepNav from "../../components/Navigation/step-nav";
 import UploadNftStyle from "../../styles/uploadnft.module.css";
 
@@ -13,7 +14,7 @@ const UploadNft = () => {
   const query: URLSearchParams = new URLSearchParams(location.search);
 
   useEffect(() => {
-    setCurrentStep(Number(location.pathname.split("/")[2]));
+    setCurrentStep(getStepNumber(location.pathname.split("/")[2]));
   }, [location.pathname]);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const UploadNft = () => {
   }, []);
 
   if (!currentStep) {
-    navigate("/nft-upload/1");
+    navigate("/nft-upload/select-provider");
   }
 
   return (

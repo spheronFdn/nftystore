@@ -84,3 +84,15 @@ export const checkUploadFileValidity = (
     return error.join(" or ");
   } else return "";
 };
+
+export const getStepNumber = (path: string): number => {
+  switch (path) {
+    default:
+    case "select-provider":
+      return 1;
+    case "upload-files":
+      return 2;
+    case "choose-url":
+      return 3;
+  }
+};

@@ -16,9 +16,13 @@ interface IStep {
 const StepNav = ({ currentStep }: IProps) => {
   const navigate = useNavigate();
   const Steps: IStep[] = [
-    { id: 1, priority: 1, onClick: () => navigate("/nft-upload/1") },
-    { id: 2, priority: 2, onClick: () => navigate("/nft-upload/2") },
-    { id: 3, priority: 3, onClick: () => navigate("/nft-upload/3") },
+    {
+      id: 1,
+      priority: 1,
+      onClick: () => navigate("/nft-upload/select-provider"),
+    },
+    { id: 2, priority: 2, onClick: () => navigate("/nft-upload/upload-files") },
+    { id: 3, priority: 3, onClick: () => navigate("/nft-upload/choose-url") },
   ];
 
   return (

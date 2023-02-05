@@ -14,7 +14,7 @@ const StepThree = () => {
 
   useEffect(() => {
     if (!protocol) {
-      navigate("/nft-upload/1");
+      navigate("/nft-upload/select-provider");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

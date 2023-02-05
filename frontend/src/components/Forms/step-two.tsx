@@ -33,7 +33,7 @@ const StepTwo = () => {
 
   useEffect(() => {
     if (!params.get("protocol")) {
-      navigate("/nft-upload/1");
+      navigate("/nft-upload/select-provider");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -43,6 +43,7 @@ const StepTwo = () => {
     let error = checkUploadFileValidity(images, metadata);
     if (error) {
       setError(error);
+      navigate(`/nft-upload/choose-url?protocol=${params.get("protocol")}`);
       setLoading(false);
     } else {
       try {
@@ -51,7 +52,7 @@ const StepTwo = () => {
           metadata,
         });
         setUploadResponse(response);
-        navigate(`/nft-upload/3?protocol=${params.get("protocol")}`);
+        navigate(`/nft-upload/choose-url?protocol=${params.get("protocol")}`);
       } catch (error) {
         console.log("ERROR", error);
       }
@@ -63,7 +64,7 @@ const StepTwo = () => {
     if (error) {
       setTimeout(() => setError(""), 2000);
     }
-  });
+  }, [error]);
 
   return (
     <>

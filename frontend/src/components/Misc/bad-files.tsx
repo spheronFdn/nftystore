@@ -11,7 +11,7 @@ const BadFiles = ({ badFiles }: IProps) => {
       {badFiles.map((file: FileRejection) => (
         <span key={file.file.name}>{file.file.name}</span>
       ))}{" "}
-      {badFiles.length > 0 && <>not accepted</>};
+      {badFiles.length > 0 && <>not accepted</>}
     </>
   );
 };

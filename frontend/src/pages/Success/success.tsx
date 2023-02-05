@@ -18,7 +18,7 @@ const Success = () => {
           title={"Go to Home"}
           loading={false}
           disabled={false}
-          handleClick={() => navigate("/nft-upload/1")}
+          handleClick={() => navigate("/nft-upload/select-provider")}
         />
       </div>
     </div>
