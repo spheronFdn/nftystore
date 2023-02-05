@@ -43,7 +43,6 @@ const StepTwo = () => {
     let error = checkUploadFileValidity(images, metadata);
     if (error) {
       setError(error);
-      navigate(`/nft-upload/choose-url?protocol=${params.get("protocol")}`);
       setLoading(false);
     } else {
       try {
