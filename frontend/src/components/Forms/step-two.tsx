@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useOutletContext } from "react-router-dom";
 import { uploadFiles } from "../../api";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import DropzoneStyle from "../../styles/dropzone.module.css";
 import Dropzone from "../Dropzone/image-dropzone";
 import JsonDropzone from "../Dropzone/json-dropzone";
+import { checkUploadFileValidity } from "../../common/utils";
+import { FileRejection } from "react-dropzone";
+import { IUploadResponse } from "../../common/types";
+import BadFiles from "../Misc/bad-files";
 
 const StepTwo = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [images, setImages] = useState<any>([]);
-  const [badImages, setBadImages] = useState<any>([]);
-  const [metadata, setMetadata] = useState([]);
-  const [badMetaData, setBadMetaData] = useState<any>([]);
+  const [images, setImages] = useState<File[]>([]);
+  const [badImages, setBadImages] = useState<FileRejection[]>([]);
+  const [metadata, setMetadata] = useState<File[]>([]);
+  const [badMetaData, setBadMetaData] = useState<FileRejection[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [protocol, setProtocol, uploadResponse, setUploadResponse] =
+    useOutletContext<
+      [
+        string,
+        (name: string) => void,
+        string,
+        (response: IUploadResponse) => void
+      ]
+    >();
   const params = new URLSearchParams(location.search);
 
   useEffect(() => {
@@ -24,24 +39,36 @@ const StepTwo = () => {
   }, []);
 
   const handleSubmit = async () => {
-    await uploadFiles(params.get("protocol") || "", { images, metadata });
-    navigate(`/nft-upload/3?protocol=${params.get("protocol")}`);
+    setLoading(true);
+    let error = checkUploadFileValidity(images, metadata);
+    if (error) {
+      setError(error);
+      setLoading(false);
+    } else {
+      try {
+        const response = await uploadFiles(params.get("protocol") || protocol, {
+          images,
+          metadata,
+        });
+        setUploadResponse(response);
+        navigate(`/nft-upload/3?protocol=${params.get("protocol")}`);
+      } catch (error) {
+        console.log("ERROR", error);
+      }
+      setLoading(false);
+    }
   };
-  // const handleSubmit = async () => {
-  //   let badFiles: any = [];
-  //   images.forEach((image: any) => {
-  //     const found = metadata.find((mtd: any) => mtd.name === image.name);
-  //     if (!found) {
-  //       badFiles = [...badFiles, image.name];
-  //     }
-  //   });
-  //   setErrorFiles(badFiles);
-  //   await uploadFiles("ipfs-filecoin", images);
-  // };
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => setError(""), 2000);
+    }
+  });
 
   return (
     <>
       <h1>Drop your files</h1>
+      <div className={DropzoneStyle.errorFile}> {error && <>{error}</>}</div>
       <div className="grid grid-cols-2">
         <div>
           <Dropzone
@@ -58,23 +85,17 @@ const StepTwo = () => {
           />
         </div>
         <div className={DropzoneStyle.errorFile}>
-          {badImages.map((file: any) => (
-            <span>{file.file.name}</span>
-          ))}{" "}
-          {badImages.length > 0 && <>not accepted</>}
+          <BadFiles badFiles={badImages} />
         </div>
         <div className={DropzoneStyle.errorFile}>
-          {badMetaData.map((file: any) => (
-            <span>{file.file.name}</span>
-          ))}{" "}
-          {badMetaData.length > 0 && <>not accepted</>}
+          <BadFiles badFiles={badMetaData} />
         </div>
       </div>
       <div className="flex items-center justify-center button-container">
         <FilledPrimaryButton
           title={"Upload"}
-          loading={false}
-          disabled={!metadata.length || !images.length}
+          loading={loading}
+          disabled={!metadata.length || !images.length || !!error}
           handleClick={handleSubmit}
         />
       </div>

@@ -2,20 +2,16 @@ import React from "react";
 import CardStyle from "../../styles/card.module.css";
 
 interface IProps {
-  cardId: string;
   isActive: boolean;
   setActive: (id: string) => void;
-  contentIcon: JSX.Element;
   contentProvider: string;
   link: string;
   isFocused: boolean;
 }
 
 const ContentUrlCard = ({
-  cardId,
   isActive,
   setActive,
-  contentIcon,
   contentProvider,
   link,
   isFocused,

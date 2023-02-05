@@ -5,7 +5,8 @@ import ContentUrlCard from "../Cards/content-url-card";
 
 const StepThree = () => {
   const navigate = useNavigate();
-  const [protocol] = useOutletContext<any>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [protocol, uploadResponse, setUploadResponse] = useOutletContext<any>();
   const [active, setActive] = useState<string>("");
   const handleNext = () => {
     navigate("/success");
@@ -26,19 +27,15 @@ const StepThree = () => {
           isFocused={true}
           isActive={active === "Spheron"}
           setActive={setActive}
-          contentIcon={<></>}
           contentProvider={"Spheron"}
           link={"https://google.com"}
-          cardId={""}
         />
         <ContentUrlCard
           isFocused={false}
           isActive={active === protocol}
           setActive={setActive}
-          contentIcon={<></>}
           contentProvider={protocol}
           link={"https://google.com"}
-          cardId={""}
         />
       </div>
       <div className="flex items-center justify-center button-container">

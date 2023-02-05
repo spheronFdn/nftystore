@@ -1,4 +1,11 @@
 export interface IUploadFilePayloadDto {
-  images: any[];
-  metadata: any[];
+  images: File[];
+  metadata: File[];
+}
+
+export interface IUploadResponse {
+  uploadId: string;
+  fileNames: string[];
+  baseUrl: string;
+  spheronUrl: string;
 }
