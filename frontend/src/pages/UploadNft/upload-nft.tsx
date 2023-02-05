@@ -22,7 +22,7 @@ const UploadNft = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!currentStep) {
+  if (!currentStep || (currentStep > 2 && !uploadResponse)) {
     navigate("/nft-upload/select-provider");
   }
 

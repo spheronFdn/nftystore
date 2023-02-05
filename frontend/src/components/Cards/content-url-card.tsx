@@ -43,7 +43,7 @@ const ContentUrlCard = ({
         </div>
         <div className={CardStyle.contenturl__card__link__container}>
           <a href={link} rel="noreferrer" target="_blank">
-            https://dasjfl;ajf;ldsj;fja;dfjaifhohdcah
+            {link}
           </a>
         </div>
       </div>

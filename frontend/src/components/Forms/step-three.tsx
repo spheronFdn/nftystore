@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { generateMetadata } from "../../api";
+import { uploadMetadata } from "../../api";
 import { IUploadResponse } from "../../common/types";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import ContentUrlCard from "../Cards/content-url-card";
@@ -19,20 +19,25 @@ const StepThree = () => {
         (response: IUploadResponse) => void
       ]
     >();
+
   const handleNext = async () => {
     setLoading(true);
     try {
-      const response = await generateMetadata(
+      const response = await uploadMetadata(
+        protocol,
         uploadResponse.uploadId,
+        uploadResponse.fileNames,
         selectedUrl
       );
-      setLoading(false);
-    } catch (error) {}
-    navigate("/success");
+      navigate("/success");
+    } catch (error) {
+      console.log("ERROR: ", error);
+    }
+    setLoading(false);
   };
 
   useEffect(() => {
-    if (!protocol) {
+    if (!protocol || typeof uploadResponse === "undefined") {
       navigate("/nft-upload/select-provider");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,9 +50,9 @@ const StepThree = () => {
         <ContentUrlCard
           setSelectedUrl={setSelectedUrl}
           isFocused={true}
-          isActive={selectedUrl === uploadResponse.baseUrl}
+          isActive={selectedUrl === uploadResponse.spheronUrl}
           contentProvider={"Spheron"}
-          link={"https://google.com"}
+          link={uploadResponse.spheronUrl}
         />
         <ContentUrlCard
           setSelectedUrl={setSelectedUrl}

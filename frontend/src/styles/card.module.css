@@ -102,6 +102,7 @@
   background: var(--text-dark);
   border-radius: 0.5rem;
   width: calc(100% - 1.125rem);
+  overflow: hidden;
 }
 
 .contenturl__card__content .contenturl__card__link__container a {
