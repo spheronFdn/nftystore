@@ -3,6 +3,8 @@ import { IUploadFilePayloadDto, IUploadResponse } from "../common/types";
 
 const BASE_URI = "http://localhost:8088";
 
+const headers = { "Content-Type": "multipart/form-data" };
+
 export const uploadFiles = async (
   protocol: string,
   files: IUploadFilePayloadDto
@@ -16,7 +18,29 @@ export const uploadFiles = async (
       url: `${BASE_URI}/uploadCollection?protocol=${protocol}`,
       data: formData,
       method: "POST",
-      headers: { "Content-Type": "multipart/form-data" },
+      headers,
+    });
+    return response;
+  } catch (error) {
+    console.log("ERROR: ", error);
+    throw new Error(error as string);
+  }
+};
+
+export const generateMetadata = async (
+  uploadId: string,
+  url: string
+): Promise<any> => {
+  let formData = new FormData();
+  formData.append("uploadId", uploadId);
+  formData.append("url", url);
+
+  try {
+    const response = await axios({
+      url: `${BASE_URI}/generateMetadataURI`,
+      data: formData,
+      method: "POST",
+      headers,
     });
     return response;
   } catch (error) {

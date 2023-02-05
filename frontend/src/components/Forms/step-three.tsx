@@ -1,14 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { generateMetadata } from "../../api";
+import { IUploadResponse } from "../../common/types";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import ContentUrlCard from "../Cards/content-url-card";
 
 const StepThree = () => {
   const navigate = useNavigate();
+  const [selectedUrl, setSelectedUrl] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [protocol, uploadResponse, setUploadResponse] = useOutletContext<any>();
-  const [active, setActive] = useState<string>("");
-  const handleNext = () => {
+  const [protocol, setProtocol, uploadResponse, setUploadResponse] =
+    useOutletContext<
+      [
+        string,
+        (name: string) => void,
+        IUploadResponse,
+        (response: IUploadResponse) => void
+      ]
+    >();
+  const handleNext = async () => {
+    setLoading(true);
+    try {
+      const response = await generateMetadata(
+        uploadResponse.uploadId,
+        selectedUrl
+      );
+      setLoading(false);
+    } catch (error) {}
     navigate("/success");
   };
 
@@ -24,26 +43,26 @@ const StepThree = () => {
       <h1>Select Content URL</h1>
       <div className="grid grid-cols-1 gap-4 justify-items-center">
         <ContentUrlCard
+          setSelectedUrl={setSelectedUrl}
           isFocused={true}
-          isActive={active === "Spheron"}
-          setActive={setActive}
+          isActive={selectedUrl === uploadResponse.baseUrl}
           contentProvider={"Spheron"}
           link={"https://google.com"}
         />
         <ContentUrlCard
+          setSelectedUrl={setSelectedUrl}
           isFocused={false}
-          isActive={active === protocol}
-          setActive={setActive}
+          isActive={selectedUrl === uploadResponse.baseUrl}
           contentProvider={protocol}
-          link={"https://google.com"}
+          link={uploadResponse.baseUrl}
         />
       </div>
       <div className="flex items-center justify-center button-container">
         <FilledPrimaryButton
           title={"Proceed"}
-          loading={false}
-          disabled={!Boolean(active)}
-          handleClick={() => handleNext()}
+          loading={loading}
+          disabled={!Boolean(selectedUrl) || loading}
+          handleClick={handleNext}
         />
       </div>
     </>

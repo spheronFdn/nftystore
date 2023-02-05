@@ -3,7 +3,7 @@ import CardStyle from "../../styles/card.module.css";
 
 interface IProps {
   isActive: boolean;
-  setActive: (id: string) => void;
+  setSelectedUrl: (url: string) => void;
   contentProvider: string;
   link: string;
   isFocused: boolean;
@@ -11,7 +11,7 @@ interface IProps {
 
 const ContentUrlCard = ({
   isActive,
-  setActive,
+  setSelectedUrl,
   contentProvider,
   link,
   isFocused,
@@ -19,7 +19,9 @@ const ContentUrlCard = ({
   return (
     <div
       role="presentation"
-      onClick={() => setActive(contentProvider)}
+      onClick={() => {
+        setSelectedUrl(link);
+      }}
       className={`${isFocused && CardStyle.contenturl__card__focused} ${
         CardStyle.contenturl__card
       }`}
