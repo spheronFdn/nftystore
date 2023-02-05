@@ -113,7 +113,7 @@ class MetadataService {
         `Error in ${__filename} - uploadCollection - ${error.message}`
       );
     } finally {
-      // await FileUtils.deleteDir(uploadDir);
+      await FileUtils.deleteDir(uploadDir);
     }
   }
 }
