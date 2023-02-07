@@ -35,17 +35,11 @@ class UploadService {
       const form = new FormData();
       const fileNames: string[] = [];
 
-      await fs.readdirSync(uploadDir).map((fileName) => {
+      fs.readdirSync(uploadDir).map((fileName) => {
         const [plainFileName, extension] = fileName.split(".");
 
         if (extension != JSON_EXTENSION) {
-          let metadata = fs.readFileSync(
-            `${uploadDir}/${plainFileName}.${JSON_EXTENSION}`
-          );
-
-          if (!metadata) {
-            throw new Error(`Missing or malformed metadata file ${fileName}!`);
-          }
+          this.checkMetadataForImage(uploadDir, plainFileName);
 
           form.append(
             fileName,
@@ -74,6 +68,19 @@ class UploadService {
 
       await FileUtils.deleteDir(uploadDir);
       throw error;
+    }
+  }
+
+  private checkMetadataForImage(filePath: string, fileName: string): void {
+    try {
+      let metadata = fs.readFileSync(
+        `${filePath}/${fileName}.${JSON_EXTENSION}`
+      );
+      JSON.parse(metadata.toString());
+    } catch (error) {
+      throw new Error(
+        `Missing or malformed metadata file for image: ${fileName}!`
+      );
     }
   }
 }

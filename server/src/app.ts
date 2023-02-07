@@ -4,6 +4,10 @@ import { Application } from "express";
 import { Server } from "http";
 import config from "./config/config";
 import Logger from "./logger/logger";
+import {
+  errorHandlingMiddleware,
+  errorLoggingMiddleware,
+} from "./components/middlewares/error-handling-middleware";
 
 class App {
   public app: Application;
@@ -37,8 +41,10 @@ class App {
       next();
     });
 
-    this.app.use(express.json({ limit: "50mb" }));
-    this.app.use(express.urlencoded({ limit: "50mb" }));
+    this.app.use(express.json({ limit: "500mb" }));
+    this.app.use(express.urlencoded({ limit: "500mb" }));
+    this.app.use(errorLoggingMiddleware);
+    this.app.use(errorHandlingMiddleware);
   }
   private middlewares(middleWares: {
     forEach: (arg0: (middleWare: any) => void) => void;
