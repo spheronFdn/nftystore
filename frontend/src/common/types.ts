@@ -9,3 +9,9 @@ export interface IUploadResponse {
   baseUrl: string;
   spheronUrl: string;
 }
+
+export interface IUploadMetadataResponse {
+  spheronUrl: string;
+  uploadId: string;
+  url: string;
+}

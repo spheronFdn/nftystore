@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { uploadMetadata } from "../../api";
-import { IUploadResponse } from "../../common/types";
+import { IUploadMetadataResponse, IUploadResponse } from "../../common/types";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import ContentUrlCard from "../Cards/content-url-card";
 
@@ -9,14 +9,22 @@ const StepThree = () => {
   const navigate = useNavigate();
   const [selectedUrl, setSelectedUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [protocol, setProtocol, uploadResponse, setUploadResponse] =
+  const [
+    protocol,
+    setProtocol,
+    uploadResponse,
+    setUploadResponse,
+    metadataResponse,
+    setMetadataResponse,
+  ] =
     useOutletContext<
       [
         string,
         (name: string) => void,
         IUploadResponse,
-        (response: IUploadResponse) => void
+        (response: IUploadResponse) => void,
+        IUploadMetadataResponse,
+        (response: IUploadMetadataResponse) => void
       ]
     >();
 
@@ -29,6 +37,7 @@ const StepThree = () => {
         uploadResponse.fileNames,
         selectedUrl
       );
+      setMetadataResponse(response);
       navigate("/success");
     } catch (error) {
       console.log("ERROR: ", error);

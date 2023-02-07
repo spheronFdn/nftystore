@@ -94,5 +94,7 @@ export const getStepNumber = (path: string): number => {
       return 2;
     case "choose-url":
       return 3;
+    case "success":
+      return 4;
   }
 };
