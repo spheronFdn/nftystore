@@ -18,7 +18,6 @@ export default abstract class HostingApi {
   private static async sendRequest(
     method: HttpMethods,
     url: string,
-    // contentType: string,
     data?: any,
     params?: any,
     baseUrl?: string
@@ -35,7 +34,6 @@ export default abstract class HostingApi {
         params: params,
         headers: {
           authorization: `Bearer ${config.hostingApi.apiToken}`,
-          // "Content-Type": `${contentType}`,
         },
       });
       return { error: false, data: response.data };
@@ -64,7 +62,6 @@ export default abstract class HostingApi {
       const { error, message, data } = await this.sendRequest(
         HttpMethods.POST,
         "/v1/deployment/upload",
-        // "multipart/form-data",
         fileData,
         {
           protocol: protocol,
@@ -88,6 +85,7 @@ export default abstract class HostingApi {
     }
   }
 
+  // TODO: REMOVE "http://localhost:8080" before deployment
   public static async getDeployment(
     deploymentId: string
   ): Promise<IDeployment> {

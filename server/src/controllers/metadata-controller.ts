@@ -12,10 +12,6 @@ class NftMetadataController {
   }
 
   public intializeRoutes() {
-    this.router.post(
-      "/generateMetadataURI",
-      NftMetadataComponent.generateMetadataURI
-    );
     this.router.post("/uploadMetadata", NftMetadataComponent.uploadMetadata);
   }
 }

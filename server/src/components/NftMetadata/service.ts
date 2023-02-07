@@ -1,6 +1,6 @@
 import fs from "fs";
 import Logger from "../../logger/logger";
-import { FileUtils } from "../Utils/FileUtils";
+import { FileUtils } from "../Utils/file-utils";
 import { Request } from "express";
 import FormData from "form-data";
 import { v4 as uuidv4 } from "uuid";
@@ -8,59 +8,13 @@ import HostingApi from "../HostingApi/service";
 import { IProject } from "../HostingApi/project-interface";
 import IDeployment from "../HostingApi/deployment-interface";
 import config from "../../config/config";
+import {
+  IMAGE_UPLOAD_PREFIX,
+  JSON_EXTENSION,
+  METADATA_UPLOAD_PREFIX,
+} from "../Utils/constants";
 
 class MetadataService {
-  async generateMetadata(
-    uploadId: string,
-    protocol: string,
-    req: Request
-  ): Promise<{
-    deploymentId: string;
-    url: string;
-    spheronUrl: string;
-  }> {
-    let uploadDir: string = "";
-    try {
-      Logger.info(
-        `Uploading json files for : ${uploadId}, using protocol: ${protocol}`
-      );
-
-      uploadDir = await FileUtils.getDedicatedUploadDir(uuidv4());
-
-      await FileUtils.getFiles(req, uploadDir);
-
-      const form = new FormData();
-
-      await fs.readdirSync(uploadDir).map((fileName) => {
-        form.append(fileName, fs.createReadStream(`${uploadDir}/${fileName}`));
-      });
-
-      const fileNames: string[] = fs.readdirSync(uploadDir);
-
-      const deployment: IDeployment = await HostingApi.getDeployment(uploadId);
-
-      // const { deploymentId, url }: { deploymentId: string; url: string } =
-      //   await HostingApi.uploadFiles(protocol, deployment.project.name, form);
-
-      // return {
-      //   deploymentId: deploymentId,
-      //   url: url,
-      //   spheronUrl: url,
-      // };
-      return {
-        deploymentId: "deploymentId",
-        url: "url",
-        spheronUrl: "url",
-      };
-    } catch (error) {
-      Logger.error(
-        `Error in ${__filename} - uploadCollection - ${error.message}`
-      );
-    } finally {
-      // await FileUtils.deleteDir(uploadDir);
-    }
-  }
-
   async uploadMetadata(
     uploadId: string,
     fileNames: string[],
@@ -72,7 +26,7 @@ class MetadataService {
   }> {
     let uploadDir: string = "";
     try {
-      Logger.info(`Uploading json files for : ${uploadId}`);
+      Logger.info(`Uploading metadata files for : ${uploadId}`);
 
       const deployment: IDeployment = await HostingApi.getDeployment(uploadId);
       uploadDir = deployment.project.name;
@@ -94,14 +48,20 @@ class MetadataService {
 
         fs.writeFileSync(fullPathMetaFile, JSON.stringify(metadata));
 
-        form.append(`${fileName}.json`, JSON.stringify(metadata));
+        form.append(
+          `${fileName}.${JSON_EXTENSION}`,
+          fs.createReadStream(fullPathMetaFile)
+        );
       }
 
-      // const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
-      //   deployment.protocol,
-      //   uploadDir.replace("nft-", "meta-"),
-      //   form
-      // );
+      const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
+        deployment.protocol,
+        uploadDir.replace(
+          `${IMAGE_UPLOAD_PREFIX}-`,
+          `${METADATA_UPLOAD_PREFIX}-`
+        ),
+        form
+      );
 
       return {
         deploymentId: "deploymentId",
@@ -112,6 +72,7 @@ class MetadataService {
       Logger.error(
         `Error in ${__filename} - uploadCollection - ${error.message}`
       );
+      throw error;
     } finally {
       // await FileUtils.deleteDir(uploadDir);
     }
