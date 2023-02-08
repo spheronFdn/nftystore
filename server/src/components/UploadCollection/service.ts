@@ -4,7 +4,8 @@ import { Request } from "express";
 import HostingApi from "../HostingApi/service";
 import { v4 as uuidv4 } from "uuid";
 import FormData from "form-data";
-import { FileUtils } from "../Utils/FileUtils";
+import { FileUtils } from "../Utils/file-utils";
+import { IMAGE_UPLOAD_PREFIX, JSON_EXTENSION } from "../Utils/constants";
 
 class UploadService {
   public async uploadCollection(
@@ -19,7 +20,9 @@ class UploadService {
   }> {
     let uploadDir: string = "";
     try {
-      projectName = projectName ? projectName : `nft-${uuidv4()}`;
+      projectName = projectName
+        ? projectName
+        : `${IMAGE_UPLOAD_PREFIX}-${uuidv4()}`;
 
       Logger.info(
         `Uploading collection: ${projectName}, using protocol: ${protocol}`
@@ -32,10 +35,12 @@ class UploadService {
       const form = new FormData();
       const fileNames: string[] = [];
 
-      await fs.readdirSync(uploadDir).map((fileName) => {
-        const extension: string = fileName.split(".")[1];
+      fs.readdirSync(uploadDir).map((fileName) => {
+        const [plainFileName, extension] = fileName.split(".");
 
-        if (extension != "json") {
+        if (extension != JSON_EXTENSION) {
+          this.checkMetadataForImage(uploadDir, plainFileName);
+
           form.append(
             fileName,
             fs.createReadStream(`${uploadDir}/${fileName}`)
@@ -54,21 +59,28 @@ class UploadService {
         uploadId: deploymentId,
         fileNames,
         url,
-        spheronUrl: spheronUrl,
+        spheronUrl,
       };
-
-      // return {
-      //   uploadId: "deploymentId",
-      //   fileNames,
-      //   url: "url",
-      //   spheronUrl: "spheronUrl",
-      // };
     } catch (error) {
       Logger.error(
         `Error in ${__filename} - uploadCollection - ${error.message}`
       );
-    } finally {
-      // await FileUtils.deleteDir(uploadDir);
+
+      await FileUtils.deleteDir(uploadDir);
+      throw error;
+    }
+  }
+
+  private checkMetadataForImage(filePath: string, fileName: string): void {
+    try {
+      let metadata = fs.readFileSync(
+        `${filePath}/${fileName}.${JSON_EXTENSION}`
+      );
+      JSON.parse(metadata.toString());
+    } catch (error) {
+      throw new Error(
+        `Missing or malformed metadata file for image: ${fileName}!`
+      );
     }
   }
 }
