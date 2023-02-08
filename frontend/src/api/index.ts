@@ -1,5 +1,9 @@
 import axios from "axios";
-import { IUploadFilePayloadDto, IUploadResponse } from "../common/types";
+import {
+  IUploadFilePayloadDto,
+  IUploadMetadataResponse,
+  IUploadResponse,
+} from "../common/types";
 
 const BASE_URI = "http://localhost:8088";
 
@@ -30,7 +34,7 @@ export const uploadMetadata = async (
   uploadId: string,
   fileNames: string[],
   url: string
-): Promise<any> => {
+): Promise<IUploadMetadataResponse> => {
   try {
     const response = await axios({
       url: `${BASE_URI}/uploadMetadata?protocol=${protocol}&uploadId=${uploadId}`,
@@ -38,7 +42,7 @@ export const uploadMetadata = async (
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
-    return response;
+    return response.data;
   } catch (error) {
     console.log("ERROR: ", error);
     throw new Error(error as string);
