@@ -23,4 +23,9 @@ code {
   --text-link: #d6c8dd;
   --text-gray-500: #b3b6c2;
   --text-gray-400: #cbc7d3;
+  --app-gradient: linear-gradient(129.58deg, rgba(44, 218, 255, 0.29) -1.47%, rgba(0, 107, 233, 0) 41.44%), #030928;
+  --text-white-100: rgba(255, 255, 255, 0.12);
+  --text-white-400: rgba(255, 255, 255, 0.04);
+  --shadow-dark: rgba(16, 24, 40, 0.05);
+  --primary-white: white;
 }

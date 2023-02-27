@@ -3,11 +3,11 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { uploadMetadata } from "../../api";
 import { IUploadMetadataResponse, IUploadResponse } from "../../common/types";
 import FilledPrimaryButton from "../Buttons/filled-primary";
+import HeroPrimaryButton from "../Buttons/hero-primary";
 import ContentUrlCard from "../Cards/content-url-card";
-import DropzoneStyle from "../../styles/dropzone.module.css";
 import Ipfs from "../../assets/icons/ipfs-icon.svg";
 import Spheron from "../../assets/icons/spheron-icon.svg";
-import HeroPrimaryButton from "../Buttons/hero-primary";
+import DropzoneStyle from "../../styles/dropzone.module.css";
 
 const StepThree = () => {
   const navigate = useNavigate();
@@ -49,17 +49,17 @@ const StepThree = () => {
     setLoading(false);
   };
 
-  // **** Fix before merging
-
   useEffect(() => {
     if (!protocol || typeof uploadResponse === "undefined") {
       navigate("/nft-upload/select-provider");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handlePrevious = () => {
     navigate(`/nft-upload/upload-files?protocol=${protocol}`);
   };
+
   return (
     <>
       <div className={DropzoneStyle.drop__heading}>
@@ -69,11 +69,11 @@ const StepThree = () => {
         Please select the desired gateway to access your collection base URI. We
         recommend using Spheron Gateway as it is super-charged with edge CDN.
       </div>
-      {/* proper style with classname */}
       <div className={DropzoneStyle.contentUrl__div}>
+        {/* Fix Image: take from data */}
         <ContentUrlCard
           setSelectedUrl={setSelectedUrl}
-          isFocused={true} // Set is true
+          isFocused={true}
           isActive={selectedUrl === uploadResponse.spheronUrl}
           contentProvider={"Spheron"}
           link={uploadResponse.spheronUrl}

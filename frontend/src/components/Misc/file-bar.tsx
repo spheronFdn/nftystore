@@ -1,5 +1,4 @@
 import React from "react";
-import { ReactComponent as DeleteIcon } from "../../assets/icons/bin.svg";
 import { ReactComponent as CloseCircle } from "../../assets/icons/close-circle.svg";
 import DropzoneStyle from "../../styles/dropzone.module.css";
 

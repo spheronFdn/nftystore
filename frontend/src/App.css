@@ -6,7 +6,7 @@
   right: 0;
   background-image: url("./assets/background/site-bg.svg") no-repeat;
   background-size: cover;
-  background: linear-gradient(129.58deg, rgba(44, 218, 255, 0.29) -1.47%, rgba(0, 107, 233, 0) 41.44%), #030928;
+  background: var(--app-gradient);
 }
 
 .text-primary {
@@ -14,7 +14,7 @@
 }
 
 .text-white {
-  color: #fff;
+  color: white;
 }
 
 .font-xs {
@@ -78,7 +78,7 @@
 /* Scrollbar */
 * {
   scrollbar-width: 6px;
-  scrollbar-color: rgba(255, 255, 255, 0.12);
+  scrollbar-color: var(--text-white-100);
 }
 
 /* Chrome, Edge and Safari */
@@ -105,17 +105,17 @@
 
 *::-webkit-scrollbar-thumb {
   border-radius: 6px;
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: var(--text-white-100);
 
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: var(--text-white-100);
 
 }
 
 *::-webkit-scrollbar-thumb:active {
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: var(--text-white-100);
 }
 
 @media (max-width: 1024px) {

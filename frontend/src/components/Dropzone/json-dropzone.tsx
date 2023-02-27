@@ -7,8 +7,8 @@ import {
   baseStyle,
   rejectStyle,
 } from "../../common/dropzone-style";
-import DropzoneStyles from "../../styles/dropzone.module.css";
 import FileBar from "../Misc/file-bar";
+import DropzoneStyles from "../../styles/dropzone.module.css";
 
 interface IProps {
   files: File[];
@@ -63,7 +63,6 @@ const JsonDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
   return (
     <>
       <div className={DropzoneStyles.container} {...getRootProps({ style })}>
-        {/* {files.length === 0 ? ( */}
         <h3>Metadata JSON Files</h3>
         <div className={DropzoneStyles.container__content__div}>
           <input {...getInputProps()} {...otherAttr} />
@@ -76,13 +75,9 @@ const JsonDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
                 </span>{" "}
                 corresponding JSON files
               </h3>
-              {/* <div>
-                Please upload in .json format with image associated <br />
-              </div> */}
             </div>
           </div>
         </div>
-        {/* ) : (  */}
         {files.length > 0 ? (
           <div className={DropzoneStyles.filebar__container}>
             <div className={DropzoneStyles.filebar__title__div}>

@@ -69,7 +69,7 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
   const handleProtocolClick = (protocol: string): void => {
     setProtocol(protocol);
   };
-  console.log(protocols, "protocols");
+
   return (
     <div className={`${CardStyle.protocol__provider__card__container}`}>
       {protocols.map((protocol) => (

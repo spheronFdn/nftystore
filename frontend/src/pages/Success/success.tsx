@@ -23,7 +23,6 @@ const Success = () => {
     useOutletContext<
       [string, (name: string) => void, IUploadResponse, IUploadMetadataResponse]
     >();
-  console.log(metadataResponse, "mdr");
 
   useEffect(() => {
     if (metadataResponse.url === "") {
@@ -45,13 +44,12 @@ const Success = () => {
         and you can view all the collection in the marketplace
       </span>
       <div className={SuccessStyle.successUrl}>
-        <Link />
-        <a href="#" rel="noreferrer" target="_blank">
-          {/* {link} */} https://example.com/article/social-share-modal
+        <Link style={{ stroke: "#56A1FF" }} />
+        <a href={metadataResponse.url} rel="noreferrer" target="_blank">
+          {metadataResponse.url}
         </a>
         <Copy />
       </div>
-      {/* <a href={metadataResponse.url}>{metadataResponse.url}</a> */}
       <div className="flex items-center justify-center button-container">
         <FilledPrimaryButton
           title={"Go to Home"}

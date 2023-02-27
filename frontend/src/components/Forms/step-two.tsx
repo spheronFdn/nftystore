@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, useOutletContext } from "react-router-dom";
 import { uploadFiles } from "../../api";
 import FilledPrimaryButton from "../Buttons/filled-primary";
-import DropzoneStyle from "../../styles/dropzone.module.css";
 import Dropzone from "../Dropzone/image-dropzone";
 import JsonDropzone from "../Dropzone/json-dropzone";
-import { checkUploadFileValidity } from "../../common/utils";
+import { checkUploadFileValidity, listData } from "../../common/utils";
 import { FileRejection } from "react-dropzone";
 import { IUploadResponse } from "../../common/types";
 import BadFiles from "../Misc/bad-files";
 import HeroPrimaryButton from "../Buttons/hero-primary";
-import { ReactComponent as CloseIcon } from "../../assets/icons/close-modal.svg";
+import Modal from "../Modal/modal";
+import DropzoneStyle from "../../styles/dropzone.module.css";
+import ModalStyle from "../../styles/modal.module.css";
 
 const StepTwo = () => {
   const navigate = useNavigate();
@@ -70,10 +71,6 @@ const StepTwo = () => {
     setModalOpen(true);
   };
 
-  const handleModalClose = () => {
-    setModalOpen(false);
-  };
-
   useEffect(() => {
     if (error) {
       setTimeout(() => setError(""), 2000);
@@ -83,44 +80,20 @@ const StepTwo = () => {
   return (
     <>
       {modalOpen ? (
-        <div className={DropzoneStyle.modal__background}>
-          <div className={DropzoneStyle.modal}>
-            <div
-              className={DropzoneStyle.modal__close}
-              onClick={handleModalClose}
-            >
-              <CloseIcon />
-            </div>
-            <div className={DropzoneStyle.modal__heading}>Guide</div>
-
+        <Modal
+          setModalOpen={setModalOpen}
+          modalHeading={"Guide"}
+          modalContent={
             <ul>
-              <li className={DropzoneStyle.modal__list}>
-                We follow the ERC721 standard for metadata schema. Any different
-                schema will not work in this widget.
-              </li>
-
-              <li className={DropzoneStyle.modal__list}>
-                The metadata JSON file name and the collection file name should
-                match to create the Base URI of the collection.
-              </li>
-              <li className={DropzoneStyle.modal__list}>
-                The metadata JSON list length should match the collection
-                length.
-              </li>
-              <li className={DropzoneStyle.modal__list}>
-                The collection list can be an image, video, or GIF. The metadata
-                JSON should always be of type JSON.
-              </li>
-              <li className={DropzoneStyle.modal__list}>
-                We will upload all the files together, which might take some
-                time based on bandwidth. Please be patient when uploading the
-                collection.
-              </li>
+              {listData.map((list) => (
+                <li key={list.id} className={ModalStyle.modal__list}>
+                  {list.description}
+                </li>
+              ))}
             </ul>
-          </div>
-        </div>
+          }
+        />
       ) : null}
-
       <div className={DropzoneStyle.drop__heading}>Drop your files here</div>
       <div className={DropzoneStyle.drop__subheading}>
         You can select all of your images in the NFT Collection along with the

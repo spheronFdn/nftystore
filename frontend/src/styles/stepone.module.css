@@ -5,10 +5,7 @@
   font-weight: 700;
   font-size: 28px;
   line-height: 34px;
-  /* identical to box height */
-
-  /* White */
-  color: #ffffff;
+  color: white;
   margin-top: 4rem;
 }
 .step__subheading {
@@ -19,8 +16,6 @@
   font-weight: 300;
   font-size: 14px;
   line-height: 24px;
-  /* identical to box height, or 171% */
-
   color: rgba(255, 255, 255, 0.7);
 }
 
@@ -28,17 +23,16 @@
   text-align: right;
   justify-content: right;
   display: flex;
-  /* margin-right: 1.8rem; */
   margin-top: 2rem;
 }
 
 @media (max-width: 800px) {
-    .step__heading {
-        margin-top: 1rem;
-    }
-    .step__button__div {
-        margin-right: 0rem;
-        margin-top: 1rem;
-        margin-bottom: 3rem;
-      }
+  .step__heading {
+    margin-top: 1rem;
   }
+  .step__button__div {
+    margin-right: 0rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
+}

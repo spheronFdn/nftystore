@@ -10,12 +10,9 @@
   cursor: pointer;
   padding: 1.25rem 1.375rem;
   border-radius: 12px;
-  /* border: 1px solid rgba(255, 255, 255, 0.18); */
   transition: all 0.3s ease-in-out;
-  /* background: var(--card-bg); */
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--text-white-400);
   border-radius: 8px;
-  /* min-width: 287px; */
   border: 2px solid transparent;
 }
 
@@ -32,56 +29,47 @@
   font-weight: 700;
   font-size: 1.25rem;
   line-height: 1.875rem;
-  color: #fff;
+  color: white;
 }
 
 .protocol__provider__card:hover {
-  /* background-color: #021e792d; */
   background: linear-gradient(
       0deg,
       rgba(98, 156, 255, 0.07),
       rgba(98, 156, 255, 0.07)
     ),
-    rgba(255, 255, 255, 0.04);
+    var(--text-white-400);
   border-radius: 8px;
-
 }
 
 .protocol__provider__card__selected {
-  /* border: 1px solid #03d3ff;
-  box-shadow: 0px 7px 10px #021d79; */
   background: linear-gradient(
       0deg,
       rgba(98, 156, 255, 0.07),
       rgba(98, 156, 255, 0.07)
     ),
-    rgba(255, 255, 255, 0.04);
+    var(--text-white-400);
   border-radius: 8px;
   border: 2px solid #418ff8;
-  /* border-image-source: radial-gradient(
-      130.89% 130.89% at 47.98% 7.11%,
-      #004aa2 0%,
-      #418ff8 99.99%,
-      #5cc4ff 100%
-    ) */
-    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-  /* border-image-slice: 1; */
 }
 
 .contenturl__card {
-  padding: 14px 20px;
+  padding: 14px 20px 20px 20px;
   border-radius: 13px;
   transition: all 0.3s ease-in-out;
-  /* border: 1px solid rgba(255, 255, 255, 0.14); */
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--text-white-400);
   border-radius: 8px;
   margin-top: 2rem;
-  /* background: var(--card-bg); */
 }
 
 .contenturl__card:hover {
-  background: linear-gradient(0deg, rgba(98, 156, 255, 0.07), rgba(98, 156, 255, 0.07)), rgba(255, 255, 255, 0.04);
+  background: linear-gradient(
+      0deg,
+      rgba(98, 156, 255, 0.07),
+      rgba(98, 156, 255, 0.07)
+    ),
+    var(--text-white-400);
   border-radius: 8px;
 }
 
@@ -91,13 +79,9 @@
       rgba(98, 156, 255, 0.07),
       rgba(98, 156, 255, 0.07)
     ),
-    rgba(255, 255, 255, 0.04);
+    var(--text-white-400);
   border: 2px solid #006be9;
   border-radius: 8px;
-  /* background: var(--secondary) !important; */
-  /* border: 1 solid rgba(255, 255, 255, 0.19); */
-  /* box-shadow: 0px 7.65854px 10.9408px #0e1a43;
-  width: 420px; */
 }
 
 .contenturl__card__content {
@@ -110,23 +94,8 @@
 .contenturl__card__content > div {
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   width: 100%;
 }
-
-/* .contenturl__card__content > div > span {
-  color: var(--text-gray-400);
-  font-weight: 600;
-  font-size: 18.8755px;
-  line-height: 23px;
-} */
-
-/* .contenturl__card__focused .contenturl__card__content > div > span {
-  color: var(--text-dark);
-  font-size: 1.25rem;
-  line-height: 1.5rem;
-  font-weight: 600;
-} */
 
 .contenturl__card__content__icon {
   height: 28px;
@@ -142,8 +111,6 @@
   padding-left: 1.125rem;
   background: rgba(246, 245, 253, 0.04);
   border-radius: 4px;
-  /* background: var(--text-dark); */
-  /* border-radius: 0.5rem; */ 
   width: calc(100% - 1.125rem);
   overflow: hidden;
   display: flex;
@@ -152,18 +119,17 @@
 
 .contenturl__card__content .contenturl__card__link__container a {
   text-decoration: none;
-  /* color: var(--text-link); */
-  /* font-family: 'Inter'; */
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  /* identical to box height */
-
-  color: #006be9;
-
+  color: #56a1ff;
+  max-width: 420px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 0.8rem;
   margin-left: 1rem;
-
 }
 
 .contenturl__card__radio {
@@ -209,20 +175,17 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 24px;
-  /* identical to box height, or 133% */
-
-  color: #ffffff;
+  color: white;
   margin-left: 1rem;
 }
 
 .recommended__div {
   background: radial-gradient(
-      130.89% 130.89% at 47.98% 7.11%,
-      #004aa2 0%,
-      #418ff8 99.99%,
-      #5cc4ff 100%
-    )
-    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    130.89% 130.89% at 47.98% 7.11%,
+    #004aa2 0%,
+    #418ff8 99.99%,
+    #5cc4ff 100%
+  );
   border-radius: 16px;
   margin-left: 1rem;
   color: white;
@@ -235,11 +198,8 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;
-  /* identical to box height, or 150% */
-
   text-align: center;
-
-  color: #ffffff;
+  color: white;
   position: relative;
 }
 .recommended__div .information__div {
@@ -273,13 +233,15 @@
   font-weight: 600;
   font-size: 12px;
   line-height: 18px;
-  /* or 150% */
-
-  color: #ffffff;
+  color: white;
 }
 
 .protocol__card__margin {
   margin-right: 1.25rem;
+}
+
+.link__icon {
+  stroke: #56a1ff;
 }
 
 @media (max-width: 800px) {
@@ -291,12 +253,12 @@
   .protocol__card__margin {
     margin: 0;
   }
-  .content__title { 
+  .content__title {
     margin-left: 0.3rem;
     font-size: 11px;
     width: max-content;
   }
-  .contenturl__card__content .contenturl__card__link__container a { 
+  .contenturl__card__content .contenturl__card__link__container a {
     margin-left: 0.3rem;
     font-size: 11px;
   }

@@ -8,8 +8,8 @@ import {
   baseStyle,
   rejectStyle,
 } from "../../common/dropzone-style";
-import DropzoneStyles from "../../styles/dropzone.module.css";
 import FileBar from "../Misc/file-bar";
+import DropzoneStyles from "../../styles/dropzone.module.css";
 
 interface IProps {
   files: File[];
@@ -57,7 +57,6 @@ const ImageDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
   const removeFile = (id: string) => {
     setFiles(files.filter((file: File) => file.name !== id));
   };
-  console.log(files, "files");
 
   const handleClear = () => {
     setFiles([]);
@@ -65,11 +64,7 @@ const ImageDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
 
   return (
     <>
-      <div
-        className={DropzoneStyles.container}
-        {...getRootProps({ style })}
-        // style={{ marginRight: "1rem" }}
-      >
+      <div className={DropzoneStyles.container} {...getRootProps({ style })}>
         <h3>NFT collection</h3>
         <div className={DropzoneStyles.container__content__div}>
           <input {...getInputProps()} {...otherAttr} />
@@ -82,24 +77,9 @@ const ImageDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
                 </span>{" "}
                 NFT collection
               </h3>
-              {/* <div>Please upload in .png/.jpeg/.jpg format</div> */}
             </div>
           </div>
         </div>
-        {/* {files.length === 0 ? (
-          <>
-            <input {...getInputProps()} {...otherAttr} />
-            <div className={DropzoneStyles.container__content}>
-              <ImageIcon />
-              <div className={DropzoneStyles.container__content__text}>
-                <h3>
-                  Drag & drop your files or <span>Browse</span>
-                </h3>
-                <div>Please upload in .png/.jpeg/.jpg format</div>
-              </div>
-            </div>
-          </>
-        ) : ( */}
         {files.length > 0 ? (
           <div className={DropzoneStyles.filebar__container}>
             <div className={DropzoneStyles.filebar__title__div}>

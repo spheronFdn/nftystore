@@ -8,9 +8,6 @@ interface IProps {
 }
 
 const Step = ({ currentStep, stepPriority, handleClick }: IProps) => {
-  console.log(currentStep, "cs");
-  console.log(stepPriority, "sp");
-
   const isActive: boolean = currentStep >= stepPriority;
   return (
     <>

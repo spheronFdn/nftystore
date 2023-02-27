@@ -37,17 +37,8 @@ export const uploadMetadata = async (
 ): Promise<IUploadMetadataResponse> => {
   try {
     const response = await axios({
-      // Very Important: remove comment
-      // url: `${BASE_URI}/uploadMetadata?protocol=${protocol}&uploadId=${uploadId}`,
-      // data: { uploadId, fileNames, baseUrl: url },
-      // method: "POST",
-      // headers: { "Content-Type": "application/json" },
-      url: "https://www.google.com/",
-      data: {
-        uploadId: 1,
-        fileNames: "new",
-        baseUrl: "https://www.google.com/",
-      },
+      url: `${BASE_URI}/uploadMetadata?protocol=${protocol}&uploadId=${uploadId}`,
+      data: { uploadId, fileNames, baseUrl: url },
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });

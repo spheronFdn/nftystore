@@ -37,7 +37,6 @@ const StepNav = ({ currentStep }: IProps) => {
           />
         ))}
       </div>
-      {/* <div className={NavStyle.step__count}>STEP {currentStep}/3</div> */}
     </div>
   );
 };
