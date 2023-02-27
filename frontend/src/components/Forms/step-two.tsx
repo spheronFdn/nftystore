@@ -9,6 +9,8 @@ import { checkUploadFileValidity } from "../../common/utils";
 import { FileRejection } from "react-dropzone";
 import { IUploadResponse } from "../../common/types";
 import BadFiles from "../Misc/bad-files";
+import HeroPrimaryButton from "../Buttons/hero-primary";
+import { ReactComponent as CloseIcon } from "../../assets/icons/close-modal.svg";
 
 const StepTwo = () => {
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ const StepTwo = () => {
   const [badImages, setBadImages] = useState<FileRejection[]>([]);
   const [metadata, setMetadata] = useState<File[]>([]);
   const [badMetaData, setBadMetaData] = useState<FileRejection[]>([]);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [protocol, setProtocol, uploadResponse, setUploadResponse] =
     useOutletContext<
@@ -59,6 +62,18 @@ const StepTwo = () => {
     }
   };
 
+  const handlePrevious = () => {
+    navigate("/nft-upload/select-provider");
+  };
+
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
   useEffect(() => {
     if (error) {
       setTimeout(() => setError(""), 2000);
@@ -67,17 +82,65 @@ const StepTwo = () => {
 
   return (
     <>
-      <h1>Drop your files</h1>
-      <div className={DropzoneStyle.errorFile}> {error && <>{error}</>}</div>
-      <div className="grid grid-cols-2">
-        <div>
+      {modalOpen ? (
+        <div className={DropzoneStyle.modal__background}>
+          <div className={DropzoneStyle.modal}>
+            <div
+              className={DropzoneStyle.modal__close}
+              onClick={handleModalClose}
+            >
+              <CloseIcon />
+            </div>
+            <div className={DropzoneStyle.modal__heading}>Guide</div>
+
+            <ul>
+              <li className={DropzoneStyle.modal__list}>
+                We follow the ERC721 standard for metadata schema. Any different
+                schema will not work in this widget.
+              </li>
+
+              <li className={DropzoneStyle.modal__list}>
+                The metadata JSON file name and the collection file name should
+                match to create the Base URI of the collection.
+              </li>
+              <li className={DropzoneStyle.modal__list}>
+                The metadata JSON list length should match the collection
+                length.
+              </li>
+              <li className={DropzoneStyle.modal__list}>
+                The collection list can be an image, video, or GIF. The metadata
+                JSON should always be of type JSON.
+              </li>
+              <li className={DropzoneStyle.modal__list}>
+                We will upload all the files together, which might take some
+                time based on bandwidth. Please be patient when uploading the
+                collection.
+              </li>
+            </ul>
+          </div>
+        </div>
+      ) : null}
+
+      <div className={DropzoneStyle.drop__heading}>Drop your files here</div>
+      <div className={DropzoneStyle.drop__subheading}>
+        You can select all of your images in the NFT Collection along with the
+        their corresponding JSON files in the Metadata JSON files.{" "}
+        <span
+          onClick={handleModalOpen}
+          className={DropzoneStyle.container__content__link}
+        >
+          Learn More
+        </span>
+      </div>
+      <div className={DropzoneStyle.content__container}>
+        <div className={DropzoneStyle.image__container__margin}>
           <Dropzone
             files={images}
             setFiles={setImages}
             setBadFiles={setBadImages}
           />
         </div>
-        <div>
+        <div className={DropzoneStyle.file__container__margin}>
           <JsonDropzone
             files={metadata}
             setFiles={setMetadata}
@@ -91,9 +154,26 @@ const StepTwo = () => {
           <BadFiles badFiles={badMetaData} />
         </div>
       </div>
-      <div className="flex items-center justify-center button-container">
+      <div className={DropzoneStyle.errorFile}>
+        {error && (
+          <div className={DropzoneStyle.errorFile__errorSpan}>
+            <span className={DropzoneStyle.errorFile__errorBadge}>Error</span>
+            {error}
+          </div>
+        )}
+      </div>
+
+      <div className={DropzoneStyle.drop__button__div}>
+        <span style={{ marginRight: "1rem" }}>
+          <HeroPrimaryButton
+            title={"Previous"}
+            loading={false}
+            disabled={false}
+            handleClick={handlePrevious}
+          />
+        </span>
         <FilledPrimaryButton
-          title={"Upload"}
+          title={"Upload And Next"}
           loading={loading}
           disabled={!metadata.length || !images.length || !!error}
           handleClick={handleSubmit}

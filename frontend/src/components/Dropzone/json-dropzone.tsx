@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 import { FileRejection, useDropzone } from "react-dropzone";
-import { ReactComponent as CloudIcon } from "../../assets/icons/cloud.svg";
+import { ReactComponent as FileIcon } from "../../assets/icons/file-icon.svg";
 import {
   acceptStyle,
   activeStyle,
@@ -56,26 +56,49 @@ const JsonDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
     setFiles(files.filter((file: File) => file.name !== fileName));
   };
 
+  const handleClear = () => {
+    setFiles([]);
+  };
+
   return (
     <>
       <div className={DropzoneStyles.container} {...getRootProps({ style })}>
-        {files.length === 0 ? (
-          <>
-            <input {...getInputProps()} {...otherAttr} />
-            <div className={DropzoneStyles.container__content}>
-              <CloudIcon />
-              <div className={DropzoneStyles.container__content__text}>
-                <h3>
-                  Drag & drop your files or <span>Browse</span>
-                </h3>
-                <div>
-                  Please upload in .json format with image associated <br />
-                </div>
-              </div>
+        {/* {files.length === 0 ? ( */}
+        <h3>Metadata JSON Files</h3>
+        <div className={DropzoneStyles.container__content__div}>
+          <input {...getInputProps()} {...otherAttr} />
+          <div className={DropzoneStyles.container__content}>
+            <FileIcon />
+            <div className={DropzoneStyles.container__content__text}>
+              <h3>
+                <span className={DropzoneStyles.container__content__link}>
+                  Click to select
+                </span>{" "}
+                corresponding JSON files
+              </h3>
+              {/* <div>
+                Please upload in .json format with image associated <br />
+              </div> */}
             </div>
-          </>
-        ) : (
+          </div>
+        </div>
+        {/* ) : (  */}
+        {files.length > 0 ? (
           <div className={DropzoneStyles.filebar__container}>
+            <div className={DropzoneStyles.filebar__title__div}>
+              <span className={DropzoneStyles.filebar__title__files}>
+                Total Files:{" "}
+                <span className={DropzoneStyles.filebar__files__length}>
+                  {files.length}
+                </span>
+              </span>
+              <span
+                onClick={handleClear}
+                className={DropzoneStyles.filebar__title__clear}
+              >
+                Clear All
+              </span>
+            </div>
             {files.map((file: File) => (
               <FileBar
                 key={file.name}
@@ -84,7 +107,7 @@ const JsonDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
               />
             ))}
           </div>
-        )}
+        ) : null}
       </div>
     </>
   );

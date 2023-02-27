@@ -1,14 +1,12 @@
 .App {
   text-align: center;
   height: 100vh;
+  position: fixed;
+  left: 0;
+  right: 0;
   background-image: url("./assets/background/site-bg.svg") no-repeat;
   background-size: cover;
-  background: linear-gradient(
-    180deg,
-    #000000 0%,
-    #190840 66.12%,
-    #143193 119.98%
-  );
+  background: linear-gradient(129.58deg, rgba(44, 218, 255, 0.29) -1.47%, rgba(0, 107, 233, 0) 41.44%), #030928;
 }
 
 .text-primary {
@@ -79,37 +77,49 @@
 
 /* Scrollbar */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: #1d4ae0 #e0e0e0;
+  scrollbar-width: 6px;
+  scrollbar-color: rgba(255, 255, 255, 0.12);
 }
 
 /* Chrome, Edge and Safari */
 *::-webkit-scrollbar {
-  width: 3px;
-  width: 3px;
+  width: 6px;
+  width: 6px;
+  border-radius: 6px;
 }
 *::-webkit-scrollbar-track {
-  border-radius: 3px;
-  background-color: #e0e0e0;
+  border-radius: 6px;
+  background-color: transparent;
+
 }
 
 *::-webkit-scrollbar-track:hover {
-  background-color: #b8c0c2;
+  background-color: transparent;
+
 }
 
 *::-webkit-scrollbar-track:active {
-  background-color: #e0e0e0;
+  background-color: transparent;
+
 }
 
 *::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  background-color: #1d4ae0;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.12);
+
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: #2053fa;
+  background-color: rgba(255, 255, 255, 0.12);
+
 }
 
 *::-webkit-scrollbar-thumb:active {
-  background-color: #1d4ae0;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 1024px) {
+  .App {
+    overflow: scroll;
+  }
 }

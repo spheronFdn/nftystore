@@ -1,9 +1,10 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import StepOne from "./components/Forms/step-one";
 import StepThree from "./components/Forms/step-three";
 import StepTwo from "./components/Forms/step-two";
 import Navbar from "./components/Navigation/navbar";
+import Footer from "./components/Footer/footer";
 import Home from "./pages/Home";
 import Success from "./pages/Success";
 import UploadNft from "./pages/UploadNft";
@@ -11,7 +12,7 @@ import UploadNft from "./pages/UploadNft";
 const Router = () => {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -22,7 +23,8 @@ const Router = () => {
           </Route>
           <Route path="/success" element={<Success />} />
         </Routes>
-      </BrowserRouter>
+        <Footer />
+      </HashRouter>
     </>
   );
 };

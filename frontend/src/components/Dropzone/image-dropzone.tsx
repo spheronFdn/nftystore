@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import { FileRejection, useDropzone } from "react-dropzone";
-import { ReactComponent as CloudIcon } from "../../assets/icons/cloud.svg";
+import { ReactComponent as ImageIcon } from "../../assets/icons/image-icon.svg";
+import { ReactComponent as CloseCircle } from "../../assets/icons/close-circle.svg";
 import {
   acceptStyle,
   activeStyle,
@@ -56,15 +57,40 @@ const ImageDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
   const removeFile = (id: string) => {
     setFiles(files.filter((file: File) => file.name !== id));
   };
+  console.log(files, "files");
+
+  const handleClear = () => {
+    setFiles([]);
+  };
 
   return (
     <>
-      <div className={DropzoneStyles.container} {...getRootProps({ style })}>
-        {files.length === 0 ? (
+      <div
+        className={DropzoneStyles.container}
+        {...getRootProps({ style })}
+        // style={{ marginRight: "1rem" }}
+      >
+        <h3>NFT collection</h3>
+        <div className={DropzoneStyles.container__content__div}>
+          <input {...getInputProps()} {...otherAttr} />
+          <div className={DropzoneStyles.container__content}>
+            <ImageIcon />
+            <div className={DropzoneStyles.container__content__text}>
+              <h3>
+                <span className={DropzoneStyles.container__content__link}>
+                  Click to select
+                </span>{" "}
+                NFT collection
+              </h3>
+              {/* <div>Please upload in .png/.jpeg/.jpg format</div> */}
+            </div>
+          </div>
+        </div>
+        {/* {files.length === 0 ? (
           <>
             <input {...getInputProps()} {...otherAttr} />
             <div className={DropzoneStyles.container__content}>
-              <CloudIcon />
+              <ImageIcon />
               <div className={DropzoneStyles.container__content__text}>
                 <h3>
                   Drag & drop your files or <span>Browse</span>
@@ -73,8 +99,23 @@ const ImageDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
               </div>
             </div>
           </>
-        ) : (
+        ) : ( */}
+        {files.length > 0 ? (
           <div className={DropzoneStyles.filebar__container}>
+            <div className={DropzoneStyles.filebar__title__div}>
+              <span className={DropzoneStyles.filebar__title__files}>
+                Total Files:{" "}
+                <span className={DropzoneStyles.filebar__files__length}>
+                  {files.length}
+                </span>
+              </span>
+              <span
+                onClick={handleClear}
+                className={DropzoneStyles.filebar__title__clear}
+              >
+                Clear All
+              </span>
+            </div>
             {files.map((file: File) => (
               <FileBar
                 key={file.name}
@@ -83,7 +124,7 @@ const ImageDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
               />
             ))}
           </div>
-        )}
+        ) : null}
       </div>
     </>
   );

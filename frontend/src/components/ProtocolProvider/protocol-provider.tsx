@@ -69,11 +69,9 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
   const handleProtocolClick = (protocol: string): void => {
     setProtocol(protocol);
   };
-
+  console.log(protocols, "protocols");
   return (
-    <div
-      className={`grid grid-cols-3 ${CardStyle.protocol__provider__card__container}`}
-    >
+    <div className={`${CardStyle.protocol__provider__card__container}`}>
       {protocols.map((protocol) => (
         <div
           key={protocol.id}
@@ -81,7 +79,9 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
           className={`${
             isSelectedProtocol(protocol.name.toLowerCase()) &&
             CardStyle.protocol__provider__card__selected
-          } ${CardStyle.protocol__provider__card}`}
+          } ${CardStyle.protocol__provider__card} ${
+            protocol.id === 3 ? "" : CardStyle.protocol__card__margin
+          }`}
         >
           <div>{protocol.icon}</div>
           <h3>{protocol.name}</h3>

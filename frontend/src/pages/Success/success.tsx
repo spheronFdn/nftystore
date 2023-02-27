@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { ReactComponent as CongratulationsIcon } from "../../assets/icons/congratulations.svg";
+import { ReactComponent as Confetti } from "../../assets/icons/confetti.svg";
+import { ReactComponent as Copy } from "../../assets/icons/copy-icon.svg";
+import { ReactComponent as Link } from "../../assets/icons/link.svg";
+
 import { IUploadMetadataResponse, IUploadResponse } from "../../common/types";
 import FilledPrimaryButton from "../../components/Buttons/filled-primary";
 import SuccessStyle from "../../styles/success.module.css";
@@ -20,6 +23,7 @@ const Success = () => {
     useOutletContext<
       [string, (name: string) => void, IUploadResponse, IUploadMetadataResponse]
     >();
+  console.log(metadataResponse, "mdr");
 
   useEffect(() => {
     if (metadataResponse.url === "") {
@@ -30,9 +34,24 @@ const Success = () => {
 
   return (
     <div className={SuccessStyle.container}>
-      <CongratulationsIcon />
-      <h1 className={SuccessStyle.title}>Congratulations</h1>
-      <a href={metadataResponse.url}>{metadataResponse.url}</a>
+      <Confetti />
+      <h1 className={SuccessStyle.title}>Congrats, Collection is Ready!</h1>
+      <span className={SuccessStyle.subtitle}>
+        Here is your generated{" "}
+        <span className={SuccessStyle.subtitle__span}> Token URI</span> that you
+        can use to launch your collection using ERC721 Contract.
+        <br /> Just set your{" "}
+        <span className={SuccessStyle.subtitle__span}>Base URI</span> with this
+        and you can view all the collection in the marketplace
+      </span>
+      <div className={SuccessStyle.successUrl}>
+        <Link />
+        <a href="#" rel="noreferrer" target="_blank">
+          {/* {link} */} https://example.com/article/social-share-modal
+        </a>
+        <Copy />
+      </div>
+      {/* <a href={metadataResponse.url}>{metadataResponse.url}</a> */}
       <div className="flex items-center justify-center button-container">
         <FilledPrimaryButton
           title={"Go to Home"}

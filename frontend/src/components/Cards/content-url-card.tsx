@@ -1,5 +1,7 @@
 import React from "react";
 import CardStyle from "../../styles/card.module.css";
+import { ReactComponent as Link } from "../../assets/icons/link.svg";
+import Info from "../../assets/icons/info-icon.svg";
 
 interface IProps {
   isActive: boolean;
@@ -7,6 +9,7 @@ interface IProps {
   contentProvider: string;
   link: string;
   isFocused: boolean;
+  image: string;
 }
 
 const ContentUrlCard = ({
@@ -15,6 +18,7 @@ const ContentUrlCard = ({
   contentProvider,
   link,
   isFocused,
+  image,
 }: IProps) => {
   return (
     <div
@@ -28,8 +32,21 @@ const ContentUrlCard = ({
     >
       <div className={CardStyle.contenturl__card__content}>
         <div>
-          <span>{contentProvider} Generated</span>
-          <div
+          <img src={image} />
+          <span className={CardStyle.content__title}>
+            {contentProvider} Gateway
+          </span>
+          {contentProvider === "Spheron" ? (
+            <div className={CardStyle.recommended__div}>
+              Recommended <img style={{ marginLeft: "0.3rem" }} src={Info} />
+              <div className={CardStyle.information__div}>
+                We recommend using Spheron Gateway as it is super-charged with
+                edge CDN.
+              </div>
+            </div>
+          ) : null}
+
+          {/* <div
             className={
               !isActive
                 ? CardStyle.contenturl__card__radio
@@ -39,11 +56,12 @@ const ContentUrlCard = ({
             {isActive && (
               <div className={CardStyle.contenturl__card__radio__circle} />
             )}
-          </div>
+          </div> */}
         </div>
         <div className={CardStyle.contenturl__card__link__container}>
+          <Link className={CardStyle.link__icon} />
           <a href={link} rel="noreferrer" target="_blank">
-            {link}
+            {/* {link} */} https://example.com/article/social-share-modal
           </a>
         </div>
       </div>

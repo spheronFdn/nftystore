@@ -7,11 +7,16 @@
 }
 
 .title {
+  /* font-family: 'Manrope'; */
+  font-style: normal;
   font-weight: 800;
-  font-size: 40px;
-  line-height: 48px;
+  font-size: 54px;
+  line-height: 114%;
+  /* identical to box height, or 62px */
+  
   text-align: center;
-  color: #fff;
+  
+  color: #FFFFFF;
 }
 
 .container > a {
@@ -19,4 +24,71 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
+}
+
+.subtitle {
+/* font-family: 'Open Sans'; */
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 28px;
+/* or 175% */
+
+text-align: center;
+
+color: rgba(255, 255, 255, 0.6);
+
+}
+
+.subtitle__span {
+  font-weight: 800;
+}
+
+.successUrl {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  background: rgba(246, 245, 253, 0.04);
+  border-radius: 6px;
+  /* background: var(--text-dark); */
+  /* border-radius: 0.5rem; */
+  width: 25rem;
+  overflow: hidden;
+  border: 8px solid rgba(0, 74, 162, 0.7);
+display: flex;
+align-items: center;
+cursor: pointer;
+}
+
+.successUrl:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.successUrl a {
+  /* color: var(--text-link); */
+  /* font-family: 'Inter'; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  color: #006be9;
+
+  margin-left: 1rem;
+  display: flex;
+  flex-grow: 1;
+}
+
+@media (max-width: 800px) {
+.title {
+  font-size: 24px;
+}
+.subtitle {
+  font-size: 12px;
+}
+.successUrl {
+  width: min-content;
+}
 }

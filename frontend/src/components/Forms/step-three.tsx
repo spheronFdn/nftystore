@@ -4,6 +4,10 @@ import { uploadMetadata } from "../../api";
 import { IUploadMetadataResponse, IUploadResponse } from "../../common/types";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import ContentUrlCard from "../Cards/content-url-card";
+import DropzoneStyle from "../../styles/dropzone.module.css";
+import Ipfs from "../../assets/icons/ipfs-icon.svg";
+import Spheron from "../../assets/icons/spheron-icon.svg";
+import HeroPrimaryButton from "../Buttons/hero-primary";
 
 const StepThree = () => {
   const navigate = useNavigate();
@@ -45,33 +49,56 @@ const StepThree = () => {
     setLoading(false);
   };
 
+  // **** Fix before merging
+
   useEffect(() => {
     if (!protocol || typeof uploadResponse === "undefined") {
       navigate("/nft-upload/select-provider");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const handlePrevious = () => {
+    navigate(`/nft-upload/upload-files?protocol=${protocol}`);
+  };
   return (
     <>
-      <h1>Select Content URL</h1>
-      <div className="grid grid-cols-1 gap-4 justify-items-center">
+      <div className={DropzoneStyle.drop__heading}>
+        Select Collection Base URI
+      </div>
+      <div className={DropzoneStyle.drop__subheading}>
+        Please select the desired gateway to access your collection base URI. We
+        recommend using Spheron Gateway as it is super-charged with edge CDN.
+      </div>
+      {/* proper style with classname */}
+      <div className={DropzoneStyle.contentUrl__div}>
         <ContentUrlCard
           setSelectedUrl={setSelectedUrl}
-          isFocused={true}
+          isFocused={true} // Set is true
           isActive={selectedUrl === uploadResponse.spheronUrl}
           contentProvider={"Spheron"}
           link={uploadResponse.spheronUrl}
+          image={Spheron}
         />
-        <ContentUrlCard
-          setSelectedUrl={setSelectedUrl}
-          isFocused={false}
-          isActive={selectedUrl === uploadResponse.baseUrl}
-          contentProvider={protocol}
-          link={uploadResponse.baseUrl}
-        />
+        <div className={DropzoneStyle.contentUrl__margin}>
+          <ContentUrlCard
+            setSelectedUrl={setSelectedUrl}
+            isFocused={false}
+            isActive={selectedUrl === uploadResponse.baseUrl}
+            contentProvider={protocol}
+            link={uploadResponse.baseUrl}
+            image={Ipfs} // take from backend
+          />
+        </div>
       </div>
-      <div className="flex items-center justify-center button-container">
+      <div className={DropzoneStyle.stepThree__button__div}>
+        <span style={{ marginRight: "1rem" }}>
+          <HeroPrimaryButton
+            title={"Previous"}
+            loading={false}
+            disabled={false}
+            handleClick={handlePrevious}
+          />
+        </span>
         <FilledPrimaryButton
           title={"Proceed"}
           loading={loading}

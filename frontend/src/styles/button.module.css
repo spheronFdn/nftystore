@@ -17,24 +17,51 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  background: var(--primary);
-  font-size: 1.25rem;
-  font-weight: 600;
-  padding: 1.25rem 3.375rem;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+/* Shadow/xs */
+/* font-family: 'Inter'; */
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 22px;
+/* identical to box height, or 138% */
+
+
+color: #FFFFFF;
+box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+border-radius: 8px;
+  /* background: radial-gradient(130.89% 130.89% at 47.98% 7.11%, #004AA2 0%, #418FF8 99.99%, #5CC4FF 100%);
+box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+border-radius: 8px; */
+  /* background: var(--primary); */
+  padding: 1rem 2rem;
+  /* border-radius: 8px; */
   border: 0;
   color: white;
   transition: all 0.3s ease-in-out;
-  margin-top: 3rem;
 }
 
 .hero__button:hover {
-  background: var(--primary-hover);
+  background: rgba(255, 255, 255, 0.2);
+  /* Shadow/xs */
+  
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;/* Shadow/xs */
+
+box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+border-radius: 8px;
+  /* background: var(--primary-hover); */
 }
 
 .hero__button:disabled {
   cursor: not-allowed;
-  background: var(--primary-disabled);
+  background: rgba(255, 255, 255, 0.1);
+opacity: 0.3;
+/* Shadow/xs */
+
+box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+border-radius: 8px;
+  /* background: var(--primary-disabled); */
 }
 
 .primary__button {
@@ -42,23 +69,40 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  background: var(--primary);
-  font-size: 1.125rem;
+  /* background: var(--primary); */
+  font-size: 14px;
   font-weight: 600;
   border: 0;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   color: #fff;
-  padding: 0.7rem 2.75rem;
+  padding: 1rem 2rem;
   transition: all 0.3s ease-in-out;
+  background: radial-gradient(130.89% 130.89% at 47.98% 7.11%, #004AA2 0%, #418FF8 99.99%, #5CC4FF 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+/* Shadow/xs */
+
+box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+border-radius: 8px;
+
 }
 
 .primary__button:hover {
-  background: var(--primary-hover);
+  background: linear-gradient(0deg, rgba(0, 49, 144, 0.61), rgba(0, 49, 144, 0.61)), radial-gradient(130.89% 130.89% at 47.98% 7.11%, #013C81 0%, #418FF8 99.99%, #5CC4FF 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+/* Shadow/xs */
+
+box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+border-radius: 8px;
+  /* background: var(--primary-hover); */
 }
 
 .primary__button:disabled {
   cursor: not-allowed;
-  background: var(--primary-disabled);
+  background: radial-gradient(130.89% 130.89% at 47.98% 7.11%, #004AA2 0%, #418FF8 99.99%, #5CC4FF 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+opacity: 0.3;
+/* Shadow/xs */
+
+box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+border-radius: 8px;
+  /* background: var(--primary-disabled); */
 }
 
 .primary__button > div {
