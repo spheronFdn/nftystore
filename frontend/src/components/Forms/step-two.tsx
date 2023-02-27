@@ -73,7 +73,7 @@ const StepTwo = () => {
 
   useEffect(() => {
     if (error) {
-      setTimeout(() => setError(""), 2000);
+      setTimeout(() => setError(""), 6000);
     }
   }, [error]);
 

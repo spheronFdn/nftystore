@@ -73,7 +73,7 @@ const StepThree = () => {
         {/* Fix Image: take from data */}
         <ContentUrlCard
           setSelectedUrl={setSelectedUrl}
-          isFocused={true}
+          isFocused={false}
           isActive={selectedUrl === uploadResponse.spheronUrl}
           contentProvider={"Spheron"}
           link={uploadResponse.spheronUrl}

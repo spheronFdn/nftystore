@@ -62,9 +62,12 @@ const JsonDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
 
   return (
     <>
-      <div className={DropzoneStyles.container} {...getRootProps({ style })}>
+      <div className={DropzoneStyles.container}>
         <h3>Metadata JSON Files</h3>
-        <div className={DropzoneStyles.container__content__div}>
+        <div
+          className={DropzoneStyles.container__content__div}
+          {...getRootProps()}
+        >
           <input {...getInputProps()} {...otherAttr} />
           <div className={DropzoneStyles.container__content}>
             <FileIcon />

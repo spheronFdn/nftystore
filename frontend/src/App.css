@@ -84,13 +84,11 @@
 /* Chrome, Edge and Safari */
 *::-webkit-scrollbar {
   width: 6px;
-  width: 6px;
   border-radius: 6px;
 }
 *::-webkit-scrollbar-track {
   border-radius: 6px;
   background-color: transparent;
-
 }
 
 *::-webkit-scrollbar-track:hover {

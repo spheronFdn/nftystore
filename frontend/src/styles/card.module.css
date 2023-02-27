@@ -261,8 +261,15 @@
   .contenturl__card__content .contenturl__card__link__container a {
     margin-left: 0.3rem;
     font-size: 11px;
+    max-width: 380px;
   }
   .link__icon {
     width: 1rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .contenturl__card__content .contenturl__card__link__container a {
+   max-width: 250px;
   }
 }

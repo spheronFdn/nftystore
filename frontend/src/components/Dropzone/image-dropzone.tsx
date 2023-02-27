@@ -64,11 +64,14 @@ const ImageDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
 
   return (
     <>
-      <div className={DropzoneStyles.container} {...getRootProps({ style })}>
+      <div className={DropzoneStyles.container}>
         <h3>NFT collection</h3>
-        <div className={DropzoneStyles.container__content__div}>
-          <input {...getInputProps()} {...otherAttr} />
+        <div
+          className={DropzoneStyles.container__content__div}
+          {...getRootProps()}
+        >
           <div className={DropzoneStyles.container__content}>
+            <input {...getInputProps()} {...otherAttr} />
             <ImageIcon />
             <div className={DropzoneStyles.container__content__text}>
               <h3>
@@ -80,6 +83,7 @@ const ImageDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
             </div>
           </div>
         </div>
+
         {files.length > 0 ? (
           <div className={DropzoneStyles.filebar__container}>
             <div className={DropzoneStyles.filebar__title__div}>

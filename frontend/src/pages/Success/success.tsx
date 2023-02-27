@@ -23,9 +23,11 @@ const Success = () => {
     useOutletContext<
       [string, (name: string) => void, IUploadResponse, IUploadMetadataResponse]
     >();
+  console.log(metadataResponse, "metadataResponse");
+  console.log("hello");
 
   useEffect(() => {
-    if (metadataResponse.url === "") {
+    if (metadataResponse?.url === "") {
       navigate("/upload-nft/select-provider");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,8 +47,8 @@ const Success = () => {
       </span>
       <div className={SuccessStyle.successUrl}>
         <Link style={{ stroke: "#56A1FF" }} />
-        <a href={metadataResponse.url} rel="noreferrer" target="_blank">
-          {metadataResponse.url}
+        <a href={metadataResponse?.url} rel="noreferrer" target="_blank">
+          {metadataResponse?.url}
         </a>
         <Copy />
       </div>
