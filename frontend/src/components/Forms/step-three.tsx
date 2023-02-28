@@ -82,7 +82,7 @@ const StepThree = () => {
       <div className={DropzoneStyle.contentUrl__div}>
         <ContentUrlCard
           setSelectedUrl={setSelectedUrl}
-          isFocused={true}
+          isFocused
           setIsFocused={setIsFocused}
           isActive={selectedUrl === uploadResponse.spheronUrl}
           contentProvider={"Spheron"}

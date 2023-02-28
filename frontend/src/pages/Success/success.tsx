@@ -32,6 +32,10 @@ const Success = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(metadataResponse?.url);
+    setIsCopied(true);
+  };
   return (
     <div className={SuccessStyle.container}>
       <Confetti />
@@ -49,13 +53,9 @@ const Success = () => {
         <a href={metadataResponse?.url} rel="noreferrer" target="_blank">
           {metadataResponse?.url}
         </a>
-
         <div className={SuccessStyle.copy__div}>
           <Copy
-            onClick={() => {
-              navigator.clipboard.writeText(metadataResponse?.url);
-              setIsCopied(true);
-            }}
+            onClick={() => handleCopy()}
             className={SuccessStyle.copy__icon}
           />
           <div

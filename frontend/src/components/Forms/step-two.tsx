@@ -4,14 +4,13 @@ import { uploadFiles } from "../../api";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import Dropzone from "../Dropzone/image-dropzone";
 import JsonDropzone from "../Dropzone/json-dropzone";
-import { checkUploadFileValidity, listData } from "../../common/utils";
+import { checkUploadFileValidity } from "../../common/utils";
 import { FileRejection } from "react-dropzone";
 import { IUploadResponse } from "../../common/types";
 import BadFiles from "../Misc/bad-files";
 import HeroPrimaryButton from "../Buttons/hero-primary";
 import Modal from "../Modal/modal";
 import DropzoneStyle from "../../styles/dropzone.module.css";
-import ModalStyle from "../../styles/modal.module.css";
 
 const StepTwo = () => {
   const navigate = useNavigate();
@@ -90,19 +89,7 @@ const StepTwo = () => {
   return (
     <>
       {modalOpen ? (
-        <Modal
-          setModalOpen={setModalOpen}
-          modalHeading={"Guide"}
-          modalContent={
-            <ul>
-              {listData.map((list) => (
-                <li key={list.id} className={ModalStyle.modal__list}>
-                  {list.description}
-                </li>
-              ))}
-            </ul>
-          }
-        />
+        <Modal setModalOpen={setModalOpen} modalHeading={"Guide"} />
       ) : null}
       <div className={DropzoneStyle.drop__heading}>Drop your files here</div>
       <div className={DropzoneStyle.drop__subheading}>

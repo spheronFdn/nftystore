@@ -1,13 +1,13 @@
 import React from "react";
 import { ReactComponent as CloseIcon } from "../../assets/icons/close-modal.svg";
+import { listData } from "../../common/utils";
 import ModalStyle from "../../styles/modal.module.css";
 
 interface IProps {
   setModalOpen: (modalOpen: boolean) => void;
   modalHeading: string;
-  modalContent: any; // infer better type
 }
-const Modal = ({ setModalOpen, modalHeading, modalContent }: IProps) => {
+const Modal = ({ setModalOpen, modalHeading }: IProps) => {
   const handleModalClose = () => {
     setModalOpen(false);
   };
@@ -18,7 +18,13 @@ const Modal = ({ setModalOpen, modalHeading, modalContent }: IProps) => {
           <CloseIcon />
         </div>
         <div className={ModalStyle.modal__heading}>{modalHeading}</div>
-        {modalContent}
+        <ul>
+          {listData.map((list) => (
+            <li key={list.id} className={ModalStyle.modal__list}>
+              {list.description}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
