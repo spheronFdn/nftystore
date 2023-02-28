@@ -79,12 +79,10 @@ const ImageDropzone = ({
             <input {...getInputProps()} {...otherAttr} />
             <ImageIcon />
             <div className={DropzoneStyles.container__content__text}>
-              <h3>
-                <span className={DropzoneStyles.container__content__link}>
-                  Click to select
-                </span>{" "}
-                NFT collection
-              </h3>
+              <span className={DropzoneStyles.container__content__link}>
+                Click to select
+              </span>{" "}
+              NFT collection
             </div>
           </div>
         </div>
@@ -115,7 +113,7 @@ const ImageDropzone = ({
           </div>
         )}
       </div>
-      {uploadWarning ? <span>Please upload images</span> : null}
+      {uploadWarning && <span>Please upload images</span>}
     </>
   );
 };

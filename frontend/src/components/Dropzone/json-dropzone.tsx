@@ -77,12 +77,10 @@ const JsonDropzone = ({
           <div className={DropzoneStyles.container__content}>
             <FileIcon />
             <div className={DropzoneStyles.container__content__text}>
-              <h3>
-                <span className={DropzoneStyles.container__content__link}>
-                  Click to select
-                </span>{" "}
-                corresponding JSON files
-              </h3>
+              <span className={DropzoneStyles.container__content__link}>
+                Click to select
+              </span>{" "}
+              corresponding JSON files
             </div>
           </div>
         </div>

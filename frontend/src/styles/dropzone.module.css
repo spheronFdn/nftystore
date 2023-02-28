@@ -9,10 +9,6 @@
   align-items: center;
 }
 
-.container__content__text {
-  margin-top: 0.75rem;
-}
-
 .container > h3 {
   /* font-family: 'Inter'; */
   font-style: normal;
@@ -156,7 +152,7 @@
   cursor: pointer;
 }
 
-.container__content__text > h3 {
+.container__content__text {
   /* font-family: 'Inter'; */
   font-style: normal;
   font-weight: 400;
@@ -164,6 +160,7 @@
   line-height: 20px;
   margin: 0;
   color: #667085;
+  margin-top: 0.75rem;
 }
 
 .container__content__link {
@@ -288,7 +285,7 @@ height: 10px !important;
     margin-bottom: 3rem;
     margin-top: 1rem;
   }
-  .container__content__text > h3 {
+  .container__content__text {
     font-size: 12px;
   }
   .container__content__link {

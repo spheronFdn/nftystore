@@ -88,9 +88,9 @@ const StepTwo = () => {
 
   return (
     <>
-      {modalOpen ? (
+      {modalOpen && (
         <Modal setModalOpen={setModalOpen} modalHeading={"Guide"} />
-      ) : null}
+      )}
       <div className={DropzoneStyle.drop__heading}>Drop your files here</div>
       <div className={DropzoneStyle.drop__subheading}>
         You can select all of your images in the NFT Collection along with the

@@ -58,12 +58,13 @@ const StepThree = () => {
     if (!protocol || typeof uploadResponse === "undefined") {
       navigate("/nft-upload/select-provider");
     }
-    if (protocol === Providers.ARWEAVE) {
-      setIsImage(Arweave);
-    } else if (protocol === Providers.FILECOIN) {
-      setIsImage(Filecoin);
-    } else if (protocol === Providers.IPFS) {
-      setIsImage(Ipfs);
+    switch (protocol) {
+      case Providers.ARWEAVE:
+        return setIsImage(Arweave);
+      case Providers.FILECOIN:
+        return setIsImage(Filecoin);
+      case Providers.IPFS:
+        return setIsImage(Ipfs);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
