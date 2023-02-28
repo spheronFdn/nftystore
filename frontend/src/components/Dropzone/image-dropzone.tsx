@@ -89,7 +89,7 @@ const ImageDropzone = ({
           </div>
         </div>
 
-        {files.length > 0 ? (
+        {files.length > 0 && (
           <div className={DropzoneStyles.filebar__container}>
             <div className={DropzoneStyles.filebar__title__div}>
               <span className={DropzoneStyles.filebar__title__files}>
@@ -113,7 +113,7 @@ const ImageDropzone = ({
               />
             ))}
           </div>
-        ) : null}
+        )}
       </div>
       {uploadWarning ? <span>Please upload images</span> : null}
     </>

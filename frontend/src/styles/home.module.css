@@ -191,6 +191,10 @@
   margin-top: 1.5rem;
 }
 
+.container__button__div {
+  margin-top: 2rem;
+}
+
 @media (max-width: 800px) {
   .container__title {
     font-size: 24px;

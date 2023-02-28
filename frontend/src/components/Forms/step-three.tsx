@@ -102,7 +102,7 @@ const StepThree = () => {
         </div>
       </div>
       <div className={DropzoneStyle.stepThree__button__div}>
-        <span style={{ marginRight: "1rem" }}>
+        <span className={DropzoneStyle.previous__button__div}>
           <HeroPrimaryButton
             title={"Previous"}
             loading={false}

@@ -38,7 +38,7 @@ const ContentUrlCard = ({
           <span className={CardStyle.content__title}>
             {contentProvider} Gateway
           </span>
-          {contentProvider === "Spheron" ? (
+          {contentProvider === "Spheron" && (
             <div className={CardStyle.recommended__div}>
               Recommended <Info className={CardStyle.info__icon} />
               <div className={CardStyle.information__div}>
@@ -46,7 +46,7 @@ const ContentUrlCard = ({
                 edge CDN.
               </div>
             </div>
-          ) : null}
+          )}
         </div>
         <div className={CardStyle.contenturl__card__link__container}>
           <Link className={CardStyle.link__icon} />

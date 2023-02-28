@@ -264,6 +264,10 @@ height: 10px !important;
   padding-bottom: 4px;
 }
 
+.previous__button__div {
+  margin-right: 1rem;
+}
+
 @media (max-width: 1024px) {
   .thumb__container {
     grid-template-columns: repeat(1, minmax(0, 1fr));

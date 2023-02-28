@@ -15,11 +15,11 @@ const Home = () => {
   return (
     <div className={HomeStyle.container}>
       <div className={HomeStyle.container__content}>
-        <div className={HomeStyle.container__left__moon}></div>
-        <div className={HomeStyle.container__center__left__moon}></div>
-        <div className={HomeStyle.container__center__right__moon}></div>
-        <div className={HomeStyle.container__left__star}></div>
-        <div className={HomeStyle.container__right__star}></div>
+        <div className={HomeStyle.container__left__moon} />
+        <div className={HomeStyle.container__center__left__moon} />
+        <div className={HomeStyle.container__center__right__moon} />
+        <div className={HomeStyle.container__left__star} />
+        <div className={HomeStyle.container__right__star} />
         {/* Look into right moon more */}
         {/* <div className={HomeStyle.container__right__moon}></div> */}
         <div className={HomeStyle.container__subtitle__div}>
@@ -39,8 +39,7 @@ const Home = () => {
           Upload your NFT collection assets faster via Spheron multi-chain
           upload!
         </span>
-        {/* Add in proper classname */}
-        <div style={{ marginTop: "2rem" }}>
+        <div className={HomeStyle.container__button__div}>
           <FilledPrimaryButton
             title="Get Started"
             loading={false}

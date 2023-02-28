@@ -86,7 +86,7 @@ const JsonDropzone = ({
             </div>
           </div>
         </div>
-        {files.length > 0 ? (
+        {files.length > 0 && (
           <div className={DropzoneStyles.filebar__container}>
             <div className={DropzoneStyles.filebar__title__div}>
               <span className={DropzoneStyles.filebar__title__files}>
@@ -110,9 +110,9 @@ const JsonDropzone = ({
               />
             ))}
           </div>
-        ) : null}
+        )}
       </div>
-      {uploadWarning ? <span>Please upload JSON Files</span> : null}
+      {uploadWarning && <span>Please upload JSON Files</span>}
     </>
   );
 };
