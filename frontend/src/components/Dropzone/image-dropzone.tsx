@@ -15,9 +15,15 @@ interface IProps {
   files: File[];
   setFiles: (files: File[]) => void;
   setBadFiles: (files: FileRejection[]) => void;
+  uploadWarning: boolean;
 }
 
-const ImageDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
+const ImageDropzone = ({
+  files,
+  setFiles,
+  setBadFiles,
+  uploadWarning,
+}: IProps) => {
   const onDrop = useCallback(
     (acceptedFiles: File[], fileRejections: FileRejection[]) => {
       setFiles(acceptedFiles);
@@ -61,7 +67,6 @@ const ImageDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
   const handleClear = () => {
     setFiles([]);
   };
-
   return (
     <>
       <div className={DropzoneStyles.container}>
@@ -110,6 +115,7 @@ const ImageDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
           </div>
         ) : null}
       </div>
+      {uploadWarning ? <span>Please upload images</span> : null}
     </>
   );
 };

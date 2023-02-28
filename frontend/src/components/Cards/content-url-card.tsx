@@ -9,6 +9,7 @@ interface IProps {
   contentProvider: string;
   link: string;
   isFocused: boolean;
+  setIsFocused: (isFocused: boolean) => void;
   image: string;
 }
 
@@ -18,6 +19,7 @@ const ContentUrlCard = ({
   contentProvider,
   link,
   isFocused,
+  setIsFocused,
   image,
 }: IProps) => {
   return (
@@ -38,7 +40,7 @@ const ContentUrlCard = ({
           </span>
           {contentProvider === "Spheron" ? (
             <div className={CardStyle.recommended__div}>
-              Recommended <Info style={{ marginLeft: "0.3rem" }} />
+              Recommended <Info className={CardStyle.info__icon} />
               <div className={CardStyle.information__div}>
                 We recommend using Spheron Gateway as it is super-charged with
                 edge CDN.

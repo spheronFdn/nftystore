@@ -6,6 +6,8 @@ import FilledPrimaryButton from "../Buttons/filled-primary";
 import HeroPrimaryButton from "../Buttons/hero-primary";
 import ContentUrlCard from "../Cards/content-url-card";
 import Ipfs from "../../assets/icons/ipfs-icon.svg";
+import Arweave from "../../assets/icons/arweave-circle.svg";
+import Filecoin from "../../assets/icons/filecoin-circle.svg";
 import Spheron from "../../assets/icons/spheron-icon.svg";
 import DropzoneStyle from "../../styles/dropzone.module.css";
 
@@ -13,6 +15,8 @@ const StepThree = () => {
   const navigate = useNavigate();
   const [selectedUrl, setSelectedUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isImage, setIsImage] = useState<string>("");
   const [
     protocol,
     setProtocol,
@@ -53,13 +57,19 @@ const StepThree = () => {
     if (!protocol || typeof uploadResponse === "undefined") {
       navigate("/nft-upload/select-provider");
     }
+    if (protocol === "arweave") {
+      setIsImage(Arweave);
+    } else if (protocol === "filecoin") {
+      setIsImage(Filecoin);
+    } else if (protocol === "ipfs") {
+      setIsImage(Ipfs);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handlePrevious = () => {
     navigate(`/nft-upload/upload-files?protocol=${protocol}`);
   };
-
   return (
     <>
       <div className={DropzoneStyle.drop__heading}>
@@ -70,10 +80,10 @@ const StepThree = () => {
         recommend using Spheron Gateway as it is super-charged with edge CDN.
       </div>
       <div className={DropzoneStyle.contentUrl__div}>
-        {/* Fix Image: take from data */}
         <ContentUrlCard
           setSelectedUrl={setSelectedUrl}
-          isFocused={false}
+          isFocused={true}
+          setIsFocused={setIsFocused}
           isActive={selectedUrl === uploadResponse.spheronUrl}
           contentProvider={"Spheron"}
           link={uploadResponse.spheronUrl}
@@ -83,10 +93,11 @@ const StepThree = () => {
           <ContentUrlCard
             setSelectedUrl={setSelectedUrl}
             isFocused={false}
+            setIsFocused={setIsFocused}
             isActive={selectedUrl === uploadResponse.baseUrl}
             contentProvider={protocol}
             link={uploadResponse.baseUrl}
-            image={Ipfs} // take from backend
+            image={isImage}
           />
         </div>
       </div>

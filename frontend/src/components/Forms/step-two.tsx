@@ -23,6 +23,7 @@ const StepTwo = () => {
   const [metadata, setMetadata] = useState<File[]>([]);
   const [badMetaData, setBadMetaData] = useState<FileRejection[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [uploadWarning, setUploadWarning] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [protocol, setProtocol, uploadResponse, setUploadResponse] =
     useOutletContext<
@@ -77,6 +78,15 @@ const StepTwo = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    if (
+      (images.length < 0 && metadata.length > 0) ||
+      (images.length > 0 && metadata.length < 0)
+    ) {
+      setUploadWarning(true);
+    }
+  }, [images, metadata]);
+
   return (
     <>
       {modalOpen ? (
@@ -111,6 +121,7 @@ const StepTwo = () => {
             files={images}
             setFiles={setImages}
             setBadFiles={setBadImages}
+            uploadWarning={uploadWarning}
           />
         </div>
         <div className={DropzoneStyle.file__container__margin}>
@@ -118,6 +129,7 @@ const StepTwo = () => {
             files={metadata}
             setFiles={setMetadata}
             setBadFiles={setBadMetaData}
+            uploadWarning={uploadWarning}
           />
         </div>
         <div className={DropzoneStyle.errorFile}>

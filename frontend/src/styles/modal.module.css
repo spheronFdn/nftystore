@@ -12,7 +12,7 @@
 .modal {
   position: absolute;
   width: 450px;
-  height: 438px;
+  height: 450px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -20,6 +20,7 @@
   border-radius: 20px;
   backdrop-filter: grayscale(0.5) opacity(0.8);
   padding-right: 1rem;
+  padding-left: 1rem;
 }
 .modal__heading {
   font-style: normal;
@@ -47,4 +48,27 @@
   text-align: right;
   margin-top: 1.1rem;
   cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .modal ul {
+    font-size: 11px;
+    margin-top: 0.1rem;
+  }
+  .modal__list {
+    font-size: 10px;
+    margin-top: 0.2rem;
+    min-width: 18rem;
+  }
+  .modal {
+    width: auto;
+    height: auto;
+    overflow-y: scroll;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .modal__heading {
+    font-size: 14px;
+  }
+  
 }

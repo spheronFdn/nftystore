@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { ReactComponent as Confetti } from "../../assets/icons/confetti.svg";
 import { ReactComponent as Copy } from "../../assets/icons/copy-icon.svg";
@@ -10,6 +10,7 @@ import SuccessStyle from "../../styles/success.module.css";
 
 const Success = () => {
   const navigate = useNavigate();
+  const [isCopied, setIsCopied] = useState<boolean>(false);
   const [
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protocol,
@@ -23,8 +24,6 @@ const Success = () => {
     useOutletContext<
       [string, (name: string) => void, IUploadResponse, IUploadMetadataResponse]
     >();
-  console.log(metadataResponse, "metadataResponse");
-  console.log("hello");
 
   useEffect(() => {
     if (metadataResponse?.url === "") {
@@ -50,7 +49,25 @@ const Success = () => {
         <a href={metadataResponse?.url} rel="noreferrer" target="_blank">
           {metadataResponse?.url}
         </a>
-        <Copy />
+
+        <div className={SuccessStyle.copy__div}>
+          <Copy
+            onClick={() => {
+              navigator.clipboard.writeText(metadataResponse?.url);
+              setIsCopied(true);
+            }}
+            className={SuccessStyle.copy__icon}
+          />
+          <div
+            className={`${SuccessStyle.copy__tooltip} ${
+              isCopied
+                ? SuccessStyle.copied__tooltip__color
+                : SuccessStyle.copy__tooltip__color
+            }`}
+          >
+            {isCopied ? "Link Copied" : "Copy Link"}
+          </div>
+        </div>
       </div>
       <div className="flex items-center justify-center button-container">
         <FilledPrimaryButton

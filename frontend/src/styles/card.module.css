@@ -61,6 +61,7 @@
   background: var(--text-white-400);
   border-radius: 8px;
   margin-top: 2rem;
+  border: 2px solid transparent;
 }
 
 .contenturl__card:hover {
@@ -212,7 +213,7 @@
   text-align: center;
   padding: 10px 0 0 7px;
   position: fixed;
-  left: 24rem;
+  left: 25%;
   height: 50px;
   margin-top: -105px;
 }
@@ -243,7 +244,9 @@
 .link__icon {
   stroke: #56a1ff;
 }
-
+.info__icon {
+margin-left: 0.3rem;
+}
 @media (max-width: 800px) {
   .protocol__provider__card__container {
     display: grid;
@@ -265,6 +268,12 @@
   }
   .link__icon {
     width: 1rem;
+  }
+  .recommended__div .information__div {
+    display: none;
+  }
+  .info__icon {
+    display: none;
   }
 }
 

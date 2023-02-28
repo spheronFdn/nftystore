@@ -295,7 +295,6 @@ height: 10px !important;
 @media (max-width: 800px) {
   .content__container {
     display: grid;
-    grid-template-rows: 50% 50%;
     grid-template-columns: auto;
     gap: 10px;
   }
