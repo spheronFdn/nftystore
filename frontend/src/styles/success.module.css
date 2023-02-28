@@ -116,6 +116,10 @@
   line-height: 18px;
   color: white;
 }
+
+.link__icon {
+  stroke: #56A1FF;
+}
 @media (max-width: 800px) {
   .title {
     font-size: 24px;

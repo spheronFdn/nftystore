@@ -49,15 +49,12 @@ const Success = () => {
         and you can view all the collection in the marketplace
       </span>
       <div className={SuccessStyle.successUrl}>
-        <Link style={{ stroke: "#56A1FF" }} />
+        <Link className={SuccessStyle.link__icon} />
         <a href={metadataResponse?.url} rel="noreferrer" target="_blank">
           {metadataResponse?.url}
         </a>
         <div className={SuccessStyle.copy__div}>
-          <Copy
-            onClick={() => handleCopy()}
-            className={SuccessStyle.copy__icon}
-          />
+          <Copy onClick={handleCopy} className={SuccessStyle.copy__icon} />
           <div
             className={`${SuccessStyle.copy__tooltip} ${
               isCopied
