@@ -131,3 +131,9 @@ export const listData: IListData[] = [
       "We will upload all the files together, which might take some time based on bandwidth. Please be patient when uploading the collection.",
   },
 ];
+
+export enum Providers {
+  IPFS = "ipfs",
+  FILECOIN = "filecoin",
+  ARWEAVE = "arweave",
+}

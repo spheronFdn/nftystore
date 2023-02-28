@@ -4,6 +4,7 @@ import { ReactComponent as FilecoinIcon } from "../../assets/icons/filecoin.svg"
 import { ReactComponent as IpfsIcon } from "../../assets/icons/ipfs.svg";
 import ProtocolProviderStyle from "../../styles/protocol-provider.module.css";
 import CardStyle from "../../styles/card.module.css";
+import { Providers } from "../../common/utils";
 
 interface IProps {
   selectedProtocol: string;
@@ -30,7 +31,7 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
       icon: (
         <ArweaveIcon
           className={`${
-            isSelectedProtocol("arweave") &&
+            isSelectedProtocol(Providers.ARWEAVE) &&
             ProtocolProviderStyle.protocol__icon__selected
           } ${ProtocolProviderStyle.protocol__icon}`}
         />
@@ -44,7 +45,7 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
       icon: (
         <FilecoinIcon
           className={`${
-            isSelectedProtocol("filecoin") &&
+            isSelectedProtocol(Providers.FILECOIN) &&
             ProtocolProviderStyle.protocol__icon__selected
           } ${ProtocolProviderStyle.protocol__icon}`}
         />
@@ -58,7 +59,7 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
       icon: (
         <IpfsIcon
           className={`${
-            isSelectedProtocol("ipfs") &&
+            isSelectedProtocol(Providers.IPFS) &&
             ProtocolProviderStyle.protocol__icon__selected
           } ${ProtocolProviderStyle.protocol__icon}`}
         />

@@ -10,6 +10,7 @@ import Arweave from "../../assets/icons/arweave-circle.svg";
 import Filecoin from "../../assets/icons/filecoin-circle.svg";
 import Spheron from "../../assets/icons/spheron-icon.svg";
 import DropzoneStyle from "../../styles/dropzone.module.css";
+import { Providers } from "../../common/utils";
 
 const StepThree = () => {
   const navigate = useNavigate();
@@ -57,11 +58,11 @@ const StepThree = () => {
     if (!protocol || typeof uploadResponse === "undefined") {
       navigate("/nft-upload/select-provider");
     }
-    if (protocol === "arweave") {
+    if (protocol === Providers.ARWEAVE) {
       setIsImage(Arweave);
-    } else if (protocol === "filecoin") {
+    } else if (protocol === Providers.FILECOIN) {
       setIsImage(Filecoin);
-    } else if (protocol === "ipfs") {
+    } else if (protocol === Providers.IPFS) {
       setIsImage(Ipfs);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
