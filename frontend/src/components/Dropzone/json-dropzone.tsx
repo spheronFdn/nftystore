@@ -1,12 +1,6 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { FileRejection, useDropzone } from "react-dropzone";
 import { ReactComponent as FileIcon } from "../../assets/icons/file-icon.svg";
-import {
-  acceptStyle,
-  activeStyle,
-  baseStyle,
-  rejectStyle,
-} from "../../common/dropzone-style";
 import FileBar from "../Misc/file-bar";
 import DropzoneStyles from "../../styles/dropzone.module.css";
 
@@ -47,17 +41,6 @@ const JsonDropzone = ({
 
   const otherAttr = { directory: "", webkitdirectory: "" };
 
-  const style: any = useMemo(
-    () => ({
-      ...baseStyle,
-      ...(isDragActive ? activeStyle : {}),
-      ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {}),
-    }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isDragActive, isDragReject, isDragAccept]
-  );
-
   const removeFile = (fileName: string) => {
     setFiles(files.filter((file: File) => file.name !== fileName));
   };
@@ -65,6 +48,7 @@ const JsonDropzone = ({
   const handleClear = () => {
     setFiles([]);
   };
+
   return (
     <>
       <div className={DropzoneStyles.container}>

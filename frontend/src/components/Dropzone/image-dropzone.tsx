@@ -1,13 +1,6 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { FileRejection, useDropzone } from "react-dropzone";
 import { ReactComponent as ImageIcon } from "../../assets/icons/image-icon.svg";
-import { ReactComponent as CloseCircle } from "../../assets/icons/close-circle.svg";
-import {
-  acceptStyle,
-  activeStyle,
-  baseStyle,
-  rejectStyle,
-} from "../../common/dropzone-style";
 import FileBar from "../Misc/file-bar";
 import DropzoneStyles from "../../styles/dropzone.module.css";
 
@@ -48,17 +41,6 @@ const ImageDropzone = ({
   });
 
   const otherAttr = { directory: "", webkitdirectory: "" };
-
-  const style: any = useMemo(
-    () => ({
-      ...baseStyle,
-      ...(isDragActive ? activeStyle : {}),
-      ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {}),
-    }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isDragActive, isDragReject, isDragAccept]
-  );
 
   const removeFile = (id: string) => {
     setFiles(files.filter((file: File) => file.name !== id));

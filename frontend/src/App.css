@@ -118,6 +118,7 @@
 
 @media (max-width: 1024px) {
   .App {
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 }
