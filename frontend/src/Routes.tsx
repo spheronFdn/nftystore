@@ -20,8 +20,8 @@ const Router = () => {
             <Route path="select-provider" element={<StepOne />} />
             <Route path="upload-files" element={<StepTwo />} />
             <Route path="choose-url" element={<StepThree />} />
+            <Route path="success" element={<Success />} />
           </Route>
-          <Route path="/success" element={<Success />} />
         </Routes>
         <Footer />
       </HashRouter>

@@ -47,7 +47,7 @@ const StepThree = () => {
         selectedUrl
       );
       setMetadataResponse(response);
-      navigate("/success");
+      navigate("/nft-upload/success");
     } catch (error) {
       console.log("ERROR: ", error);
     }

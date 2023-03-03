@@ -19,10 +19,18 @@ const Success = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     uploadResponse,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setUploadResponse,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     metadataResponse,
   ] =
     useOutletContext<
-      [string, (name: string) => void, IUploadResponse, IUploadMetadataResponse]
+      [
+        string,
+        (name: string) => void,
+        IUploadResponse,
+        (response: IUploadResponse) => void,
+        IUploadMetadataResponse
+      ]
     >();
 
   useEffect(() => {
@@ -36,6 +44,8 @@ const Success = () => {
     navigator.clipboard.writeText(metadataResponse?.url);
     setIsCopied(true);
   };
+  console.log(metadataResponse, "metadataResponse");
+
   return (
     <div className={SuccessStyle.container}>
       <Confetti />
