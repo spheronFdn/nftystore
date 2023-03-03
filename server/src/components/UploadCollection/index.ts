@@ -32,7 +32,7 @@ export async function uploadCollection(
     }
 
     const { uploadId, fileNames, url, spheronUrl } =
-      await UploadService.uploadCollection(protocol, req);
+      await UploadService.uploadCollection(protocol, req, "lumos-nft-image");
 
     res.status(200).json({
       uploadId,

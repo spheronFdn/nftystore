@@ -44,7 +44,7 @@ class MetadataService {
         }
 
         let metadata = JSON.parse(rawdata.toString());
-        metadata.image = `${baseUrl}/${image}`;
+        metadata.image = `https://${baseUrl}/${image}`;
 
         fs.writeFileSync(fullPathMetaFile, JSON.stringify(metadata));
 
@@ -56,10 +56,7 @@ class MetadataService {
 
       const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
         deployment.protocol,
-        uploadDir.replace(
-          `${IMAGE_UPLOAD_PREFIX}-`,
-          `${METADATA_UPLOAD_PREFIX}-`
-        ),
+        "lumos-nft-collection",
         form
       );
 

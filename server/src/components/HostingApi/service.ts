@@ -91,8 +91,7 @@ export default abstract class HostingApi {
         HttpMethods.GET,
         `/v1/deployment/${deploymentId}`,
         {},
-        null,
-        "http://localhost:8080"
+        null
       );
 
       if (error) {
