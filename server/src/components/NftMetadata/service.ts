@@ -56,7 +56,10 @@ class MetadataService {
 
       const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
         deployment.protocol,
-        "lumos-nft-collection",
+        uploadDir.replace(
+          `${IMAGE_UPLOAD_PREFIX}-`,
+          `${METADATA_UPLOAD_PREFIX}-`
+        ),
         form
       );
 
