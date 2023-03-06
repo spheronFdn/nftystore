@@ -90,9 +90,7 @@ export default abstract class HostingApi {
       const { error, message, data } = await this.sendRequest(
         HttpMethods.GET,
         `/v1/deployment/${deploymentId}`,
-        {},
-        null,
-        "http://localhost:8080"
+        {}
       );
 
       if (error) {
