@@ -23,6 +23,11 @@ const ContentUrlCard = ({
   image,
   cardValue,
 }: IProps) => {
+  const protocolName =
+    contentProvider === "ipfs"
+      ? contentProvider.toUpperCase()
+      : contentProvider.charAt(0).toUpperCase() + contentProvider.slice(1);
+
   return (
     <div
       role="presentation"
@@ -39,7 +44,7 @@ const ContentUrlCard = ({
         <div>
           <img src={image} />
           <span className={CardStyle.content__title}>
-            {contentProvider} Gateway
+            {protocolName} Gateway
           </span>
           {contentProvider === "Spheron" && (
             <div className={CardStyle.recommended__div}>
