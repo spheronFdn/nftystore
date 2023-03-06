@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { FileRejection, useDropzone } from "react-dropzone";
+import { Accept, FileRejection, useDropzone } from "react-dropzone";
 import { ReactComponent as ImageIcon } from "../../assets/icons/image-icon.svg";
 import FileBar from "../Misc/file-bar";
 import DropzoneStyles from "../../styles/dropzone.module.css";
@@ -9,6 +9,9 @@ interface IProps {
   setFiles: (files: File[]) => void;
   setBadFiles: (files: FileRejection[]) => void;
   uploadWarning: boolean;
+  title: string;
+  description: string;
+  fileType: string;
 }
 
 const ImageDropzone = ({
@@ -16,6 +19,9 @@ const ImageDropzone = ({
   setFiles,
   setBadFiles,
   uploadWarning,
+  title,
+  description,
+  fileType,
 }: IProps) => {
   const onDrop = useCallback(
     (acceptedFiles: File[], fileRejections: FileRejection[]) => {
@@ -26,12 +32,17 @@ const ImageDropzone = ({
     [setFiles]
   );
 
+  const acceptFiles: Accept =
+    fileType === "images"
+      ? {
+          "image/jpeg": [],
+          "image/png": [],
+        }
+      : { "application/json": [".json"] };
+
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: {
-      "image/jpeg": [],
-      "image/png": [],
-    },
+    accept: acceptFiles,
   });
 
   const otherAttr = { directory: "", webkitdirectory: "" };
@@ -47,7 +58,7 @@ const ImageDropzone = ({
   return (
     <>
       <div className={DropzoneStyles.container}>
-        <h3>NFT collection</h3>
+        <h3>{title}</h3>
         <div
           className={DropzoneStyles.container__content__div}
           {...getRootProps()}
@@ -59,7 +70,7 @@ const ImageDropzone = ({
               <span className={DropzoneStyles.container__content__link}>
                 Click to select
               </span>{" "}
-              NFT collection
+              {description}
             </div>
           </div>
         </div>

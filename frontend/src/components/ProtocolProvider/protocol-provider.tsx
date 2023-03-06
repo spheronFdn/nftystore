@@ -53,7 +53,7 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
     },
     {
       id: 3,
-      name: "Ipfs",
+      name: "IPFS",
       description:
         "Specializes in data storage, blockchain, and serverless web.",
       icon: (

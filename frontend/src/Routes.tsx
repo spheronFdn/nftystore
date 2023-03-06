@@ -1,8 +1,8 @@
 import React from "react";
 import { Routes, Route, HashRouter } from "react-router-dom";
-import StepOne from "./components/Forms/step-one";
-import StepThree from "./components/Forms/step-three";
-import StepTwo from "./components/Forms/step-two";
+import StepOne from "./components/Forms/select-protocol";
+import StepThree from "./components/Forms/choose-link";
+import StepTwo from "./components/Forms/drop-files";
 import Navbar from "./components/Navigation/navbar";
 import Footer from "./components/Footer/footer";
 import Home from "./pages/Home";

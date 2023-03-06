@@ -33,21 +33,13 @@
 }
 
 .protocol__provider__card:hover {
-  background: linear-gradient(
-      0deg,
-      rgba(98, 156, 255, 0.07),
-      rgba(98, 156, 255, 0.07)
-    ),
+  background: var(--primary-provider-card),
     var(--text-white-400);
   border-radius: 8px;
 }
 
 .protocol__provider__card__selected {
-  background: linear-gradient(
-      0deg,
-      rgba(98, 156, 255, 0.07),
-      rgba(98, 156, 255, 0.07)
-    ),
+  background: var(--primary-provider-card),
     var(--text-white-400);
   border-radius: 8px;
   border: 2px solid #418ff8;
@@ -65,21 +57,13 @@
 }
 
 .contenturl__card:hover {
-  background: linear-gradient(
-      0deg,
-      rgba(98, 156, 255, 0.07),
-      rgba(98, 156, 255, 0.07)
-    ),
+  background: var(--primary-provider-card),
     var(--text-white-400);
   border-radius: 8px;
 }
 
 .contenturl__card__focused {
-  background: linear-gradient(
-      0deg,
-      rgba(98, 156, 255, 0.07),
-      rgba(98, 156, 255, 0.07)
-    ),
+  background: var(--primary-provider-card),
     var(--text-white-400);
   border: 2px solid #006be9;
   border-radius: 8px;
@@ -181,12 +165,7 @@
 }
 
 .recommended__div {
-  background: radial-gradient(
-    130.89% 130.89% at 47.98% 7.11%,
-    #004aa2 0%,
-    #418ff8 99.99%,
-    #5cc4ff 100%
-  );
+  background: var(--primary-button-gradient);
   border-radius: 16px;
   margin-left: 1rem;
   color: white;

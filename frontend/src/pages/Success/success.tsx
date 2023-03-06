@@ -34,17 +34,16 @@ const Success = () => {
     >();
 
   useEffect(() => {
-    if (metadataResponse?.url === "") {
+    if (metadataResponse?.spheronUrl === "") {
       navigate("/upload-nft/select-provider");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(metadataResponse?.url);
+    navigator.clipboard.writeText(metadataResponse?.spheronUrl);
     setIsCopied(true);
   };
-  console.log(metadataResponse, "metadataResponse");
 
   return (
     <div className={SuccessStyle.container}>
@@ -60,8 +59,8 @@ const Success = () => {
       </span>
       <div className={SuccessStyle.successUrl}>
         <Link className={SuccessStyle.link__icon} />
-        <a href={metadataResponse?.url} rel="noreferrer" target="_blank">
-          {metadataResponse?.url}
+        <a href={metadataResponse?.spheronUrl} rel="noreferrer" target="_blank">
+          {metadataResponse?.spheronUrl}
         </a>
         <div className={SuccessStyle.copy__div}>
           <Copy onClick={handleCopy} className={SuccessStyle.copy__icon} />

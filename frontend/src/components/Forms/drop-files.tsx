@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, useOutletContext } from "react-router-dom";
 import { uploadFiles } from "../../api";
 import FilledPrimaryButton from "../Buttons/filled-primary";
-import Dropzone from "../Dropzone/image-dropzone";
-import JsonDropzone from "../Dropzone/json-dropzone";
+import Dropzone from "../Dropzone/file-dropzone";
 import { checkUploadFileValidity } from "../../common/utils";
 import { FileRejection } from "react-dropzone";
 import { IUploadResponse } from "../../common/types";
@@ -109,14 +108,20 @@ const StepTwo = () => {
             setFiles={setImages}
             setBadFiles={setBadImages}
             uploadWarning={uploadWarning}
+            title={"NFT collection"}
+            description={"NFT collection"}
+            fileType={"images"}
           />
         </div>
         <div className={DropzoneStyle.file__container__margin}>
-          <JsonDropzone
+          <Dropzone
             files={metadata}
             setFiles={setMetadata}
             setBadFiles={setBadMetaData}
             uploadWarning={uploadWarning}
+            title={"Metadata JSON Files"}
+            description={"corresponding JSON files"}
+            fileType={"json"}
           />
         </div>
         <div className={DropzoneStyle.errorFile}>
