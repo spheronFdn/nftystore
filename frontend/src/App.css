@@ -1,3 +1,115 @@
 .App {
   text-align: center;
+  height: 100vh;
+  background-image: url("./assets/background/site-bg.svg") no-repeat;
+  background-size: cover;
+  background: linear-gradient(
+    180deg,
+    #000000 0%,
+    #190840 66.12%,
+    #143193 119.98%
+  );
+}
+
+.text-primary {
+  color: #888888;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.font-xs {
+  font-size: 12px;
+}
+
+.font-sm {
+  font-size: 14px;
+}
+
+.font-lg {
+  font-size: 18px;
+}
+
+.grid {
+  display: grid;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.gap-4 {
+  gap: 1.125rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-items-center {
+  justify-items: center;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.hero-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.button-container {
+  margin-top: 3rem;
+}
+
+/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1d4ae0 #e0e0e0;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  width: 3px;
+  width: 3px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background-color: #e0e0e0;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #e0e0e0;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: #1d4ae0;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #2053fa;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #1d4ae0;
 }

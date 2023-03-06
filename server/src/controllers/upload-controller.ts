@@ -4,7 +4,7 @@ import { Router, Request, Response } from "express";
 import Logger from "../logger/logger";
 import { UploadCollectionComponent } from "../components";
 
-class NftMetadataController {
+class UploadController {
   public router = Router();
 
   constructor() {
@@ -13,12 +13,15 @@ class NftMetadataController {
 
   public intializeRoutes() {
     this.router.post(
-      "/generateMetadataURI",
+      "/uploadCollection",
       UploadCollectionComponent.uploadCollection
+    );
+    this.router.get(
+      "/uploadCollection/:uploadId/status",
+      UploadCollectionComponent.uploadCollectionStatus
     );
   }
 }
 
-const nftMetadataController: NftMetadataController =
-  new NftMetadataController();
-export default nftMetadataController;
+const uploadController: UploadController = new UploadController();
+export default uploadController;

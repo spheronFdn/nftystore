@@ -1,120 +1,86 @@
 import fs from "fs";
-
 import Logger from "../../logger/logger";
-import formidable, { Files, Part } from "formidable";
-import IncomingForm from "formidable/Formidable";
-import config from "../../config/config";
 import { Request } from "express";
 import HostingApi from "../HostingApi/service";
 import { v4 as uuidv4 } from "uuid";
-import IDeployment from "../HostingApi/deployment-interface";
 import FormData from "form-data";
+import { FileUtils } from "../Utils/file-utils";
+import { IMAGE_UPLOAD_PREFIX, JSON_EXTENSION } from "../Utils/constants";
 
 class UploadService {
   public async uploadCollection(
     protocol: string,
     req: Request,
     projectName?: string
-  ): Promise<{ deploymentId: string; url: string }> {
+  ): Promise<{
+    uploadId: string;
+    fileNames: string[];
+    url: string;
+    spheronUrl: string;
+  }> {
     let uploadDir: string = "";
     try {
-      projectName = projectName ? projectName : `fileUpload-${uuidv4()}`;
+      projectName = projectName
+        ? projectName
+        : `${IMAGE_UPLOAD_PREFIX}-${uuidv4()}`;
 
       Logger.info(
         `Uploading collection: ${projectName}, using protocol: ${protocol}`
       );
 
-      uploadDir = await this.getDedicatedUploadDir();
+      uploadDir = await FileUtils.getDedicatedUploadDir(projectName);
 
-      await this.getFiles(req, uploadDir);
+      await FileUtils.getFiles(req, uploadDir);
 
       const form = new FormData();
+      const fileNames: string[] = [];
 
-      await fs.readdirSync(uploadDir).map((fileName) => {
-        form.append(fileName, fs.createReadStream(`${uploadDir}/${fileName}`));
+      fs.readdirSync(uploadDir).map((fileName) => {
+        const [plainFileName, extension] = fileName.split(".");
+
+        if (extension != JSON_EXTENSION) {
+          this.checkMetadataForImage(uploadDir, plainFileName);
+
+          form.append(
+            fileName,
+            fs.createReadStream(`${uploadDir}/${fileName}`)
+          );
+          fileNames.push(fileName);
+        }
       });
 
-      const { deploymentId, url }: { deploymentId: string; url: string } =
-        await HostingApi.uploadFiles(protocol, projectName, form);
+      const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
+        protocol,
+        projectName,
+        form
+      );
 
       return {
-        deploymentId: deploymentId,
-        url: url,
+        uploadId: deploymentId,
+        fileNames,
+        url,
+        spheronUrl,
       };
     } catch (error) {
       Logger.error(
         `Error in ${__filename} - uploadCollection - ${error.message}`
       );
-    } finally {
-      await this.deleteDir(uploadDir);
+
+      await FileUtils.deleteDir(uploadDir);
+      throw error;
     }
   }
 
-  private async getFiles(req: Request, uploadDir: string): Promise<Files> {
+  private checkMetadataForImage(filePath: string, fileName: string): void {
     try {
-      const form: IncomingForm = formidable({
-        uploadDir: uploadDir,
-        allowEmptyFiles: true,
-        keepExtensions: true,
-        multiples: true,
-        filter: this.filterFiles,
-      });
-
-      const { files }: { files: formidable.Files } = await new Promise(
-        (resolve, reject) =>
-          form.parse(req, (err, fields, files) => {
-            if (err) {
-              reject(err);
-              return;
-            }
-            resolve({ files });
-          })
+      let metadata = fs.readFileSync(
+        `${filePath}/${fileName}.${JSON_EXTENSION}`
       );
-      return files;
+      JSON.parse(metadata.toString());
     } catch (error) {
-      Logger.error(`Error in ${__filename} - parseForm - ${error.message}`);
-      throw error;
-    }
-  }
-
-  private filterFiles(part: Part): boolean {
-    const subDirs = part.originalFilename?.split("/");
-    if (subDirs?.indexOf("..") !== -1) {
-      return false;
-    }
-    return true;
-  }
-
-  private async getDedicatedUploadDir(): Promise<string> {
-    try {
-      const folderName = `${config.rootUploadDirectory}/${uuidv4()}`;
-      try {
-        await fs.promises.access(folderName);
-      } catch (error) {
-        // folder doesn't exists
-        await fs.promises.mkdir(folderName);
-      }
-      return folderName;
-    } catch (error) {
-      Logger.error(
-        `Error in ${__filename} - getDedicatedUploadDir - ${error.message}`
+      throw new Error(
+        `Missing or malformed metadata file for image: ${fileName}!`
       );
-      throw error;
-    }
-  }
-
-  private async deleteDir(uploadDir: string): Promise<void> {
-    try {
-      if (!uploadDir) {
-        return;
-      }
-      await fs.promises.rm(uploadDir, {
-        recursive: true,
-        force: true,
-      });
-    } catch (error) {
-      Logger.error(`Error in ${__filename} - deleteDir - ${error.message}`);
-      throw error;
     }
   }
 }
