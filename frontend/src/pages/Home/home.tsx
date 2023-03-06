@@ -1,8 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import FilledPrimaryButton from "../../components/Buttons/filled-primary";
-import HeroPrimaryButton from "../../components/Buttons/hero-primary";
-import HeroButton from "../../components/Buttons/hero-primary";
 import HomeStyle from "../../styles/home.module.css";
 
 const Home = () => {
