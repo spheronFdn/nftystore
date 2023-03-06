@@ -142,3 +142,8 @@ export enum FocusedProvider {
   SPHERON = "spheron",
   PROVIDER = "provider",
 }
+
+export enum FileType {
+  IMAGES = "images",
+  METADATA = "metadata",
+}

@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { Accept, FileRejection, useDropzone } from "react-dropzone";
 import { ReactComponent as ImageIcon } from "../../assets/icons/image-icon.svg";
 import FileBar from "../Misc/file-bar";
+import { FileType } from "../../common/utils";
 import DropzoneStyles from "../../styles/dropzone.module.css";
 
 interface IProps {
@@ -33,7 +34,7 @@ const ImageDropzone = ({
   );
 
   const acceptFiles: Accept =
-    fileType === "images"
+    fileType === FileType.IMAGES
       ? {
           "image/jpeg": [],
           "image/png": [],

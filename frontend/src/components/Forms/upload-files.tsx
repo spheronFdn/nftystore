@@ -3,7 +3,7 @@ import { useNavigate, useLocation, useOutletContext } from "react-router-dom";
 import { uploadFiles } from "../../api";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import Dropzone from "../Dropzone/file-dropzone";
-import { checkUploadFileValidity } from "../../common/utils";
+import { checkUploadFileValidity, FileType } from "../../common/utils";
 import { FileRejection } from "react-dropzone";
 import { IUploadResponse } from "../../common/types";
 import BadFiles from "../Misc/bad-files";
@@ -110,7 +110,7 @@ const UploadFiles = () => {
             uploadWarning={uploadWarning}
             title={"NFT collection"}
             description={"NFT collection"}
-            fileType={"images"}
+            fileType={FileType.IMAGES}
           />
         </div>
         <div className={DropzoneStyle.file__container__margin}>
@@ -121,7 +121,7 @@ const UploadFiles = () => {
             uploadWarning={uploadWarning}
             title={"Metadata JSON Files"}
             description={"corresponding JSON files"}
-            fileType={"json"}
+            fileType={FileType.METADATA}
           />
         </div>
         <div className={DropzoneStyle.errorFile}>
