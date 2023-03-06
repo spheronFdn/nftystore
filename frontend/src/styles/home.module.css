@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-top: -8rem;
+}
+
+.container__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container__content h1 {
+  color: #fff;
+  font-size: 3.1rem;
+  font-weight: 800;
+  line-height: 4.25rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container__content > div > span {
+  color: var(--secondary);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}

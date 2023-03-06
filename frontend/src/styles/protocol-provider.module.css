@@ -1,0 +1,15 @@
+.protocol__icon {
+  height: 4rem;
+  width: 4rem;
+  color: var(--primary);
+}
+
+.protocol__icon__selected {
+  color: #fff;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
