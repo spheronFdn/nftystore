@@ -9,14 +9,16 @@ import Ipfs from "../../assets/icons/ipfs-icon.svg";
 import Arweave from "../../assets/icons/arweave-circle.svg";
 import Filecoin from "../../assets/icons/filecoin-circle.svg";
 import Spheron from "../../assets/icons/spheron-icon.svg";
+import { FocusedProvider, Providers } from "../../common/utils";
 import DropzoneStyle from "../../styles/dropzone.module.css";
-import { Providers } from "../../common/utils";
 
 const StepThree = () => {
   const navigate = useNavigate();
   const [selectedUrl, setSelectedUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [focusedValue, setFocusedValue] = useState<FocusedProvider>(
+    FocusedProvider.SPHERON
+  );
   const [isImage, setIsImage] = useState<string>("");
   const [
     protocol,
@@ -84,22 +86,22 @@ const StepThree = () => {
       <div className={DropzoneStyle.contentUrl__div}>
         <ContentUrlCard
           setSelectedUrl={setSelectedUrl}
-          isFocused
-          setIsFocused={setIsFocused}
-          isActive={selectedUrl === uploadResponse.spheronUrl}
+          focusedValue={focusedValue}
+          setFocusedValue={setFocusedValue}
           contentProvider={"Spheron"}
           link={uploadResponse.spheronUrl}
           image={Spheron}
+          cardValue={FocusedProvider.SPHERON}
         />
         <div className={DropzoneStyle.contentUrl__margin}>
           <ContentUrlCard
             setSelectedUrl={setSelectedUrl}
-            isFocused={false}
-            setIsFocused={setIsFocused}
-            isActive={selectedUrl === uploadResponse.baseUrl}
+            focusedValue={focusedValue}
+            setFocusedValue={setFocusedValue}
             contentProvider={protocol}
             link={uploadResponse.baseUrl}
             image={isImage}
+            cardValue={FocusedProvider.PROVIDER}
           />
         </div>
       </div>

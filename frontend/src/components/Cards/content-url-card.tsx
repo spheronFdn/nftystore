@@ -1,36 +1,39 @@
 import React from "react";
 import { ReactComponent as Link } from "../../assets/icons/link.svg";
 import { ReactComponent as Info } from "../../assets/icons/info-icon.svg";
+import { FocusedProvider } from "../../common/utils";
 import CardStyle from "../../styles/card.module.css";
 
 interface IProps {
-  isActive: boolean;
   setSelectedUrl: (url: string) => void;
   contentProvider: string;
   link: string;
-  isFocused: boolean;
-  setIsFocused: (isFocused: boolean) => void;
+  focusedValue: FocusedProvider;
+  setFocusedValue: (focusedValue: FocusedProvider) => void;
   image: string;
+  cardValue: FocusedProvider;
 }
 
 const ContentUrlCard = ({
-  isActive,
   setSelectedUrl,
   contentProvider,
   link,
-  isFocused,
-  setIsFocused,
+  focusedValue,
+  setFocusedValue,
   image,
+  cardValue,
 }: IProps) => {
   return (
     <div
       role="presentation"
       onClick={() => {
         setSelectedUrl(link);
+        setFocusedValue(cardValue);
       }}
-      className={`${isFocused && CardStyle.contenturl__card__focused} ${
-        CardStyle.contenturl__card
-      }`}
+      className={`${
+        cardValue === focusedValue && CardStyle.contenturl__card__focused
+      } 
+      ${CardStyle.contenturl__card}`}
     >
       <div className={CardStyle.contenturl__card__content}>
         <div>

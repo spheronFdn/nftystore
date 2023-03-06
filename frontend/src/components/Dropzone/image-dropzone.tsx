@@ -23,16 +23,10 @@ const ImageDropzone = ({
       setBadFiles(fileRejections);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [setFiles]
   );
 
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-  } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: {
       "image/jpeg": [],
@@ -49,6 +43,7 @@ const ImageDropzone = ({
   const handleClear = () => {
     setFiles([]);
   };
+
   return (
     <>
       <div className={DropzoneStyles.container}>

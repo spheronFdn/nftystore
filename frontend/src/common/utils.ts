@@ -137,3 +137,8 @@ export enum Providers {
   FILECOIN = "filecoin",
   ARWEAVE = "arweave",
 }
+
+export enum FocusedProvider {
+  SPHERON = "spheron",
+  PROVIDER = "provider",
+}

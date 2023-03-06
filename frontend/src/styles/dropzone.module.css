@@ -55,6 +55,7 @@
   transition: 0.3s all ease-in-out;
   background: rgba(252, 252, 253, 0.04);
   border-radius: 2px;
+  margin-bottom: 0.5rem;
 }
 .filebar__container::-webkit-scrollbar {
   background: var(--text-white-100) !important;
@@ -205,6 +206,7 @@
   transition: border .3s ease-in-out;
   cursor: pointer;
   margin-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 ::-webkit-scrollbar {
