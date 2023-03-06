@@ -12,7 +12,7 @@ import Spheron from "../../assets/icons/spheron-icon.svg";
 import { FocusedProvider, Providers } from "../../common/utils";
 import DropzoneStyle from "../../styles/dropzone.module.css";
 
-const StepThree = () => {
+const ChooseLink = () => {
   const navigate = useNavigate();
   const [selectedUrl, setSelectedUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -105,7 +105,7 @@ const StepThree = () => {
           />
         </div>
       </div>
-      <div className={DropzoneStyle.stepThree__button__div}>
+      <div className={DropzoneStyle.chooseLink__button__div}>
         <span className={DropzoneStyle.previous__button__div}>
           <HeroPrimaryButton
             title={"Previous"}
@@ -125,4 +125,4 @@ const StepThree = () => {
   );
 };
 
-export default StepThree;
+export default ChooseLink;

@@ -137,7 +137,7 @@
   margin-top: 3rem;
 }
 
-.stepThree__button__div {
+.chooseLink__button__div {
   text-align: right;
   justify-content: right;
   display: flex;
@@ -283,7 +283,7 @@ height: 10px !important;
     margin-bottom: 3rem;
     margin-top: 3rem;
   }
-  .stepThree__button__div {
+  .chooseLink__button__div {
     margin-bottom: 3rem;
     margin-top: 1rem;
   }

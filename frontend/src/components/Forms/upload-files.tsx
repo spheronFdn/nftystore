@@ -11,7 +11,7 @@ import HeroPrimaryButton from "../Buttons/hero-primary";
 import Modal from "../Modal/modal";
 import DropzoneStyle from "../../styles/dropzone.module.css";
 
-const StepTwo = () => {
+const UploadFiles = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState<string>("");
@@ -160,4 +160,4 @@ const StepTwo = () => {
   );
 };
 
-export default StepTwo;
+export default UploadFiles;
