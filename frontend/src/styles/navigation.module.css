@@ -1,59 +1,46 @@
 .navbar {
   display: flex;
   justify-content: flex-start;
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-  padding-left: 8%;
+  padding-top: 1.75rem;
+  padding-bottom: 1.5rem;
+  padding-left: 5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.17);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
   z-index: 99;
-  background: rgba(0, 0, 0, 0.08);
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
 }
 
 .step__line {
   margin-right: 0.375rem;
-  min-height: 2rem;
-  min-width: 2rem;
-  border-radius: 50%;
+  height: 0.375rem;
+  width: 5.375rem;
+  border-radius: 6px;
+  background: #e4e5e9;
   cursor: pointer;
   border: 0;
   outline: none;
-  color: white;
 }
 
 .step__line__active {
-  background: radial-gradient(
-    130.89% 130.89% at 47.98% 7.11%,
-    #004aa2 0%,
-    #418ff8 99.99%,
-    #5cc4ff 100%
-  );
+  background: var(--secondary) !important;
 }
 
 .step__line:disabled {
   cursor: not-allowed;
-  opacity: 0.3;
-  background: radial-gradient(
-    130.89% 130.89% at 47.98% 7.11%,
-    #004aa2 0%,
-    #418ff8 99.99%,
-    #5cc4ff 100%
-  ) !important;
 }
 
 .step__container {
-  margin-top: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .step__container > div {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
   width: auto;
-  margin-top: 3rem;
 }
 
 .step__count {
@@ -61,21 +48,4 @@
   color: var(--secondary);
   font-weight: 600;
   font-size: 1.25rem;
-}
-
-.step__divider {
-  margin-left: -6px;
-  border: 1px solid rgba(210, 213, 218, 0.1);
-  border-radius: 2px;
-  width: 30rem;
-}
-.step__divider__none {
-  display: none;
-}
-
-@media (max-width: 800px) {
-  .navbar {
-    padding-left: 1rem;
-    backdrop-filter: blur(15px);
-  }
 }

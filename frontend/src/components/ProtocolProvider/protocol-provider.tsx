@@ -4,7 +4,6 @@ import { ReactComponent as FilecoinIcon } from "../../assets/icons/filecoin.svg"
 import { ReactComponent as IpfsIcon } from "../../assets/icons/ipfs.svg";
 import ProtocolProviderStyle from "../../styles/protocol-provider.module.css";
 import CardStyle from "../../styles/card.module.css";
-import { Providers } from "../../common/utils";
 
 interface IProps {
   selectedProtocol: string;
@@ -31,7 +30,7 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
       icon: (
         <ArweaveIcon
           className={`${
-            isSelectedProtocol(Providers.ARWEAVE) &&
+            isSelectedProtocol("arweave") &&
             ProtocolProviderStyle.protocol__icon__selected
           } ${ProtocolProviderStyle.protocol__icon}`}
         />
@@ -45,7 +44,7 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
       icon: (
         <FilecoinIcon
           className={`${
-            isSelectedProtocol(Providers.FILECOIN) &&
+            isSelectedProtocol("filecoin") &&
             ProtocolProviderStyle.protocol__icon__selected
           } ${ProtocolProviderStyle.protocol__icon}`}
         />
@@ -59,7 +58,7 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
       icon: (
         <IpfsIcon
           className={`${
-            isSelectedProtocol(Providers.IPFS) &&
+            isSelectedProtocol("ipfs") &&
             ProtocolProviderStyle.protocol__icon__selected
           } ${ProtocolProviderStyle.protocol__icon}`}
         />
@@ -72,7 +71,9 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
   };
 
   return (
-    <div className={`${CardStyle.protocol__provider__card__container}`}>
+    <div
+      className={`grid grid-cols-3 ${CardStyle.protocol__provider__card__container}`}
+    >
       {protocols.map((protocol) => (
         <div
           key={protocol.id}
@@ -80,9 +81,7 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
           className={`${
             isSelectedProtocol(protocol.name.toLowerCase()) &&
             CardStyle.protocol__provider__card__selected
-          } ${CardStyle.protocol__provider__card} ${
-            protocol.id === 3 ? "" : CardStyle.protocol__card__margin
-          }`}
+          } ${CardStyle.protocol__provider__card}`}
         >
           <div>{protocol.icon}</div>
           <h3>{protocol.name}</h3>

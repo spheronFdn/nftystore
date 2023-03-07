@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import ProtocolProvider from "../ProtocolProvider";
-import StepOneStyle from "../../styles/stepone.module.css";
 
 const StepOne = () => {
   const navigate = useNavigate();
@@ -13,12 +12,12 @@ const StepOne = () => {
 
   return (
     <>
-      <div className={StepOneStyle.step__heading}>Select protocol</div>
-      <div className={StepOneStyle.step__subheading}>
-        Please click on a protocol that suits your needs
-      </div>
+      <h1>Choose your protocol</h1>
       <ProtocolProvider setProtocol={setProtocol} selectedProtocol={protocol} />
-      <div className={StepOneStyle.step__button__div}>
+      <div
+        className="flex items-center justify-center"
+        style={{ marginTop: "100px" }}
+      >
         <FilledPrimaryButton
           title={"Next"}
           loading={false}

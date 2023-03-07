@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import FormData from "form-data";
 import { FileUtils } from "../Utils/file-utils";
 import { IMAGE_UPLOAD_PREFIX, JSON_EXTENSION } from "../Utils/constants";
+import { randomBytes } from "crypto";
 
 class UploadService {
   public async uploadCollection(
@@ -21,8 +22,8 @@ class UploadService {
     let uploadDir: string = "";
     try {
       projectName = projectName
-        ? projectName
-        : `${IMAGE_UPLOAD_PREFIX}-${uuidv4()}`;
+        ? `${IMAGE_UPLOAD_PREFIX}-${projectName}`
+        : `${IMAGE_UPLOAD_PREFIX}-${randomBytes(5).toString("hex")}`;
 
       Logger.info(
         `Uploading collection: ${projectName}, using protocol: ${protocol}`

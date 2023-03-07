@@ -1,22 +1,22 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { FileRejection, useDropzone } from "react-dropzone";
-import { ReactComponent as FileIcon } from "../../assets/icons/file-icon.svg";
-import FileBar from "../Misc/file-bar";
+import { ReactComponent as CloudIcon } from "../../assets/icons/cloud.svg";
+import {
+  acceptStyle,
+  activeStyle,
+  baseStyle,
+  rejectStyle,
+} from "../../common/dropzone-style";
 import DropzoneStyles from "../../styles/dropzone.module.css";
+import FileBar from "../Misc/file-bar";
 
 interface IProps {
   files: File[];
   setFiles: (files: File[]) => void;
   setBadFiles: (files: FileRejection[]) => void;
-  uploadWarning: boolean;
 }
 
-const JsonDropzone = ({
-  files,
-  setFiles,
-  setBadFiles,
-  uploadWarning,
-}: IProps) => {
+const JsonDropzone = ({ files, setFiles, setBadFiles }: IProps) => {
   const onDrop = useCallback(
     (acceptedFiles: File[], fileRejections: FileRejection[]) => {
       setFiles(acceptedFiles);
@@ -41,49 +41,41 @@ const JsonDropzone = ({
 
   const otherAttr = { directory: "", webkitdirectory: "" };
 
+  const style: any = useMemo(
+    () => ({
+      ...baseStyle,
+      ...(isDragActive ? activeStyle : {}),
+      ...(isDragAccept ? acceptStyle : {}),
+      ...(isDragReject ? rejectStyle : {}),
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isDragActive, isDragReject, isDragAccept]
+  );
+
   const removeFile = (fileName: string) => {
     setFiles(files.filter((file: File) => file.name !== fileName));
   };
 
-  const handleClear = () => {
-    setFiles([]);
-  };
-
   return (
     <>
-      <div className={DropzoneStyles.container}>
-        <h3>Metadata JSON Files</h3>
-        <div
-          className={DropzoneStyles.container__content__div}
-          {...getRootProps()}
-        >
-          <input {...getInputProps()} {...otherAttr} />
-          <div className={DropzoneStyles.container__content}>
-            <FileIcon />
-            <div className={DropzoneStyles.container__content__text}>
-              <span className={DropzoneStyles.container__content__link}>
-                Click to select
-              </span>{" "}
-              corresponding JSON files
+      <div className={DropzoneStyles.container} {...getRootProps({ style })}>
+        {files.length === 0 ? (
+          <>
+            <input {...getInputProps()} {...otherAttr} />
+            <div className={DropzoneStyles.container__content}>
+              <CloudIcon />
+              <div className={DropzoneStyles.container__content__text}>
+                <h3>
+                  Drag & drop your files or <span>Browse</span>
+                </h3>
+                <div>
+                  Please upload in .json format with image associated <br />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        {files.length > 0 && (
+          </>
+        ) : (
           <div className={DropzoneStyles.filebar__container}>
-            <div className={DropzoneStyles.filebar__title__div}>
-              <span className={DropzoneStyles.filebar__title__files}>
-                Total Files:{" "}
-                <span className={DropzoneStyles.filebar__files__length}>
-                  {files.length}
-                </span>
-              </span>
-              <span
-                onClick={handleClear}
-                className={DropzoneStyles.filebar__title__clear}
-              >
-                Clear All
-              </span>
-            </div>
             {files.map((file: File) => (
               <FileBar
                 key={file.name}
@@ -94,7 +86,6 @@ const JsonDropzone = ({
           </div>
         )}
       </div>
-      {uploadWarning && <span>Please upload JSON Files</span>}
     </>
   );
 };

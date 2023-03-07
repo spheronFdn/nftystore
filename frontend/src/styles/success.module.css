@@ -7,13 +7,11 @@
 }
 
 .title {
-  /* font-family: 'Manrope'; */
-  font-style: normal;
   font-weight: 800;
-  font-size: 54px;
-  line-height: 114%;
+  font-size: 40px;
+  line-height: 48px;
   text-align: center;
-  color: white;
+  color: #fff;
 }
 
 .container > a {
@@ -21,113 +19,4 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-}
-
-.subtitle {
-  /* font-family: 'Open Sans'; */
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 28px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.subtitle__span {
-  font-weight: 800;
-}
-
-.successUrl {
-  margin-top: 2rem;
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  background: rgba(246, 245, 253, 0.04);
-  border-radius: 6px;
-  width: auto;
-  overflow: hidden;
-  border: 4px solid #006be9;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.successUrl:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-.successUrl a {
-  /* font-family: 'Inter'; */
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 17px;
-  color: #56a1ff;
-  letter-spacing: 0.5px;
-  margin-right: 32px;
-  margin-left: 0.5rem;
-  display: flex;
-  flex-grow: 1;
-}
-
-.copy__div {
-  position: relative;
-  width: 3rem;
-}
-.copy__icon {
-  position: relative;
-}
-.copied__tooltip__color {
-  background: #0F3875;
-}
-.copy__tooltip__color {
-  background: #0f3875;
-}
-.copy__div .copy__tooltip {
-  visibility: hidden;
-  max-width: 100px;
-  border-radius: 8px;
-  color: black;
-  z-index: 1;
-  text-align: center;
-  padding: 9px 5px 1px 6px;
-  position: fixed;
-  left: 51%;
-  height: 25px;
-  margin-top: -70px;
-}
-.copy__div .copy__tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: 0px;
-  border-width: 7px;
-  border-style: solid;
-  border-color: #0f3875 transparent transparent transparent;
-}
-.copy__div:hover .copy__tooltip {
-  visibility: visible;
-  /* font-family: 'Inter'; */
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 18px;
-  color: white;
-}
-
-.link__icon {
-  stroke: #56A1FF;
-}
-@media (max-width: 800px) {
-  .title {
-    font-size: 24px;
-  }
-  .subtitle {
-    font-size: 12px;
-  }
-  .successUrl {
-    width: min-content;
-  }
 }
