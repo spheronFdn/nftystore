@@ -23,4 +23,25 @@ code {
   --text-link: #d6c8dd;
   --text-gray-500: #b3b6c2;
   --text-gray-400: #cbc7d3;
+  --app-gradient: linear-gradient(
+      129.58deg,
+      rgba(44, 218, 255, 0.29) -1.47%,
+      rgba(0, 107, 233, 0) 41.44%
+    ),
+    #030928;
+  --text-white-100: rgba(255, 255, 255, 0.12);
+  --text-white-400: rgba(255, 255, 255, 0.04);
+  --shadow-dark: rgba(16, 24, 40, 0.05);
+  --primary-white: white;
+  --primary-button-gradient: radial-gradient(
+    130.89% 130.89% at 47.98% 7.11%,
+    #004aa2 0%,
+    #418ff8 99.99%,
+    #5cc4ff 100%
+  );
+  --primary-provider-card: linear-gradient(
+    0deg,
+    rgba(98, 156, 255, 0.07),
+    rgba(98, 156, 255, 0.07)
+  );
 }

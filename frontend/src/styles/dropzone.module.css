@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 .content__container {
   display: grid;
   grid-template-columns: 50% 50%;
 }
-=======
->>>>>>> dev
 .container__content {
   display: flex;
   flex-direction: column;
@@ -12,40 +9,19 @@
   align-items: center;
 }
 
-<<<<<<< HEAD
-.container > h3 {
+.heading {
   /* font-family: 'Inter'; */
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
   line-height: 24px;
   color: #006be9;
-  text-align: left;
+  text-align: left !important;
   margin-left: 1rem;
+  display: flex;
 }
 
 .container__content__text > div {
-=======
-.container__content__text {
-  margin-top: 0.75rem;
-}
-
-.container__content__text > h3 {
-  margin: 0;
-  padding: 0;
-  color: #fff;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.container__content__text > h3 > span {
-  color: var(--secondary) !important;
-}
-
-.container__content__text > div {
-  margin-top: 0.75rem;
->>>>>>> dev
   text-align: center;
 }
 
@@ -66,17 +42,10 @@
 }
 
 .filebar__container {
-<<<<<<< HEAD
   max-height: 150px;
   cursor: default;
   margin: 0.6rem 0.8rem 0.2rem 1rem;
   width: -webkit-fill-available;
-=======
-  height: 150px;
-  overflow-y: scroll;
-  width: calc(100% + 10rem);
-  cursor: default;
->>>>>>> dev
 }
 
 .filebar {
@@ -84,10 +53,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 13px 10px 10px;
-<<<<<<< HEAD
   transition: 0.3s all ease-in-out;
   background: rgba(252, 252, 253, 0.04);
   border-radius: 2px;
+  margin-bottom: 0.5rem;
 }
 .filebar__container::-webkit-scrollbar {
   background: var(--text-white-100) !important;
@@ -96,17 +65,6 @@
 }
 .filebar > div {
   color: white;
-=======
-  width: 90%;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 4px;
-  margin-bottom: 0.75rem;
-  transition: 0.3s all ease-in-out;
-}
-
-.filebar > div {
-  color: #fff;
->>>>>>> dev
   text-align: left;
   font-weight: 400;
   font-size: 14px;
@@ -124,7 +82,6 @@
 
 .errorFile {
   margin-top: 0.5rem;
-<<<<<<< HEAD
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
@@ -181,7 +138,7 @@
   margin-top: 3rem;
 }
 
-.stepThree__button__div {
+.chooseLink__button__div {
   text-align: right;
   justify-content: right;
   display: flex;
@@ -247,13 +204,14 @@
   border-radius: 8px;
   background-color: var(--text-white-400);
   color: #bdbdbd;
-  transition: border .3s ease-in-out;
+  transition: border 0.3s ease-in-out;
   cursor: pointer;
   margin-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 ::-webkit-scrollbar {
-height: 10px !important;
+  height: 10px !important;
 }
 
 .filebar__delete__icon {
@@ -308,22 +266,12 @@ height: 10px !important;
 
 .previous__button__div {
   margin-right: 1rem;
-=======
-  color: red;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.errorFile > span {
-  margin-right: 4px;
->>>>>>> dev
 }
 
 @media (max-width: 1024px) {
   .thumb__container {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-<<<<<<< HEAD
   .contentUrl__div {
     display: grid;
     grid-template-columns: auto;
@@ -336,7 +284,7 @@ height: 10px !important;
     margin-bottom: 3rem;
     margin-top: 3rem;
   }
-  .stepThree__button__div {
+  .chooseLink__button__div {
     margin-bottom: 3rem;
     margin-top: 1rem;
   }
@@ -363,6 +311,4 @@ height: 10px !important;
   .errorFile {
     border-radius: 20px;
   }
-=======
->>>>>>> dev
 }

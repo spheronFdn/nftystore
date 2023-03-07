@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, useOutletContext } from "react-router-dom";
 import { uploadFiles } from "../../api";
 import FilledPrimaryButton from "../Buttons/filled-primary";
-import DropzoneStyle from "../../styles/dropzone.module.css";
-import Dropzone from "../Dropzone/image-dropzone";
-import JsonDropzone from "../Dropzone/json-dropzone";
-import { checkUploadFileValidity } from "../../common/utils";
+import Dropzone from "../Dropzone/file-dropzone";
+import { checkUploadFileValidity, FileType } from "../../common/utils";
 import { FileRejection } from "react-dropzone";
 import { IUploadResponse } from "../../common/types";
 import BadFiles from "../Misc/bad-files";
+import HeroPrimaryButton from "../Buttons/hero-primary";
+import Modal from "../Modal/modal";
+import DropzoneStyle from "../../styles/dropzone.module.css";
 
-const StepTwo = () => {
+const UploadFiles = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState<string>("");
@@ -19,6 +20,8 @@ const StepTwo = () => {
   const [badImages, setBadImages] = useState<FileRejection[]>([]);
   const [metadata, setMetadata] = useState<File[]>([]);
   const [badMetaData, setBadMetaData] = useState<FileRejection[]>([]);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [uploadWarning, setUploadWarning] = useState<boolean>(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [protocol, setProtocol, uploadResponse, setUploadResponse] =
     useOutletContext<
@@ -59,29 +62,66 @@ const StepTwo = () => {
     }
   };
 
+  const handlePrevious = () => {
+    navigate("/nft-upload/select-provider");
+  };
+
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
   useEffect(() => {
     if (error) {
-      setTimeout(() => setError(""), 2000);
+      setTimeout(() => setError(""), 6000);
     }
   }, [error]);
 
+  useEffect(() => {
+    if (
+      (images.length < 0 && metadata.length > 0) ||
+      (images.length > 0 && metadata.length < 0)
+    ) {
+      setUploadWarning(true);
+    }
+  }, [images, metadata]);
+
   return (
     <>
-      <h1>Drop your files</h1>
-      <div className={DropzoneStyle.errorFile}> {error && <>{error}</>}</div>
-      <div className="grid grid-cols-2">
-        <div>
+      {modalOpen && (
+        <Modal setModalOpen={setModalOpen} modalHeading={"Guide"} />
+      )}
+      <div className={DropzoneStyle.drop__heading}>Drop your files here</div>
+      <div className={DropzoneStyle.drop__subheading}>
+        You can select all of your images in the NFT Collection along with the
+        their corresponding JSON files in the Metadata JSON files.{" "}
+        <span
+          onClick={handleModalOpen}
+          className={DropzoneStyle.container__content__link}
+        >
+          Learn More
+        </span>
+      </div>
+      <div className={DropzoneStyle.content__container}>
+        <div className={DropzoneStyle.image__container__margin}>
           <Dropzone
             files={images}
             setFiles={setImages}
             setBadFiles={setBadImages}
+            uploadWarning={uploadWarning}
+            title={"NFT collection"}
+            description={"NFT collection"}
+            fileType={FileType.IMAGES}
           />
         </div>
-        <div>
-          <JsonDropzone
+        <div className={DropzoneStyle.file__container__margin}>
+          <Dropzone
             files={metadata}
             setFiles={setMetadata}
             setBadFiles={setBadMetaData}
+            uploadWarning={uploadWarning}
+            title={"Metadata JSON Files"}
+            description={"corresponding JSON files"}
+            fileType={FileType.METADATA}
           />
         </div>
         <div className={DropzoneStyle.errorFile}>
@@ -91,9 +131,26 @@ const StepTwo = () => {
           <BadFiles badFiles={badMetaData} />
         </div>
       </div>
-      <div className="flex items-center justify-center button-container">
+      <div className={DropzoneStyle.errorFile}>
+        {error && (
+          <div className={DropzoneStyle.errorFile__errorSpan}>
+            <span className={DropzoneStyle.errorFile__errorBadge}>Error</span>
+            {error}
+          </div>
+        )}
+      </div>
+
+      <div className={DropzoneStyle.drop__button__div}>
+        <span className={DropzoneStyle.previous__button__div}>
+          <HeroPrimaryButton
+            title={"Previous"}
+            loading={false}
+            disabled={false}
+            handleClick={handlePrevious}
+          />
+        </span>
         <FilledPrimaryButton
-          title={"Upload"}
+          title={"Upload And Next"}
           loading={loading}
           disabled={!metadata.length || !images.length || !!error}
           handleClick={handleSubmit}
@@ -103,4 +160,4 @@ const StepTwo = () => {
   );
 };
 
-export default StepTwo;
+export default UploadFiles;
