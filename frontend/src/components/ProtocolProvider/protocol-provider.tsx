@@ -28,42 +28,21 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
       name: "Arweave",
       description:
         "Specializes in data storage, blockchain, and serverless web.",
-      icon: (
-        <ArweaveIcon
-          className={`${
-            isSelectedProtocol(Providers.ARWEAVE) &&
-            ProtocolProviderStyle.protocol__icon__selected
-          } ${ProtocolProviderStyle.protocol__icon}`}
-        />
-      ),
+      icon: <ArweaveIcon className="ProtocolProviderStyle.protocol__icon" />,
     },
     {
       id: 2,
       name: "Filecoin",
       description:
         "Specializes in data storage, blockchain, and serverless web.",
-      icon: (
-        <FilecoinIcon
-          className={`${
-            isSelectedProtocol(Providers.FILECOIN) &&
-            ProtocolProviderStyle.protocol__icon__selected
-          } ${ProtocolProviderStyle.protocol__icon}`}
-        />
-      ),
+      icon: <FilecoinIcon className="ProtocolProviderStyle.protocol__icon" />,
     },
     {
       id: 3,
       name: "IPFS",
       description:
         "Specializes in data storage, blockchain, and serverless web.",
-      icon: (
-        <IpfsIcon
-          className={`${
-            isSelectedProtocol(Providers.IPFS) &&
-            ProtocolProviderStyle.protocol__icon__selected
-          } ${ProtocolProviderStyle.protocol__icon}`}
-        />
-      ),
+      icon: <IpfsIcon className="ProtocolProviderStyle.protocol__icon" />,
     },
   ];
 

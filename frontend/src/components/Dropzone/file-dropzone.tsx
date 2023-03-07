@@ -46,7 +46,7 @@ const ImageDropzone = ({
     accept: acceptFiles,
   });
 
-  const otherAttr = { directory: "", webkitdirectory: "" };
+  const otherAttr = { directory: "", webkitdirectory: "", mozdirectory: "" };
 
   const removeFile = (id: string) => {
     setFiles(files.filter((file: File) => file.name !== id));
@@ -55,6 +55,16 @@ const ImageDropzone = ({
   const handleClear = () => {
     setFiles([]);
   };
+  const filesSize: any = files.map((file) => (file.size / 1024).toFixed(0));
+  const arrSum = (arr: any) => {
+    let sum = 0;
+    arr.forEach((n: number) => (sum += n));
+    return sum;
+  };
+  console.log(
+    files.forEach((file) => file.size),
+    "files"
+  );
 
   return (
     <>
@@ -65,7 +75,7 @@ const ImageDropzone = ({
           {...getRootProps()}
         >
           <div className={DropzoneStyles.container__content}>
-            <input {...getInputProps()} {...otherAttr} />
+            <input {...getInputProps()} {...otherAttr} type="file" />
             <ImageIcon />
             <div className={DropzoneStyles.container__content__text}>
               <span className={DropzoneStyles.container__content__link}>
@@ -82,7 +92,7 @@ const ImageDropzone = ({
               <span className={DropzoneStyles.filebar__title__files}>
                 Total Files:{" "}
                 <span className={DropzoneStyles.filebar__files__length}>
-                  {files.length}
+                  {files.length} files (10mb)
                 </span>
               </span>
               <span

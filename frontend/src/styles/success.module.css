@@ -37,25 +37,35 @@
   font-weight: 800;
 }
 
+.successUrl__div {
+  background: rgba(255, 255, 255, 0.04);
+border-radius: 8px;
+padding: 1.5rem 2.5rem;
+margin-top: 2rem;
+}
+
 .successUrl {
-  margin-top: 2rem;
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
   padding-left: 1rem;
   padding-right: 1rem;
   background: rgba(246, 245, 253, 0.04);
-  border-radius: 6px;
-  width: auto;
+  border-radius: 4px;
+  width: 500px;
   overflow: hidden;
-  border: 4px solid #006be9;
+  height: 1.8rem;
+  /* border: 4px solid #006be9; */
   display: flex;
   align-items: center;
   cursor: pointer;
   text-decoration: none;
 }
 
+.successUrl__margin {
+  margin-top: 1rem;
+}
 .successUrl:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
 }
 .successUrl a {
   /* font-family: 'Inter'; */
@@ -64,26 +74,66 @@
   font-size: 16px;
   line-height: 17px;
   color: #56a1ff;
-  letter-spacing: 0.5px;
+  text-decoration: none;
   margin-right: 32px;
   margin-left: 0.5rem;
   display: flex;
   flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 470px;
 }
 
 .copy__div {
   position: relative;
-  width: 3rem;
+  min-width: 4rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 4px;
 }
-.copy__icon {
+.copy__span {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  /* identical to box height, or 100% */
+
+  display: flex;
+  align-items: center;
+
+  color: #006be9;
+
   position: relative;
 }
-.copied__tooltip__color {
-  background: #0F3875;
+
+.copy__div:hover {
+  background: #0959b7;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
 }
+
+.copy__div:hover .copy__span {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.copied__tooltip__color {
+  background: #0f3875;
+}
+
 .copy__tooltip__color {
   background: #0f3875;
 }
+
 .copy__div .copy__tooltip {
   visibility: hidden;
   max-width: 100px;
@@ -97,6 +147,7 @@
   height: 25px;
   margin-top: -70px;
 }
+
 .copy__div .copy__tooltip::after {
   content: "";
   position: absolute;
@@ -107,6 +158,7 @@
   border-style: solid;
   border-color: #0f3875 transparent transparent transparent;
 }
+
 .copy__div:hover .copy__tooltip {
   visibility: visible;
   /* font-family: 'Inter'; */
@@ -118,7 +170,8 @@
 }
 
 .link__icon {
-  stroke: #56A1FF;
+max-width: 2rem;
+max-height: 2rem;
 }
 @media (max-width: 800px) {
   .title {

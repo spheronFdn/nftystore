@@ -18,6 +18,7 @@
   color: #006be9;
   text-align: left;
   margin-left: 1rem;
+  margin-bottom: 0.2rem;
 }
 
 .container__content__text > div {
@@ -118,10 +119,12 @@
   line-height: 34px;
   color: white;
   margin-top: 3rem;
+  margin-bottom: 1rem;
 }
+
 .drop__subheading {
   text-align: left;
-  margin-top: 1rem;
+  margin-top: 0rem;
   /* font-family: 'Inter'; */
   font-style: normal;
   font-weight: 300;
@@ -134,7 +137,8 @@
   text-align: right;
   justify-content: right;
   display: flex;
-  margin-top: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
 }
 
 .chooseLink__button__div {
@@ -148,7 +152,7 @@
   background: rgba(252, 252, 253, 0.04);
   border: 1px dashed rgba(0, 107, 233, 0.35);
   margin: 0.2rem 0.8rem 0.2rem 1rem;
-  padding: 2rem 1rem 1rem 1rem;
+  padding: 1rem;
   width: -webkit-fill-available;
   cursor: pointer;
 }
@@ -203,14 +207,14 @@
   border-radius: 8px;
   background-color: var(--text-white-400);
   color: #bdbdbd;
-  transition: border .3s ease-in-out;
+  transition: border 0.3s ease-in-out;
   cursor: pointer;
   margin-top: 1rem;
   padding-bottom: 1rem;
 }
 
 ::-webkit-scrollbar {
-height: 10px !important;
+  height: 10px !important;
 }
 
 .filebar__delete__icon {
@@ -267,6 +271,48 @@ height: 10px !important;
   margin-right: 1rem;
 }
 
+.input__heading {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 27px;
+  color: #ffffff;
+  text-align: left;
+}
+
+.input__div {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 1.2rem 1.8rem;
+  position: relative;
+}
+
+.input__collection {
+  background-color: rgba(246, 245, 253, 0.04);
+  border-radius: 4px;
+  border: 0px;
+  width: -webkit-fill-available;
+  padding: 1rem 2rem;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+}
+
+.input__icon {
+  position: absolute;
+  right: 3rem;
+  top: 2.25rem;
+}
+.input__collection::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.input__collection:focus-visible {
+  border: 0px;
+  outline: 0px;
+}
 @media (max-width: 1024px) {
   .thumb__container {
     grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -280,11 +326,11 @@ height: 10px !important;
     margin-left: 0rem;
   }
   .drop__button__div {
-    margin-bottom: 3rem;
-    margin-top: 3rem;
+    margin-bottom: 5rem;
+    margin-top: 1rem;
   }
   .chooseLink__button__div {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     margin-top: 1rem;
   }
   .container__content__text {
