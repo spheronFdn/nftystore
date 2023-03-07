@@ -9,15 +9,16 @@
   align-items: center;
 }
 
-.container > h3 {
+.heading {
   /* font-family: 'Inter'; */
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
   line-height: 24px;
   color: #006be9;
-  text-align: left;
+  text-align: left !important;
   margin-left: 1rem;
+  display: flex;
 }
 
 .container__content__text > div {
@@ -203,14 +204,14 @@
   border-radius: 8px;
   background-color: var(--text-white-400);
   color: #bdbdbd;
-  transition: border .3s ease-in-out;
+  transition: border 0.3s ease-in-out;
   cursor: pointer;
   margin-top: 1rem;
   padding-bottom: 1rem;
 }
 
 ::-webkit-scrollbar {
-height: 10px !important;
+  height: 10px !important;
 }
 
 .filebar__delete__icon {
