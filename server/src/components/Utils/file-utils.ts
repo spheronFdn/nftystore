@@ -30,6 +30,8 @@ export const FileUtils = {
         multiples: true,
         filter: this.filterFiles,
         filename: getFilename(uploadDir),
+        maxTotalFileSize: 1024 * 1024 * 1024,
+        maxFileSize: 1024 * 1024 * 1024,
       });
 
       const { files }: { files: formidable.Files } = await new Promise(

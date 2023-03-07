@@ -93,23 +93,19 @@
 
 *::-webkit-scrollbar-track:hover {
   background-color: transparent;
-
 }
 
 *::-webkit-scrollbar-track:active {
   background-color: transparent;
-
 }
 
 *::-webkit-scrollbar-thumb {
   border-radius: 6px;
   background-color: var(--text-white-100);
-
 }
 
 *::-webkit-scrollbar-thumb:hover {
   background-color: var(--text-white-100);
-
 }
 
 *::-webkit-scrollbar-thumb:active {

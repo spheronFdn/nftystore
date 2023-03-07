@@ -79,7 +79,7 @@
   position: relative;
 }
 .copied__tooltip__color {
-  background: #0F3875;
+  background: #0f3875;
 }
 .copy__tooltip__color {
   background: #0f3875;
@@ -118,7 +118,7 @@
 }
 
 .link__icon {
-  stroke: #56A1FF;
+  stroke: #56a1ff;
 }
 @media (max-width: 800px) {
   .title {
