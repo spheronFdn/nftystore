@@ -33,14 +33,12 @@
 }
 
 .protocol__provider__card:hover {
-  background: var(--primary-provider-card),
-    var(--text-white-400);
+  background: var(--primary-provider-card), var(--text-white-400);
   border-radius: 8px;
 }
 
 .protocol__provider__card__selected {
-  background: var(--primary-provider-card),
-    var(--text-white-400);
+  background: var(--primary-provider-card), var(--text-white-400);
   border-radius: 8px;
   border: 2px solid #418ff8;
 }
@@ -57,14 +55,12 @@
 }
 
 .contenturl__card:hover {
-  background: var(--primary-provider-card),
-    var(--text-white-400);
+  background: var(--primary-provider-card), var(--text-white-400);
   border-radius: 8px;
 }
 
 .contenturl__card__focused {
-  background: var(--primary-provider-card),
-    var(--text-white-400);
+  background: var(--primary-provider-card), var(--text-white-400);
   border: 2px solid #006be9;
   border-radius: 8px;
 }
@@ -224,7 +220,7 @@
   stroke: #56a1ff;
 }
 .info__icon {
-margin-left: 0.3rem;
+  margin-left: 0.3rem;
 }
 @media (max-width: 800px) {
   .protocol__provider__card__container {
@@ -258,6 +254,6 @@ margin-left: 0.3rem;
 
 @media (max-width: 450px) {
   .contenturl__card__content .contenturl__card__link__container a {
-   max-width: 250px;
+    max-width: 250px;
   }
 }

@@ -66,7 +66,7 @@ const ImageDropzone = ({
   return (
     <>
       <div className={DropzoneStyles.container}>
-        <h3>{title}</h3>
+        <h3 className={DropzoneStyles.heading}>{title}</h3>
         <div
           className={DropzoneStyles.container__content__div}
           {...getRootProps()}
@@ -109,7 +109,17 @@ const ImageDropzone = ({
           </div>
         )}
       </div>
-      {uploadWarning && <span>Please upload images</span>}
+      {uploadWarning && (
+        <>
+          {fileType === FileType.IMAGES ? (
+            <span className={DropzoneStyles.heading}>Please upload Images</span>
+          ) : (
+            <span className={DropzoneStyles.heading}>
+              Please select some files
+            </span>
+          )}
+        </>
+      )}
     </>
   );
 };

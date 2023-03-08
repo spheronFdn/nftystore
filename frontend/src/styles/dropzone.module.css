@@ -9,16 +9,17 @@
   align-items: center;
 }
 
-.container > h3 {
+.heading {
   /* font-family: 'Inter'; */
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
   line-height: 24px;
   color: #006be9;
-  text-align: left;
+  text-align: left !important;
   margin-left: 1rem;
   margin-bottom: 0.2rem;
+  display: flex;
 }
 
 .container__content__text > div {

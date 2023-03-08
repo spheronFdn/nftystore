@@ -19,8 +19,7 @@ export default abstract class HostingApi {
     method: HttpMethods,
     url: string,
     data?: any,
-    params?: any,
-    baseUrl?: string
+    params?: any
   ): Promise<{
     error: boolean;
     message?: string;
@@ -29,7 +28,7 @@ export default abstract class HostingApi {
     try {
       const response = await axios({
         method,
-        url: `${baseUrl ? baseUrl : config.hostingApi.hostAddress}${url}`,
+        url: `${config.hostingApi.hostAddress}${url}`,
         data,
         params: params,
         headers: {
@@ -39,7 +38,7 @@ export default abstract class HostingApi {
       return { error: false, data: response.data };
     } catch (error) {
       Logger.error(
-        `Error in ${__filename} - sendRequest - url: ${url} - ${error.message}`
+        `Error in ${__filename} - sendRequest - url: ${config.hostingApi.hostAddress}${url} - ${error.message}`
       );
       throw error;
     }
@@ -82,7 +81,6 @@ export default abstract class HostingApi {
     }
   }
 
-  // TODO: REMOVE "http://localhost:8080" before deployment
   public static async getDeployment(
     deploymentId: string
   ): Promise<IDeployment> {
