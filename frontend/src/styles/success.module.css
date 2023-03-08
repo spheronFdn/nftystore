@@ -40,8 +40,9 @@
 .successUrl__div {
   background: rgba(255, 255, 255, 0.04);
 border-radius: 8px;
-padding: 1.5rem 2.5rem;
+padding: 1.5rem 1.8rem;
 margin-top: 2rem;
+position: relative;
 }
 
 .successUrl {
@@ -79,12 +80,16 @@ margin-top: 2rem;
   margin-left: 0.5rem;
   display: flex;
   flex-grow: 1;
+}
+
+.link__div {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 470px;
+  width: 470px;
+  margin-right: 1rem;
+  display:inline-block;
 }
-
 .copy__div {
   position: relative;
   min-width: 4rem;
@@ -101,14 +106,10 @@ margin-top: 2rem;
   font-weight: 500;
   font-size: 12px;
   line-height: 12px;
-  /* identical to box height, or 100% */
-
   display: flex;
   align-items: center;
-
   color: #006be9;
-
-  position: relative;
+  /* position: relative; */
 }
 
 .copy__div:hover {
@@ -134,7 +135,7 @@ margin-top: 2rem;
   background: #0f3875;
 }
 
-.copy__div .copy__tooltip {
+.copy__tooltip {
   visibility: hidden;
   max-width: 100px;
   border-radius: 8px;
@@ -143,9 +144,9 @@ margin-top: 2rem;
   text-align: center;
   padding: 9px 5px 1px 6px;
   position: fixed;
-  left: 51%;
   height: 25px;
-  margin-top: -70px;
+  margin-top: -90px;
+  margin-right: 10px;
 }
 
 .copy__div .copy__tooltip::after {
@@ -173,6 +174,7 @@ margin-top: 2rem;
 max-width: 2rem;
 max-height: 2rem;
 }
+
 @media (max-width: 800px) {
   .title {
     font-size: 24px;
@@ -182,5 +184,30 @@ max-height: 2rem;
   }
   .successUrl {
     width: min-content;
+  }
+  .link__div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 250px;
+    display:inline-block;
+  }
+  .successUrl a {
+    font-weight: 600;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .link__div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 150px;
+    display:inline-block;
+  }
+  .successUrl a {
+    font-weight: 600;
+    font-size: 12px;
   }
 }

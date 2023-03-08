@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { ReactComponent as Confetti } from "../../assets/icons/confetti.svg";
-import { ReactComponent as Copy } from "../../assets/icons/copy-icon.svg";
-import { ReactComponent as Link } from "../../assets/icons/link.svg";
 import Ipfs from "../../assets/icons/ipfs-icon.svg";
 import Arweave from "../../assets/icons/arweave-circle.svg";
 import Filecoin from "../../assets/icons/filecoin-circle.svg";
@@ -14,55 +12,57 @@ import SuccessStyle from "../../styles/success.module.css";
 
 const Success = () => {
   const navigate = useNavigate();
-  const [isCopied, setIsCopied] = useState<boolean>(false);
+  const [isCopied, setIsCopied] = useState<Array<any>>([]);
   const [isImage, setIsImage] = useState<string>("");
-  // const [
-  //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //   protocol,
-  //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //   setProtocol,
-  //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //   uploadResponse,
-  //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //   setUploadResponse,
-  //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  //   metadataResponse,
-  // ] =
-  //   useOutletContext<
-  //     [
-  //       string,
-  //       (name: string) => void,
-  //       IUploadResponse,
-  //       (response: IUploadResponse) => void,
-  //       IUploadMetadataResponse
-  //     ]
-  //   >();
+  const [
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    protocol,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setProtocol,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    uploadResponse,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setUploadResponse,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    metadataResponse,
+  ] =
+    useOutletContext<
+      [
+        string,
+        (name: string) => void,
+        IUploadResponse,
+        (response: IUploadResponse) => void,
+        IUploadMetadataResponse
+      ]
+    >();
 
   useEffect(() => {
-    // if (metadataResponse?.spheronUrl === "") {
-    //   navigate("/upload-nft/select-provider");
-    // }
-    // switch (protocol) {
-    //   case Providers.ARWEAVE:
-    //     return setIsImage(Arweave);
-    //   case Providers.FILECOIN:
-    //     return setIsImage(Filecoin);
-    //   case Providers.IPFS:
-    //     return setIsImage(Ipfs);
-    // }
+    if (metadataResponse?.spheronUrl === "") {
+      navigate("/upload-nft/select-provider");
+    }
+    switch (protocol) {
+      case Providers.ARWEAVE:
+        return setIsImage(Arweave);
+      case Providers.FILECOIN:
+        return setIsImage(Filecoin);
+      case Providers.IPFS:
+        return setIsImage(Ipfs);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSpheronCopy = () => {
+  let copiedText = [...isCopied];
+  const handleSpheronCopy = (i: number) => {
     navigator.clipboard.writeText(metadataResponse?.spheronUrl);
-    setIsCopied(true);
+    copiedText[i] = true;
+    setIsCopied(copiedText);
   };
 
-  const handleProtocolCopy = () => {
+  const handleProtocolCopy = (i: number) => {
     navigator.clipboard.writeText(metadataResponse?.url);
-    setIsCopied(true);
+    copiedText[i] = true;
+    setIsCopied(copiedText);
   };
-  // console.log(protocol, "protocol");
 
   const links = [
     {
@@ -78,6 +78,7 @@ const Success = () => {
       linkCopy: handleProtocolCopy,
     },
   ];
+
   return (
     <div className={SuccessStyle.container}>
       <Confetti />
@@ -98,23 +99,25 @@ const Success = () => {
             } ${SuccessStyle.successUrl}`}
           >
             <img className={SuccessStyle.link__icon} src={link.icon} />
-            {/* <a href={`https://${link.link}`} rel="noreferrer" target="_blank">
-              {`https://${link.link}`}
-            </a> */}
-            <a href="#" rel="noreferrer" target="_blank">
-              hy
-            </a>
-            <div onClick={link.linkCopy} className={SuccessStyle.copy__div}>
+            <div className={SuccessStyle.link__div}>
+              <a href={`https://${link.link}`} rel="noreferrer" target="_blank">
+                {`https://${link.link}`}
+              </a>
+            </div>
+            <div
+              onClick={() => link.linkCopy(link.id)}
+              className={SuccessStyle.copy__div}
+            >
               <span className={SuccessStyle.copy__span}>Copy</span>
-              <div
+              <span
                 className={`${SuccessStyle.copy__tooltip} ${
-                  isCopied
+                  isCopied[link.id]
                     ? SuccessStyle.copied__tooltip__color
                     : SuccessStyle.copy__tooltip__color
                 }`}
               >
-                {isCopied ? "Link Copied" : "Copy Link"}
-              </div>
+                {isCopied[link.id] ? "Link Copied" : "Copy Link"}
+              </span>
             </div>
           </div>
         ))}

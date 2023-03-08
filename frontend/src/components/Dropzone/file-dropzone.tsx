@@ -55,15 +55,12 @@ const ImageDropzone = ({
   const handleClear = () => {
     setFiles([]);
   };
-  const filesSize: any = files.map((file) => (file.size / 1024).toFixed(0));
-  const arrSum = (arr: any) => {
-    let sum = 0;
-    arr.forEach((n: number) => (sum += n));
-    return sum;
-  };
-  console.log(
-    files.forEach((file) => file.size),
-    "files"
+  const filesSize: any = files.map((file) =>
+    Number((file.size / (1024 * 1024)).toFixed(0))
+  );
+  const sum = filesSize.reduce(
+    (partialSum: number, a: number) => (partialSum += a),
+    0
   );
 
   return (
@@ -92,7 +89,7 @@ const ImageDropzone = ({
               <span className={DropzoneStyles.filebar__title__files}>
                 Total Files:{" "}
                 <span className={DropzoneStyles.filebar__files__length}>
-                  {files.length} files (10mb)
+                  {files.length} files ({sum}mb)
                 </span>
               </span>
               <span
