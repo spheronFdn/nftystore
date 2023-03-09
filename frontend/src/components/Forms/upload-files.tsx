@@ -52,10 +52,14 @@ const UploadFiles = () => {
       setLoading(false);
     } else {
       try {
-        const response = await uploadFiles(params.get("protocol") || protocol, {
-          images,
-          metadata,
-        });
+        const response = await uploadFiles(
+          params.get("protocol") || protocol,
+          collectionName,
+          {
+            images,
+            metadata,
+          }
+        );
         setUploadResponse(response);
         navigate(`/nft-upload/choose-url?protocol=${params.get("protocol")}`);
       } catch (error) {
@@ -169,7 +173,12 @@ const UploadFiles = () => {
         <FilledPrimaryButton
           title={"Upload And Next"}
           loading={loading}
-          disabled={!metadata.length || !images.length || !!error}
+          disabled={
+            !metadata.length ||
+            !images.length ||
+            !!error ||
+            !collectionName.length
+          }
           handleClick={handleSubmit}
         />
       </div>
