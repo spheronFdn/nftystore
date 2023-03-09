@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactComponent as Link } from "../../assets/icons/link.svg";
 import { ReactComponent as Info } from "../../assets/icons/info-icon.svg";
-import { FocusedProvider } from "../../common/utils";
+import { FocusedProvider, Providers } from "../../common/utils";
 import CardStyle from "../../styles/card.module.css";
 
 interface IProps {
@@ -24,7 +24,7 @@ const ContentUrlCard = ({
   cardValue,
 }: IProps) => {
   const protocolName =
-    contentProvider === "ipfs"
+    contentProvider === Providers.IPFS
       ? contentProvider.toUpperCase()
       : contentProvider.charAt(0).toUpperCase() + contentProvider.slice(1);
 

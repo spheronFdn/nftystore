@@ -31,8 +31,10 @@ export async function uploadCollection(
       );
     }
 
+    const projectName = String(req.query.projectName);
+
     const { uploadId, fileNames, url, spheronUrl } =
-      await UploadService.uploadCollection(protocol, req);
+      await UploadService.uploadCollection(protocol, req, projectName);
 
     res.status(200).json({
       uploadId,

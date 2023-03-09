@@ -46,6 +46,7 @@
 }
 
 .successUrl {
+  margin-top: 2rem;
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
   padding-left: 1rem;
@@ -159,7 +160,6 @@
   border-style: solid;
   border-color: #0f3875 transparent transparent transparent;
 }
-
 .copy__div:hover .copy__tooltip {
   visibility: visible;
   /* font-family: 'Inter'; */
