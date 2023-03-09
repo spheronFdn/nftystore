@@ -2,8 +2,9 @@ import React from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import ProtocolProvider from "../ProtocolProvider";
+import selectProviderStyle from "../../styles/select-provider.module.css";
 
-const StepOne = () => {
+const SelectProvider = () => {
   const navigate = useNavigate();
   const [protocol, setProtocol] = useOutletContext<any>();
   const handleNext = (protocol: string): void => {
@@ -12,12 +13,12 @@ const StepOne = () => {
 
   return (
     <>
-      <h1>Choose your protocol</h1>
+      <div className={selectProviderStyle.step__heading}>Select protocol</div>
+      <div className={selectProviderStyle.step__subheading}>
+        Please click on a protocol that suits your needs
+      </div>
       <ProtocolProvider setProtocol={setProtocol} selectedProtocol={protocol} />
-      <div
-        className="flex items-center justify-center"
-        style={{ marginTop: "100px" }}
-      >
+      <div className={selectProviderStyle.step__button__div}>
         <FilledPrimaryButton
           title={"Next"}
           loading={false}
@@ -29,4 +30,4 @@ const StepOne = () => {
   );
 };
 
-export default StepOne;
+export default SelectProvider;

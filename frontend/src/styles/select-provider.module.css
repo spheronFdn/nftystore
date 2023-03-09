@@ -1,0 +1,38 @@
+.step__heading {
+  text-align: left;
+  /* font-family: 'Inter'; */
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 34px;
+  color: white;
+  margin-top: 4rem;
+}
+.step__subheading {
+  text-align: left;
+  margin-top: 1rem;
+  /* font-family: 'Inter'; */
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 24px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.step__button__div {
+  text-align: right;
+  justify-content: right;
+  display: flex;
+  margin-top: 2rem;
+}
+
+@media (max-width: 800px) {
+  .step__heading {
+    margin-top: 1rem;
+  }
+  .step__button__div {
+    margin-right: 0rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
+}

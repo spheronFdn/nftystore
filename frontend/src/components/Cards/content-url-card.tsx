@@ -1,47 +1,63 @@
 import React from "react";
+import { ReactComponent as Link } from "../../assets/icons/link.svg";
+import { ReactComponent as Info } from "../../assets/icons/info-icon.svg";
+import { FocusedProvider, Providers } from "../../common/utils";
 import CardStyle from "../../styles/card.module.css";
 
 interface IProps {
-  isActive: boolean;
   setSelectedUrl: (url: string) => void;
   contentProvider: string;
   link: string;
-  isFocused: boolean;
+  focusedValue: FocusedProvider;
+  setFocusedValue: (focusedValue: FocusedProvider) => void;
+  image: string;
+  cardValue: FocusedProvider;
 }
 
 const ContentUrlCard = ({
-  isActive,
   setSelectedUrl,
   contentProvider,
   link,
-  isFocused,
+  focusedValue,
+  setFocusedValue,
+  image,
+  cardValue,
 }: IProps) => {
+  const protocolName =
+    contentProvider === Providers.IPFS
+      ? contentProvider.toUpperCase()
+      : contentProvider.charAt(0).toUpperCase() + contentProvider.slice(1);
+
   return (
     <div
       role="presentation"
       onClick={() => {
         setSelectedUrl(link);
+        setFocusedValue(cardValue);
       }}
-      className={`${isFocused && CardStyle.contenturl__card__focused} ${
-        CardStyle.contenturl__card
-      }`}
+      className={`${
+        cardValue === focusedValue && CardStyle.contenturl__card__focused
+      } 
+      ${CardStyle.contenturl__card}`}
     >
       <div className={CardStyle.contenturl__card__content}>
         <div>
-          <span>{contentProvider} Generated</span>
-          <div
-            className={
-              !isActive
-                ? CardStyle.contenturl__card__radio
-                : CardStyle.contenturl__card__radio__active
-            }
-          >
-            {isActive && (
-              <div className={CardStyle.contenturl__card__radio__circle} />
-            )}
-          </div>
+          <img src={image} />
+          <span className={CardStyle.content__title}>
+            {protocolName} Gateway
+          </span>
+          {contentProvider === "Spheron" && (
+            <div className={CardStyle.recommended__div}>
+              Recommended <Info className={CardStyle.info__icon} />
+              <div className={CardStyle.information__div}>
+                We recommend using Spheron Gateway as it is super-charged with
+                edge CDN.
+              </div>
+            </div>
+          )}
         </div>
         <div className={CardStyle.contenturl__card__link__container}>
+          <Link className={CardStyle.link__icon} />
           <a href={link} rel="noreferrer" target="_blank">
             {link}
           </a>
