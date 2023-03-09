@@ -44,7 +44,7 @@ class MetadataService {
         }
 
         let metadata = JSON.parse(rawdata.toString());
-        metadata.image = `${baseUrl}/${image}`;
+        metadata.image = `https://${baseUrl}/${image}`;
 
         fs.writeFileSync(fullPathMetaFile, JSON.stringify(metadata));
 
