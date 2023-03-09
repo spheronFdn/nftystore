@@ -42,11 +42,14 @@ const Success = () => {
     }
     switch (protocol) {
       case Providers.ARWEAVE:
-        return setIsImage(Arweave);
+        setIsImage(Arweave);
+        break;
       case Providers.FILECOIN:
-        return setIsImage(Filecoin);
+        setIsImage(Filecoin);
+        break;
       case Providers.IPFS:
-        return setIsImage(Ipfs);
+        setIsImage(Ipfs);
+        break;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

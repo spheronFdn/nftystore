@@ -24,7 +24,7 @@ const UploadFiles = () => {
   const [badMetaData, setBadMetaData] = useState<FileRejection[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [uploadWarning, setUploadWarning] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>("");
+  const [collectionName, setCollectionName] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [protocol, setProtocol, uploadResponse, setUploadResponse] =
     useOutletContext<
@@ -98,10 +98,10 @@ const UploadFiles = () => {
         <input
           className={DropzoneStyle.input__collection}
           placeholder="Enter Collection Name"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          value={collectionName}
+          onChange={(e) => setCollectionName(e.target.value)}
         />
-        {inputValue ? (
+        {collectionName ? (
           <EnableCheckbox className={DropzoneStyle.input__icon} />
         ) : (
           <DisableCheckbox className={DropzoneStyle.input__icon} />
