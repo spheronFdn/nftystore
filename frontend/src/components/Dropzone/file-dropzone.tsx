@@ -55,7 +55,7 @@ const ImageDropzone = ({
   const handleClear = () => {
     setFiles([]);
   };
-  const filesSize: any = files.map((file) =>
+  const filesSize = files.map((file) =>
     Number((file.size / (1024 * 1024)).toFixed(0))
   );
   const sum = filesSize.reduce(
