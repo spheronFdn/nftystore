@@ -22,7 +22,7 @@ class UploadService {
     let uploadDir: string = "";
     try {
       projectName = projectName
-        ? `${IMAGE_UPLOAD_PREFIX}-projectName`
+        ? `${IMAGE_UPLOAD_PREFIX}-${projectName}`
         : `${IMAGE_UPLOAD_PREFIX}-${randomBytes(5).toString("hex")}`;
 
       Logger.info(
