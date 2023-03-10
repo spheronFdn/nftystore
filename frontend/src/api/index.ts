@@ -46,7 +46,7 @@ export const uploadMetadata = async (
   try {
     const response = await axios({
       url: `${BASE_URI}/uploadMetadata?protocol=${protocol}&uploadId=${uploadId}`,
-      data: { uploadId, fileNames, baseUrl: url, apiToken },
+      data: { uploadId, fileNames, baseUrl: url },
       method: "POST",
       headers: {
         "Content-Type": "application/json",
