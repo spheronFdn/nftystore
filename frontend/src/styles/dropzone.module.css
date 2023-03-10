@@ -430,48 +430,6 @@
   margin-right: 1rem;
 }
 
-.input__heading {
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 27px;
-  color: #ffffff;
-  text-align: left;
-}
-
-.input__div {
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 8px;
-  padding: 1.2rem 1.8rem;
-  position: relative;
-}
-
-.input__collection {
-  background-color: rgba(246, 245, 253, 0.04);
-  border-radius: 4px;
-  border: 0px;
-  width: -webkit-fill-available;
-  padding: 1rem 2rem;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-  color: rgba(255, 255, 255, 0.7);
-  position: relative;
-}
-
-.input__icon {
-  position: absolute;
-  right: 3rem;
-  top: 2.25rem;
-}
-.input__collection::placeholder {
-  color: rgba(255, 255, 255, 0.4);
-}
-.input__collection:focus-visible {
-  border: 0px;
-  outline: 0px;
-}
 @media (max-width: 1024px) {
   .thumb__container {
     grid-template-columns: repeat(1, minmax(0, 1fr));

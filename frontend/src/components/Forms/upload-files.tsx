@@ -4,13 +4,12 @@ import { uploadFiles } from "../../api";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import Dropzone from "../Dropzone/file-dropzone";
 import { checkUploadFileValidity, FileType } from "../../common/utils";
-import { ReactComponent as DisableCheckbox } from "../../assets/icons/disable-checkbox.svg";
-import { ReactComponent as EnableCheckbox } from "../../assets/icons/enable-checkbox.svg";
 import { FileRejection } from "react-dropzone";
 import { IUploadResponse } from "../../common/types";
 import BadFiles from "../Misc/bad-files";
 import HeroPrimaryButton from "../Buttons/hero-primary";
 import Modal from "../Modal/modal";
+import Input from "../Input/input";
 import DropzoneStyle from "../../styles/dropzone.module.css";
 
 const UploadFiles = () => {
@@ -25,6 +24,7 @@ const UploadFiles = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [uploadWarning, setUploadWarning] = useState<boolean>(false);
   const [collectionName, setCollectionName] = useState<string>("");
+  const [accessToken, setAccessToken] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [protocol, setProtocol, uploadResponse, setUploadResponse] =
     useOutletContext<
@@ -55,6 +55,7 @@ const UploadFiles = () => {
         const response = await uploadFiles(
           params.get("protocol") || protocol,
           collectionName,
+          accessToken,
           {
             images,
             metadata,
@@ -97,20 +98,23 @@ const UploadFiles = () => {
       {modalOpen && (
         <Modal setModalOpen={setModalOpen} modalHeading={"Guide"} />
       )}
-      <h4 className={DropzoneStyle.drop__heading}>Collection Name</h4>
-      <div className={DropzoneStyle.input__div}>
-        <input
-          className={DropzoneStyle.input__collection}
-          placeholder="Enter Collection Name"
-          value={collectionName}
-          onChange={(e) => setCollectionName(e.target.value)}
-        />
-        {collectionName ? (
-          <EnableCheckbox className={DropzoneStyle.input__icon} />
-        ) : (
-          <DisableCheckbox className={DropzoneStyle.input__icon} />
-        )}
-      </div>
+      <Input
+        heading={"Collection Name"}
+        placeholder={"e.g. Bored Ape Yacht Club"}
+        inputValue={collectionName}
+        setInputValue={setCollectionName}
+      />
+      <Input
+        heading={"Access Token"}
+        placeholder={"Enter your access token"}
+        description={
+          "Please create an access token from Spheron platform to upload and manage the bandwidth billing."
+        }
+        descriptionLink="https://docs.spheron.network/api/rest-api-references/#creating-an-access-token"
+        descriptionLinkText="Learn More"
+        inputValue={accessToken}
+        setInputValue={setAccessToken}
+      />
       <div className={DropzoneStyle.drop__heading}>Drop your files here</div>
       <div className={DropzoneStyle.drop__subheading}>
         You can select all of your images in the NFT Collection along with the
@@ -177,7 +181,8 @@ const UploadFiles = () => {
             !metadata.length ||
             !images.length ||
             !!error ||
-            !collectionName.length
+            !collectionName.length ||
+            !accessToken.length
           }
           handleClick={handleSubmit}
         />
