@@ -10,8 +10,8 @@ interface IProps {
   description?: string;
   descriptionLink?: string;
   descriptionLinkText?: string;
-  inputValue: any;
-  setInputValue: (inputValue: any) => void;
+  inputValue: string;
+  setInputValue: (inputValue: string) => void;
 }
 const Input = ({
   heading,

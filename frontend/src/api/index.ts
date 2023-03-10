@@ -24,7 +24,10 @@ export const uploadFiles = async (
       url: `${BASE_URI}/uploadCollection?protocol=${protocol}&${projectName}`,
       data: formData,
       method: "POST",
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${apiToken}`,
+      },
     });
     return response.data;
   } catch (error) {
@@ -45,7 +48,10 @@ export const uploadMetadata = async (
       url: `${BASE_URI}/uploadMetadata?protocol=${protocol}&uploadId=${uploadId}`,
       data: { uploadId, fileNames, baseUrl: url, apiToken },
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiToken}`,
+      },
     });
     return response.data;
   } catch (error) {
