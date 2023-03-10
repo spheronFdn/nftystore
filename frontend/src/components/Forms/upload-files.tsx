@@ -4,6 +4,8 @@ import { uploadFiles } from "../../api";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import Dropzone from "../Dropzone/file-dropzone";
 import { checkUploadFileValidity, FileType } from "../../common/utils";
+import { ReactComponent as DisableCheckbox } from "../../assets/icons/disable-checkbox.svg";
+import { ReactComponent as EnableCheckbox } from "../../assets/icons/enable-checkbox.svg";
 import { FileRejection } from "react-dropzone";
 import { IUploadResponse } from "../../common/types";
 import BadFiles from "../Misc/bad-files";
@@ -22,6 +24,7 @@ const UploadFiles = () => {
   const [badMetaData, setBadMetaData] = useState<FileRejection[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [uploadWarning, setUploadWarning] = useState<boolean>(false);
+  const [collectionName, setCollectionName] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [protocol, setProtocol, uploadResponse, setUploadResponse] =
     useOutletContext<
@@ -49,10 +52,14 @@ const UploadFiles = () => {
       setLoading(false);
     } else {
       try {
-        const response = await uploadFiles(params.get("protocol") || protocol, {
-          images,
-          metadata,
-        });
+        const response = await uploadFiles(
+          params.get("protocol") || protocol,
+          collectionName,
+          {
+            images,
+            metadata,
+          }
+        );
         setUploadResponse(response);
         navigate(`/nft-upload/choose-url?protocol=${params.get("protocol")}`);
       } catch (error) {
@@ -90,6 +97,20 @@ const UploadFiles = () => {
       {modalOpen && (
         <Modal setModalOpen={setModalOpen} modalHeading={"Guide"} />
       )}
+      <h4 className={DropzoneStyle.drop__heading}>Collection Name</h4>
+      <div className={DropzoneStyle.input__div}>
+        <input
+          className={DropzoneStyle.input__collection}
+          placeholder="Enter Collection Name"
+          value={collectionName}
+          onChange={(e) => setCollectionName(e.target.value)}
+        />
+        {collectionName ? (
+          <EnableCheckbox className={DropzoneStyle.input__icon} />
+        ) : (
+          <DisableCheckbox className={DropzoneStyle.input__icon} />
+        )}
+      </div>
       <div className={DropzoneStyle.drop__heading}>Drop your files here</div>
       <div className={DropzoneStyle.drop__subheading}>
         You can select all of your images in the NFT Collection along with the
@@ -152,7 +173,12 @@ const UploadFiles = () => {
         <FilledPrimaryButton
           title={"Upload And Next"}
           loading={loading}
-          disabled={!metadata.length || !images.length || !!error}
+          disabled={
+            !metadata.length ||
+            !images.length ||
+            !!error ||
+            !collectionName.length
+          }
           handleClick={handleSubmit}
         />
       </div>

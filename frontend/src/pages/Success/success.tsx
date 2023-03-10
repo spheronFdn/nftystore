@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { ReactComponent as Confetti } from "../../assets/icons/confetti.svg";
-import { ReactComponent as Copy } from "../../assets/icons/copy-icon.svg";
-import { ReactComponent as Link } from "../../assets/icons/link.svg";
-
+import Ipfs from "../../assets/icons/ipfs-icon.svg";
+import Arweave from "../../assets/icons/arweave-circle.svg";
+import Filecoin from "../../assets/icons/filecoin-circle.svg";
+import Spheron from "../../assets/icons/spheron-icon.svg";
 import { IUploadMetadataResponse, IUploadResponse } from "../../common/types";
+import { Providers } from "../../common/utils";
 import FilledPrimaryButton from "../../components/Buttons/filled-primary";
 import SuccessStyle from "../../styles/success.module.css";
 
 const Success = () => {
   const navigate = useNavigate();
-  const [isCopied, setIsCopied] = useState<boolean>(false);
+  const [isCopied, setIsCopied] = useState<Array<any>>([]);
+  const [isImage, setIsImage] = useState<string>("");
   const [
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protocol,
@@ -37,13 +40,47 @@ const Success = () => {
     if (metadataResponse?.spheronUrl === "") {
       navigate("/upload-nft/select-provider");
     }
+    switch (protocol) {
+      case Providers.ARWEAVE:
+        setIsImage(Arweave);
+        break;
+      case Providers.FILECOIN:
+        setIsImage(Filecoin);
+        break;
+      case Providers.IPFS:
+        setIsImage(Ipfs);
+        break;
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleCopy = () => {
+  let copiedText = [...isCopied];
+  const handleSpheronCopy = (i: number) => {
     navigator.clipboard.writeText(metadataResponse?.spheronUrl);
-    setIsCopied(true);
+    copiedText[i] = true;
+    setIsCopied(copiedText);
   };
+
+  const handleProtocolCopy = (i: number) => {
+    navigator.clipboard.writeText(metadataResponse?.url);
+    copiedText[i] = true;
+    setIsCopied(copiedText);
+  };
+
+  const links = [
+    {
+      id: 1,
+      link: metadataResponse?.spheronUrl,
+      icon: Spheron,
+      linkCopy: handleSpheronCopy,
+    },
+    {
+      id: 2,
+      link: metadataResponse?.url,
+      icon: isImage,
+      linkCopy: handleProtocolCopy,
+    },
+  ];
 
   return (
     <div className={SuccessStyle.container}>
@@ -57,23 +94,36 @@ const Success = () => {
         <span className={SuccessStyle.subtitle__span}>Base URI</span> with this
         and you can view all the collection in the marketplace
       </span>
-      <div className={SuccessStyle.successUrl}>
-        <Link className={SuccessStyle.link__icon} />
-        <a href={metadataResponse?.spheronUrl} rel="noreferrer" target="_blank">
-          {metadataResponse?.spheronUrl}
-        </a>
-        <div className={SuccessStyle.copy__div}>
-          <Copy onClick={handleCopy} className={SuccessStyle.copy__icon} />
+      <div className={SuccessStyle.successUrl__div}>
+        {links.map((link) => (
           <div
-            className={`${SuccessStyle.copy__tooltip} ${
-              isCopied
-                ? SuccessStyle.copied__tooltip__color
-                : SuccessStyle.copy__tooltip__color
-            }`}
+            className={`${
+              link.id === 2 ? SuccessStyle.successUrl__margin : ""
+            } ${SuccessStyle.successUrl}`}
           >
-            {isCopied ? "Link Copied" : "Copy Link"}
+            <img className={SuccessStyle.link__icon} src={link.icon} />
+            <div className={SuccessStyle.link__div}>
+              <a href={`https://${link.link}`} rel="noreferrer" target="_blank">
+                {`https://${link.link}`}
+              </a>
+            </div>
+            <div
+              onClick={() => link.linkCopy(link.id)}
+              className={SuccessStyle.copy__div}
+            >
+              <span className={SuccessStyle.copy__span}>Copy</span>
+              <span
+                className={`${SuccessStyle.copy__tooltip} ${
+                  isCopied[link.id]
+                    ? SuccessStyle.copied__tooltip__color
+                    : SuccessStyle.copy__tooltip__color
+                }`}
+              >
+                {isCopied[link.id] ? "Link Copied" : "Copy Link"}
+              </span>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
       <div className="flex items-center justify-center button-container">
         <FilledPrimaryButton

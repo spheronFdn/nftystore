@@ -11,6 +11,7 @@
   left: 0;
   right: 0;
   top: 0;
+  backdrop-filter: blur(15px);
 }
 
 .step__line {
@@ -40,7 +41,7 @@
 }
 
 .step__container {
-  margin-top: 10rem;
+  margin-top: 9rem;
 }
 
 .step__container > div {

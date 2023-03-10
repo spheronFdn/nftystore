@@ -96,7 +96,6 @@ export default abstract class HostingApi {
         {},
         apiToken
       );
-
       if (error) {
         throw new ApiError(ApiErrorTypeEnum.VALIDATION, message);
       }
