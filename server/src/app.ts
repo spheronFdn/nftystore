@@ -60,6 +60,9 @@ class App {
     controllers.forEach((controller) => {
       this.app.use("/", controller.router);
     });
+    this.app.use("/status", (req, res) => {
+      res.status(200).json({ number: 1000 });
+    });
   }
 
   public listen() {
