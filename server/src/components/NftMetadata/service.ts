@@ -29,7 +29,10 @@ class MetadataService {
     try {
       Logger.info(`Uploading metadata files for : ${uploadId}`);
 
-      const deployment: IDeployment = await HostingApi.getDeployment(uploadId);
+      const deployment: IDeployment = await HostingApi.getDeployment(
+        uploadId,
+        apiToken
+      );
       uploadDir = deployment.project.name;
 
       const form = new FormData();
@@ -61,7 +64,8 @@ class MetadataService {
           `${IMAGE_UPLOAD_PREFIX}-`,
           `${METADATA_UPLOAD_PREFIX}-`
         ),
-        form
+        form,
+        apiToken
       );
 
       return {

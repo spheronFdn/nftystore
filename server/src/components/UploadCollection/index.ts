@@ -67,7 +67,10 @@ export async function uploadCollectionStatus(
     const { uploadId } = req.params;
     Logger.info(`Get upload status request received: ${uploadId} `);
 
-    const deployment: IDeployment = await HostingApi.getDeployment(uploadId);
+    const deployment: IDeployment = await HostingApi.getDeployment(
+      uploadId,
+      getTokenFromHeader(req)
+    );
 
     res.status(200).json({ status: deployment.status });
   } catch (error) {

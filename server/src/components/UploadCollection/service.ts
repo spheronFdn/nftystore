@@ -54,7 +54,8 @@ class UploadService {
       const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
         protocol,
         projectName,
-        form
+        form,
+        apiToken
       );
 
       return {
