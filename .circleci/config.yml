@@ -14,7 +14,7 @@ workflows:
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           create-repo: false
-          dockerfile: Dockerfile
+          dockerfile: server/Dockerfile
           name: aws-ecr-build-push-dev
           repo: nft-meta-widget
           tag: dev
