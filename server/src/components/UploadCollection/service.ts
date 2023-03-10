@@ -12,7 +12,8 @@ class UploadService {
   public async uploadCollection(
     protocol: string,
     req: Request,
-    projectName?: string
+    projectName?: string,
+    apiToken?: string
   ): Promise<{
     uploadId: string;
     fileNames: string[];

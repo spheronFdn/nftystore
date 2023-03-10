@@ -7,6 +7,7 @@ import {
 } from "../middlewares/error-handling-middleware";
 import HostingApi from "../HostingApi/service";
 import IDeployment from "../HostingApi/deployment-interface";
+import { getTokenFromHeader } from "../Utils/auth";
 
 export async function uploadCollection(
   req: Request,
@@ -31,10 +32,17 @@ export async function uploadCollection(
       );
     }
 
-    const projectName = String(req.query.projectName);
+    const projectName = req.query.projectName
+      ? String(req.query.projectName)
+      : null;
 
     const { uploadId, fileNames, url, spheronUrl } =
-      await UploadService.uploadCollection(protocol, req, projectName);
+      await UploadService.uploadCollection(
+        protocol,
+        req,
+        projectName,
+        getTokenFromHeader(req)
+      );
 
     res.status(200).json({
       uploadId,

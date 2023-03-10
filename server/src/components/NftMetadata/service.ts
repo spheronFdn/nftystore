@@ -18,7 +18,8 @@ class MetadataService {
   async uploadMetadata(
     uploadId: string,
     fileNames: string[],
-    baseUrl: string
+    baseUrl: string,
+    apiToken?: string
   ): Promise<{
     deploymentId: string;
     url: string;
