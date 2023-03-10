@@ -15,7 +15,7 @@ interface IEnvironmentConfig {
 const development: IEnvironmentConfig = {
   port: process.env.PORT || 8088,
   uiUrl: process.env.UI_URL,
-  maxUploadSize: process.env.MAX_UPLOAD_SIZE,
+  maxUploadSize: process.env.MAX_UPLOAD_SIZE || 1024 * 1024 * 1024,
   rootUploadDirectory:
     process.env.ROOT_UPLOAD_DIRECTORY || "./uploaded-content",
   hostingApi: {
@@ -28,7 +28,7 @@ const development: IEnvironmentConfig = {
 const test: IEnvironmentConfig = {
   port: process.env.PORT || 3001,
   uiUrl: process.env.UI_URL,
-  maxUploadSize: process.env.MAX_UPLOAD_SIZE,
+  maxUploadSize: process.env.MAX_UPLOAD_SIZE || 1024 * 1024 * 1024,
   rootUploadDirectory:
     process.env.ROOT_UPLOAD_DIRECTORY || "./uploaded-content",
   hostingApi: {
@@ -41,7 +41,7 @@ const test: IEnvironmentConfig = {
 const production: IEnvironmentConfig = {
   port: process.env.PORT || 3001,
   uiUrl: process.env.UI_URL,
-  maxUploadSize: process.env.MAX_UPLOAD_SIZE,
+  maxUploadSize: process.env.MAX_UPLOAD_SIZE || 1024 * 1024 * 1024,
   rootUploadDirectory:
     process.env.ROOT_UPLOAD_DIRECTORY || "./uploaded-content",
   hostingApi: {

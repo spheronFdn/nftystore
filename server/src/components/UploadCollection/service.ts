@@ -12,7 +12,8 @@ class UploadService {
   public async uploadCollection(
     protocol: string,
     req: Request,
-    projectName?: string
+    projectName?: string,
+    apiToken?: string
   ): Promise<{
     uploadId: string;
     fileNames: string[];
@@ -53,7 +54,8 @@ class UploadService {
       const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
         protocol,
         projectName,
-        form
+        form,
+        apiToken
       );
 
       return {
