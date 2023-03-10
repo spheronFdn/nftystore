@@ -1,11 +1,7 @@
 .protocol__icon {
-  height: 4rem;
-  width: 4rem;
+  height: 4rem !important;
+  width: 4rem !important;
   color: var(--primary);
-}
-
-.protocol__icon__selected {
-  color: white;
 }
 
 .container {
