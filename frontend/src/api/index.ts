@@ -37,12 +37,13 @@ export const uploadMetadata = async (
   protocol: string,
   uploadId: string,
   fileNames: string[],
-  url: string
+  url: string,
+  apiToken: string
 ): Promise<IUploadMetadataResponse> => {
   try {
     const response = await axios({
       url: `${BASE_URI}/uploadMetadata?protocol=${protocol}&uploadId=${uploadId}`,
-      data: { uploadId, fileNames, baseUrl: url },
+      data: { uploadId, fileNames, baseUrl: url, apiToken },
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });

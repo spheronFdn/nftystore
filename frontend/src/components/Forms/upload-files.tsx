@@ -12,7 +12,12 @@ import Modal from "../Modal/modal";
 import Input from "../Input/input";
 import DropzoneStyle from "../../styles/dropzone.module.css";
 
-const UploadFiles = () => {
+interface IProps {
+  accessToken: string;
+  setAccessToken: (accessToken: string) => void;
+}
+
+const UploadFiles = ({ accessToken, setAccessToken }: IProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState<string>("");
@@ -24,7 +29,6 @@ const UploadFiles = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [uploadWarning, setUploadWarning] = useState<boolean>(false);
   const [collectionName, setCollectionName] = useState<string>("");
-  const [accessToken, setAccessToken] = useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [protocol, setProtocol, uploadResponse, setUploadResponse] =
     useOutletContext<
