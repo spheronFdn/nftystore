@@ -4,6 +4,8 @@ import { uploadFiles } from "../../api";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import Dropzone from "../Dropzone/file-dropzone";
 import { checkUploadFileValidity, FileType } from "../../common/utils";
+import { ReactComponent as DisableCheckbox } from "../../assets/icons/disable-checkbox.svg";
+import { ReactComponent as EnableCheckbox } from "../../assets/icons/enable-checkbox.svg";
 import { FileRejection } from "react-dropzone";
 import { IUploadResponse } from "../../common/types";
 import BadFiles from "../Misc/bad-files";

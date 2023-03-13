@@ -19,7 +19,8 @@ export default abstract class HostingApi {
     method: HttpMethods,
     url: string,
     data?: any,
-    params?: any
+    params?: any,
+    apiToken?: string
   ): Promise<{
     error: boolean;
     message?: string;
@@ -32,7 +33,7 @@ export default abstract class HostingApi {
         data,
         params: params,
         headers: {
-          authorization: `Bearer ${config.hostingApi.apiToken}`,
+          authorization: `Bearer ${apiToken ?? config.hostingApi.apiToken}`,
         },
       });
       return { error: false, data: response.data };
@@ -47,7 +48,8 @@ export default abstract class HostingApi {
   public static async uploadFiles(
     protocol: string,
     projectName: string,
-    fileData: any
+    fileData: any,
+    apiToken?: string
   ): Promise<{
     projectId: string;
     deploymentId: string;
@@ -62,7 +64,8 @@ export default abstract class HostingApi {
         {
           protocol: protocol,
           project: projectName,
-        }
+        },
+        apiToken
       );
 
       if (error) {
@@ -82,13 +85,16 @@ export default abstract class HostingApi {
   }
 
   public static async getDeployment(
-    deploymentId: string
+    deploymentId: string,
+    apiToken?: string
   ): Promise<IDeployment> {
     try {
       const { error, message, data } = await this.sendRequest(
         HttpMethods.GET,
         `/v1/deployment/${deploymentId}`,
-        {}
+        {},
+        {},
+        apiToken
       );
       if (error) {
         throw new ApiError(ApiErrorTypeEnum.VALIDATION, message);

@@ -1,0 +1,63 @@
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@8.1.2
+  # aws-ecs: circleci/aws-ecs@2.0.0
+
+workflows:
+  build-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          context: develop
+          region: "${AWS_REGION_DEV}"
+          registry-id: AWS_REGISTRY_ID_DEV
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: false
+          dockerfile: server/Dockerfile
+          name: aws-ecr-build-push-dev
+          repo: nft-meta-widget
+          tag: dev
+          extra-build-args: --build-arg CODE_VERSION=${CIRCLE_SHA1:0:7}
+          filters:
+            branches:
+              only: dev
+      # - aws-ecr/build-and-push-image:
+      #     context: production
+      #     region: "${AWS_REGION_PROD}"
+      #     registry-id: AWS_REGISTRY_ID_PROD
+      #     aws-access-key-id: AWS_ACCESS_KEY_ID
+      #     aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+      #     create-repo: false
+      #     dockerfile: Dockerfile
+      #     name: aws-ecr-build-push-prod-premium
+      #     repo: nft-meta-widget
+      #     tag: prod-premium
+      #     extra-build-args: --build-arg CODE_VERSION=${CIRCLE_SHA1:0:7}
+      #     filters:
+      #       branches:
+      #         only: main
+      # # deploy - DEV
+      # - aws-ecs/deploy-service-update:
+      #     context: develop
+      #     cluster-name: "nft-meta-widget-dev"
+      #     container-image-name-updates: "container=nft-meta-widget-dev,tag=dev"
+      #     family: "nft-meta-widget-dev"
+      #     aws-region: AWS_REGION_DEV
+      #     requires:
+      #       - aws-ecr-build-push-dev
+      #     filters:
+      #       branches:
+      #         only: dev
+      # # deploy - PROD
+      # - aws-ecs/deploy-service-update:
+      #     context: production
+      #     cluster-name: "nft-meta-widget-prod-premium"
+      #     container-image-name-updates: "container=nft-meta-widget-prod-premium,tag=prod-premium"
+      #     family: "nft-meta-widget-prod-premium-akash-logs-check"
+      #     aws-region: AWS_REGION_PROD
+      #     requires:
+      #       - aws-ecr-build-push-prod-premium
+      #     filters:
+      #       branches:
+      #         only: main

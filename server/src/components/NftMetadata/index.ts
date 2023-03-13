@@ -6,6 +6,7 @@ import {
   ApiError,
   ApiErrorTypeEnum,
 } from "../middlewares/error-handling-middleware";
+import { getTokenFromHeader } from "../Utils/auth";
 
 export async function uploadMetadata(
   req: Request,
@@ -28,7 +29,8 @@ export async function uploadMetadata(
       await MetadataService.uploadMetadata(
         request.uploadId,
         request.fileNames,
-        request.baseUrl
+        request.baseUrl,
+        getTokenFromHeader(req)
       );
 
     res.status(200).json({
