@@ -5,7 +5,7 @@ import {
   IUploadResponse,
 } from "../common/types";
 
-const BASE_URI = "https://nft-widget-api-dev.spheron.network/";
+const BASE_URI = "https://nft-widget-api-dev.spheron.network";
 
 export const uploadFiles = async (
   protocol: string,
