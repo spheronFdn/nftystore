@@ -12,7 +12,10 @@ import Spheron from "../../assets/icons/spheron-icon.svg";
 import { FocusedProvider, Providers } from "../../common/utils";
 import DropzoneStyle from "../../styles/dropzone.module.css";
 
-const ChooseLink = () => {
+interface Iprops {
+  accessToken: string;
+}
+const ChooseLink = ({ accessToken }: Iprops) => {
   const navigate = useNavigate();
   const [selectedUrl, setSelectedUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -46,7 +49,8 @@ const ChooseLink = () => {
         protocol,
         uploadResponse.uploadId,
         uploadResponse.fileNames,
-        selectedUrl
+        selectedUrl,
+        accessToken
       );
       setMetadataResponse(response);
       navigate("/nft-upload/success");

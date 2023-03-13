@@ -11,9 +11,16 @@ import { IUploadResponse } from "../../common/types";
 import BadFiles from "../Misc/bad-files";
 import HeroPrimaryButton from "../Buttons/hero-primary";
 import Modal from "../Modal/modal";
+import Input from "../Input/input";
 import DropzoneStyle from "../../styles/dropzone.module.css";
+import InputStyle from "../../styles/input.module.css";
 
-const UploadFiles = () => {
+interface IProps {
+  accessToken: string;
+  setAccessToken: (accessToken: string) => void;
+}
+
+const UploadFiles = ({ accessToken, setAccessToken }: IProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [error, setError] = useState<string>("");
@@ -55,6 +62,7 @@ const UploadFiles = () => {
         const response = await uploadFiles(
           params.get("protocol") || protocol,
           collectionName,
+          accessToken,
           {
             images,
             metadata,
@@ -97,19 +105,26 @@ const UploadFiles = () => {
       {modalOpen && (
         <Modal setModalOpen={setModalOpen} modalHeading={"Guide"} />
       )}
-      <h4 className={DropzoneStyle.drop__heading}>Collection Name</h4>
-      <div className={DropzoneStyle.input__div}>
-        <input
-          className={DropzoneStyle.input__collection}
-          placeholder="Enter Collection Name"
-          value={collectionName}
-          onChange={(e) => setCollectionName(e.target.value)}
+      <div className={DropzoneStyle.drop__heading}>Enter Details</div>
+      <div className={InputStyle.input__div}>
+        <Input
+          heading="Collection Name"
+          placeholder="e.g. Bored Ape Yacht Club"
+          description=""
+          descriptionLink=""
+          descriptionLinkText=""
+          inputValue={collectionName}
+          setInputValue={setCollectionName}
         />
-        {collectionName ? (
-          <EnableCheckbox className={DropzoneStyle.input__icon} />
-        ) : (
-          <DisableCheckbox className={DropzoneStyle.input__icon} />
-        )}
+        <Input
+          heading="Access Token"
+          placeholder="Enter your access token"
+          description="Please create an access token from Spheron platform to upload and manage the bandwidth billing."
+          descriptionLink="https://docs.spheron.network/api/rest-api-references/#creating-an-access-token"
+          descriptionLinkText="Learn More"
+          inputValue={accessToken}
+          setInputValue={setAccessToken}
+        />
       </div>
       <div className={DropzoneStyle.drop__heading}>Drop your files here</div>
       <div className={DropzoneStyle.drop__subheading}>
@@ -177,7 +192,8 @@ const UploadFiles = () => {
             !metadata.length ||
             !images.length ||
             !!error ||
-            !collectionName.length
+            !collectionName.length ||
+            !accessToken.length
           }
           handleClick={handleSubmit}
         />
