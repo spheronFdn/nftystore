@@ -5,7 +5,7 @@ import {
   IUploadResponse,
 } from "../common/types";
 
-const BASE_URI = "https://nft-widget-api-dev.spheron.network/";
+const BASE_URI = "https://nft-widget-api-dev.spheron.network";
 
 export const uploadFiles = async (
   protocol: string,
@@ -20,7 +20,7 @@ export const uploadFiles = async (
   formData.append("projectName", projectName);
   try {
     const response = await axios({
-      url: `${BASE_URI}/uploadCollection?protocol=${protocol}&${projectName}`,
+      url: `${BASE_URI}/uploadCollection?protocol=${protocol}&projectName=${projectName}`,
       data: formData,
       method: "POST",
       headers: {
