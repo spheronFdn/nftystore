@@ -11,6 +11,7 @@ import HeroPrimaryButton from "../Buttons/hero-primary";
 import Modal from "../Modal/modal";
 import Input from "../Input/input";
 import DropzoneStyle from "../../styles/dropzone.module.css";
+import InputStyle from "../../styles/input.module.css";
 
 interface IProps {
   accessToken: string;
@@ -102,23 +103,27 @@ const UploadFiles = ({ accessToken, setAccessToken }: IProps) => {
       {modalOpen && (
         <Modal setModalOpen={setModalOpen} modalHeading={"Guide"} />
       )}
-      <Input
-        heading={"Collection Name"}
-        placeholder={"e.g. Bored Ape Yacht Club"}
-        inputValue={collectionName}
-        setInputValue={setCollectionName}
-      />
-      <Input
-        heading={"Access Token"}
-        placeholder={"Enter your access token"}
-        description={
-          "Please create an access token from Spheron platform to upload and manage the bandwidth billing."
-        }
-        descriptionLink="https://docs.spheron.network/api/rest-api-references/#creating-an-access-token"
-        descriptionLinkText="Learn More"
-        inputValue={accessToken}
-        setInputValue={setAccessToken}
-      />
+      <div className={DropzoneStyle.drop__heading}>Enter Details</div>
+      <div className={InputStyle.input__div}>
+        <Input
+          heading="Collection Name"
+          placeholder="e.g. Bored Ape Yacht Club"
+          description=""
+          descriptionLink=""
+          descriptionLinkText=""
+          inputValue={collectionName}
+          setInputValue={setCollectionName}
+        />
+        <Input
+          heading="Access Token"
+          placeholder="Enter your access token"
+          description="Please create an access token from Spheron platform to upload and manage the bandwidth billing."
+          descriptionLink="https://docs.spheron.network/api/rest-api-references/#creating-an-access-token"
+          descriptionLinkText="Learn More"
+          inputValue={accessToken}
+          setInputValue={setAccessToken}
+        />
+      </div>
       <div className={DropzoneStyle.drop__heading}>Drop your files here</div>
       <div className={DropzoneStyle.drop__subheading}>
         You can select all of your images in the NFT Collection along with the

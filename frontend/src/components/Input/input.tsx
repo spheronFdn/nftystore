@@ -7,9 +7,9 @@ import DropzoneStyle from "../../styles/dropzone.module.css";
 interface IProps {
   heading: string;
   placeholder: string;
-  description?: string;
-  descriptionLink?: string;
-  descriptionLinkText?: string;
+  description: string;
+  descriptionLink: string;
+  descriptionLinkText: string;
   inputValue: string;
   setInputValue: (inputValue: string) => void;
 }
@@ -24,18 +24,21 @@ const Input = ({
 }: IProps) => {
   return (
     <>
-      <h4 className={InputStyle.input__heading}>{heading}</h4>
-      <div className={InputStyle.input__subheading}>
-        {description}{" "}
-        <a
-          target="_blank"
-          href={descriptionLink}
-          className={DropzoneStyle.container__content__link}
-        >
-          {descriptionLinkText}
-        </a>
-      </div>{" "}
-      <div className={InputStyle.input__div}>
+      <h4 className={InputStyle.input__heading}>{heading}*</h4>
+      {description.length > 0 && (
+        <div className={InputStyle.input__subheading}>
+          {description}
+          <a
+            target="_blank"
+            href={descriptionLink}
+            className={InputStyle.input__content__link}
+          >
+            {descriptionLinkText}
+          </a>
+        </div>
+      )}
+
+      <div className={InputStyle.input__section}>
         <input
           className={InputStyle.input__collection}
           placeholder={placeholder}

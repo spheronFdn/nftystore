@@ -18,7 +18,6 @@ export const uploadFiles = async (
   files.metadata.forEach((metadata: File) => formData.append("", metadata));
   formData.append("protocol", protocol);
   formData.append("projectName", projectName);
-  formData.append("apiToken", apiToken);
   try {
     const response = await axios({
       url: `${BASE_URI}/uploadCollection?protocol=${protocol}&${projectName}`,
