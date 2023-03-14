@@ -7,6 +7,8 @@ import FormData from "form-data";
 import { FileUtils } from "../Utils/file-utils";
 import { IMAGE_UPLOAD_PREFIX, JSON_EXTENSION } from "../Utils/constants";
 import { randomBytes } from "crypto";
+import { safePromise } from "../Utils/helpers";
+import config from "../../config/config";
 
 class UploadService {
   public async uploadCollection(
@@ -58,6 +60,11 @@ class UploadService {
         apiToken
       );
 
+      setTimeout(() => {
+        Logger.info(`File cleanup - ${uploadDir}`);
+        safePromise(FileUtils.deleteDir(uploadDir));
+      }, Number(config.maxUploadTimeout));
+
       return {
         uploadId: deploymentId,
         fileNames,
@@ -69,7 +76,7 @@ class UploadService {
         `Error in ${__filename} - uploadCollection - ${error.message}`
       );
 
-      await FileUtils.deleteDir(uploadDir);
+      safePromise(FileUtils.deleteDir(uploadDir));
       throw error;
     }
   }

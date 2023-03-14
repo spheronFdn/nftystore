@@ -6,7 +6,7 @@ import {
   ApiError,
   ApiErrorTypeEnum,
 } from "../middlewares/error-handling-middleware";
-import { getTokenFromHeader } from "../Utils/auth";
+import { getTokenFromHeader } from "../Utils/helpers";
 
 export async function uploadMetadata(
   req: Request,

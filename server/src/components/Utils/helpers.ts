@@ -11,3 +11,14 @@ export function getTokenFromHeader(req: Request) {
   Logger.info("Access token found in request.");
   return token;
 }
+
+export async function safePromise<T>(
+  asyncFunction: Promise<T>,
+  errorInfo?: string
+): Promise<void> {
+  try {
+    await asyncFunction;
+  } catch (error) {
+    Logger.error(`Error safePromise -  ${errorInfo} - ${error.message}`);
+  }
+}
