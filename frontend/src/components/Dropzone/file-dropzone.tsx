@@ -32,7 +32,7 @@ const ImageDropzone = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [setFiles]
   );
-
+  const fileConvertorNumber = fileType === FileType.IMAGES ? 1024 * 1024 : 1024;
   const acceptFiles: Accept =
     fileType === FileType.IMAGES
       ? {
@@ -56,8 +56,9 @@ const ImageDropzone = ({
     setFiles([]);
   };
   const filesSize = files.map((file) =>
-    Number((file.size / (1024 * 1024)).toFixed(0))
+    Number((file.size / fileConvertorNumber).toFixed(2))
   );
+
   const sum = filesSize.reduce(
     (partialSum: number, a: number) => (partialSum += a),
     0
@@ -89,7 +90,8 @@ const ImageDropzone = ({
               <span className={DropzoneStyles.filebar__title__files}>
                 Total Files:{" "}
                 <span className={DropzoneStyles.filebar__files__length}>
-                  {files.length} files ({sum}mb)
+                  {files.length} files ({sum.toFixed(2)}
+                  {fileType === FileType.IMAGES ? <>mb</> : <>kb</>})
                 </span>
               </span>
               <span
