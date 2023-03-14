@@ -41,8 +41,8 @@ workflows:
       - aws-ecs/deploy-service-update:
           context: develop
           cluster-name: "nft-meta-widget-dev"
-          container-image-name-updates: "container=nft-meta-widget-dev,tag=dev"
-          family: "nft-meta-widget-dev"
+          container-image-name-updates: "container=nft-meta-widget-dev-api,tag=dev"
+          family: "nft-meta-widget-dev-api"
           aws-region: AWS_REGION_DEV
           requires:
             - aws-ecr-build-push-dev
