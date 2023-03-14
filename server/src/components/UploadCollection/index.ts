@@ -7,7 +7,7 @@ import {
 } from "../middlewares/error-handling-middleware";
 import HostingApi from "../HostingApi/service";
 import IDeployment from "../HostingApi/deployment-interface";
-import { getTokenFromHeader } from "../Utils/auth";
+import { getTokenFromHeader } from "../Utils/helpers";
 
 export async function uploadCollection(
   req: Request,

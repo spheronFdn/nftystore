@@ -9,7 +9,7 @@ import IncomingForm from "formidable/Formidable";
 export const FileUtils = {
   async deleteDir(uploadDir: string): Promise<void> {
     try {
-      if (!uploadDir) {
+      if (!uploadDir || !fs.existsSync(uploadDir)) {
         return;
       }
       await fs.promises.rm(uploadDir, {
