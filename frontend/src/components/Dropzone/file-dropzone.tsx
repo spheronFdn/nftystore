@@ -38,6 +38,7 @@ const ImageDropzone = ({
       ? {
           "image/jpeg": [],
           "image/png": [],
+          "image/jpg": [],
         }
       : { "application/json": [".json"] };
 
