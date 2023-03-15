@@ -68,7 +68,9 @@
 .step__divider__none {
   display: none;
 }
-
+.logo {
+  cursor: pointer;
+}
 @media (max-width: 800px) {
   .navbar {
     padding-left: 1rem;
