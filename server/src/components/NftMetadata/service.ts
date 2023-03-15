@@ -74,7 +74,7 @@ class MetadataService {
       return {
         deploymentId: deploymentId,
         url: url,
-        spheronUrl: spheronUrl,
+        spheronUrl: `https://${spheronUrl}`,
       };
     } catch (error) {
       Logger.error(
