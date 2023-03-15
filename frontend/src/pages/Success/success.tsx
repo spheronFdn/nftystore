@@ -70,7 +70,7 @@ const Success = () => {
   const links = [
     {
       id: 1,
-      link: metadataResponse?.spheronUrl,
+      link: `https://${metadataResponse?.spheronUrl}`,
       icon: Spheron,
       linkCopy: handleSpheronCopy,
     },
@@ -103,8 +103,8 @@ const Success = () => {
           >
             <img className={SuccessStyle.link__icon} src={link.icon} />
             <div className={SuccessStyle.link__div}>
-              <a href={`https://${link.link}`} rel="noreferrer" target="_blank">
-                {`https://${link.link}`}
+              <a href={link.link} rel="noreferrer" target="_blank">
+                {link.link}
               </a>
             </div>
             <div
@@ -125,7 +125,7 @@ const Success = () => {
           </div>
         ))}
       </div>
-      <div className="flex items-center justify-center button-container">
+      <div className={SuccessStyle.button__div}>
         <FilledPrimaryButton
           title={"Go to Home"}
           loading={false}

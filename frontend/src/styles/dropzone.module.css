@@ -43,7 +43,6 @@
 }
 
 .filebar__container {
-  max-height: 150px;
   cursor: default;
   margin: 0.6rem 0.8rem 0.2rem 1rem;
   width: -webkit-fill-available;
@@ -194,8 +193,6 @@
 }
 
 .container {
-  /* height: 100%; */
-  padding-bottom: 0.8rem;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -208,7 +205,8 @@
   transition: border 0.3s ease-in-out;
   cursor: pointer;
   margin-top: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  max-height: 300px;
 }
 
 ::-webkit-scrollbar {
@@ -352,24 +350,6 @@
 
 .contentUrl__margin {
   margin-left: 1.5rem;
-}
-
-.container {
-  /* height: 100%; */
-  padding-bottom: 0.8rem;
-  overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  border-width: 1;
-  border-radius: 8px;
-  background-color: var(--text-white-400);
-  color: #bdbdbd;
-  transition: border 0.3s ease-in-out;
-  cursor: pointer;
-  margin-top: 1rem;
-  padding-bottom: 1rem;
 }
 
 ::-webkit-scrollbar {
