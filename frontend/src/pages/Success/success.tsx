@@ -70,7 +70,7 @@ const Success = () => {
   const links = [
     {
       id: 1,
-      link: `https://${metadataResponse?.spheronUrl}`,
+      link: metadataResponse?.spheronUrl,
       icon: Spheron,
       linkCopy: handleSpheronCopy,
     },
