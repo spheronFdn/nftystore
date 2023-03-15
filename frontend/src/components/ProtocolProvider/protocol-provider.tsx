@@ -14,6 +14,7 @@ interface IProps {
 interface IProtocol {
   id: number;
   name: string;
+  protocolName: string;
   description: string;
   icon: JSX.Element;
 }
@@ -26,6 +27,7 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
     {
       id: 1,
       name: "Arweave",
+      protocolName: Providers.ARWEAVE,
       description:
         "Specializes in data storage, blockchain, and serverless web.",
       icon: <ArweaveIcon className="ProtocolProviderStyle.protocol__icon" />,
@@ -33,6 +35,7 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
     {
       id: 2,
       name: "Filecoin",
+      protocolName: Providers.FILECOIN,
       description:
         "Specializes in data storage, blockchain, and serverless web.",
       icon: <FilecoinIcon className="ProtocolProviderStyle.protocol__icon" />,
@@ -40,6 +43,7 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
     {
       id: 3,
       name: "IPFS",
+      protocolName: Providers.IPFS,
       description:
         "Specializes in data storage, blockchain, and serverless web.",
       icon: <IpfsIcon className="ProtocolProviderStyle.protocol__icon" />,
@@ -55,9 +59,9 @@ const ProtocolProvider = ({ selectedProtocol, setProtocol }: IProps) => {
       {protocols.map((protocol) => (
         <div
           key={protocol.id}
-          onClick={() => handleProtocolClick(protocol.name.toLowerCase())}
+          onClick={() => handleProtocolClick(protocol.protocolName)}
           className={`${
-            isSelectedProtocol(protocol.name.toLowerCase()) &&
+            isSelectedProtocol(protocol.protocolName) &&
             CardStyle.protocol__provider__card__selected
           } ${CardStyle.protocol__provider__card} ${
             protocol.id === 3 ? "" : CardStyle.protocol__card__margin

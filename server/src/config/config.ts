@@ -6,6 +6,7 @@ interface IEnvironmentConfig {
   port: string | number;
   uiUrl: string;
   maxUploadSize: string | number;
+  maxUploadTimeout: string | number;
   rootUploadDirectory: string;
   hostingApi: {
     hostAddress: string;
@@ -16,6 +17,7 @@ const development: IEnvironmentConfig = {
   port: process.env.PORT || 8088,
   uiUrl: process.env.UI_URL,
   maxUploadSize: process.env.MAX_UPLOAD_SIZE || 1024 * 1024 * 1024,
+  maxUploadTimeout: process.env.MAX_UPLOAD_TIMEOUT || 1000 * 60 * 30,
   rootUploadDirectory:
     process.env.ROOT_UPLOAD_DIRECTORY || "./uploaded-content",
   hostingApi: {
@@ -29,6 +31,7 @@ const test: IEnvironmentConfig = {
   port: process.env.PORT || 3001,
   uiUrl: process.env.UI_URL,
   maxUploadSize: process.env.MAX_UPLOAD_SIZE || 1024 * 1024 * 1024,
+  maxUploadTimeout: process.env.MAX_UPLOAD_TIMEOUT || 1000 * 60 * 30,
   rootUploadDirectory:
     process.env.ROOT_UPLOAD_DIRECTORY || "./uploaded-content",
   hostingApi: {
@@ -42,6 +45,7 @@ const production: IEnvironmentConfig = {
   port: process.env.PORT || 3001,
   uiUrl: process.env.UI_URL,
   maxUploadSize: process.env.MAX_UPLOAD_SIZE || 1024 * 1024 * 1024,
+  maxUploadTimeout: process.env.MAX_UPLOAD_TIMEOUT || 1000 * 60 * 30,
   rootUploadDirectory:
     process.env.ROOT_UPLOAD_DIRECTORY || "./uploaded-content",
   hostingApi: {

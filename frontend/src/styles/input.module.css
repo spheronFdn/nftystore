@@ -40,6 +40,7 @@
   line-height: 24px;
   color: rgba(255, 255, 255, 0.7);
   position: relative;
+  padding-right: 4rem;
 }
 
 .input__icon {
@@ -70,4 +71,5 @@
  color: #006be9;
  cursor: pointer;
  margin-left: 0.3rem;
+ text-decoration: none;
 }
