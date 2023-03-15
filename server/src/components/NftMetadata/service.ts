@@ -13,6 +13,7 @@ import {
   JSON_EXTENSION,
   METADATA_UPLOAD_PREFIX,
 } from "../Utils/constants";
+import { safePromise } from "../Utils/helpers";
 
 class MetadataService {
   async uploadMetadata(
@@ -48,7 +49,9 @@ class MetadataService {
         }
 
         let metadata = JSON.parse(rawdata.toString());
-        metadata.image = `https://${baseUrl}/${image}`;
+        metadata.image = `${
+          baseUrl.includes("https://") ? "" : "https://"
+        }${baseUrl}/${image}`;
 
         fs.writeFileSync(fullPathMetaFile, JSON.stringify(metadata));
 
@@ -71,7 +74,7 @@ class MetadataService {
       return {
         deploymentId: deploymentId,
         url: url,
-        spheronUrl: spheronUrl,
+        spheronUrl: `https://${spheronUrl}`,
       };
     } catch (error) {
       Logger.error(
@@ -79,7 +82,7 @@ class MetadataService {
       );
       throw error;
     } finally {
-      await FileUtils.deleteDir(uploadDir);
+      safePromise(FileUtils.deleteDir(uploadDir));
     }
   }
 }

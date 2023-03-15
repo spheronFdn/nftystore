@@ -134,7 +134,7 @@ export const listData: IListData[] = [
 
 export enum Providers {
   IPFS = "ipfs",
-  FILECOIN = "filecoin",
+  FILECOIN = "ipfs-filecoin",
   ARWEAVE = "arweave",
 }
 
