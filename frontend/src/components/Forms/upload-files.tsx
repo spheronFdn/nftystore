@@ -70,9 +70,10 @@ const UploadFiles = ({ accessToken, setAccessToken }: IProps) => {
         );
         setUploadResponse(response);
         navigate(`/nft-upload/choose-url?protocol=${params.get("protocol")}`);
-      } catch (error) {
+      } catch (error: any) {
+        // Infer better type for error
         console.log("ERROR", error);
-        setError("Some issue has occured. Please try again!");
+        setError(error.message);
         setLoading(false);
       }
       setLoading(false);
