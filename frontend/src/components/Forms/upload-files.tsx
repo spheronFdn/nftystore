@@ -143,9 +143,9 @@ const UploadFiles = ({ accessToken, setAccessToken }: IProps) => {
       <div className={DropzoneStyle.content__container}>
         <div className={DropzoneStyle.image__container__margin}>
           <Dropzone
+            inputId="imageNft"
             files={images}
             setFiles={setImages}
-            setBadFiles={setBadImages}
             uploadWarning={uploadWarning}
             title={"NFT collection"}
             description={"NFT collection"}
@@ -154,21 +154,22 @@ const UploadFiles = ({ accessToken, setAccessToken }: IProps) => {
         </div>
         <div className={DropzoneStyle.file__container__margin}>
           <Dropzone
+            inputId="jsonNft"
             files={metadata}
             setFiles={setMetadata}
-            setBadFiles={setBadMetaData}
             uploadWarning={uploadWarning}
             title={"Metadata JSON Files"}
             description={"corresponding JSON files"}
             fileType={FileType.METADATA}
           />
         </div>
-        <div className={DropzoneStyle.errorFile}>
+        {/* Discuss it's usage as it won't work now without dropzone */}
+        {/* <div className={DropzoneStyle.errorFile}>
           <BadFiles badFiles={badImages} />
         </div>
         <div className={DropzoneStyle.errorFile}>
           <BadFiles badFiles={badMetaData} />
-        </div>
+        </div> */}
       </div>
       <div className={DropzoneStyle.errorFile}>
         {error && (

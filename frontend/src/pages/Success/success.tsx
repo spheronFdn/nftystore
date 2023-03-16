@@ -7,6 +7,7 @@ import Filecoin from "../../assets/icons/filecoin-circle.svg";
 import Spheron from "../../assets/icons/spheron-icon.svg";
 import { IUploadMetadataResponse, IUploadResponse } from "../../common/types";
 import { Providers } from "../../common/utils";
+import { ConfettiShower } from "../../common/confetti-shower";
 import FilledPrimaryButton from "../../components/Buttons/filled-primary";
 import SuccessStyle from "../../styles/success.module.css";
 
@@ -83,57 +84,60 @@ const Success = () => {
   ];
 
   return (
-    <div className={SuccessStyle.container}>
-      <Confetti />
-      <h1 className={SuccessStyle.title}>Congrats, Collection is Ready!</h1>
-      <span className={SuccessStyle.subtitle}>
-        Here is your generated{" "}
-        <span className={SuccessStyle.subtitle__span}> Token URI</span> that you
-        can use to launch your collection using ERC721 Contract.
-        <br /> Just set your{" "}
-        <span className={SuccessStyle.subtitle__span}>Base URI</span> with this
-        and you can view all the collection in the marketplace
-      </span>
-      <div className={SuccessStyle.successUrl__div}>
-        {links.map((link) => (
-          <div
-            className={`${
-              link.id === 2 ? SuccessStyle.successUrl__margin : ""
-            } ${SuccessStyle.successUrl}`}
-          >
-            <img className={SuccessStyle.link__icon} src={link.icon} />
-            <div className={SuccessStyle.link__div}>
-              <a href={link.link} rel="noreferrer" target="_blank">
-                {link.link}
-              </a>
-            </div>
+    <>
+      <div className={SuccessStyle.container}>
+        <ConfettiShower />
+        <Confetti />
+        <h1 className={SuccessStyle.title}>Congrats, Collection is Ready!</h1>
+        <span className={SuccessStyle.subtitle}>
+          Here is your generated{" "}
+          <span className={SuccessStyle.subtitle__span}> Token URI</span> that
+          you can use to launch your collection using ERC721 Contract.
+          <br /> Just set your{" "}
+          <span className={SuccessStyle.subtitle__span}>Base URI</span> with
+          this and you can view all the collection in the marketplace
+        </span>
+        <div className={SuccessStyle.successUrl__div}>
+          {links.map((link) => (
             <div
-              onClick={() => link.linkCopy(link.id)}
-              className={SuccessStyle.copy__div}
+              className={`${
+                link.id === 2 ? SuccessStyle.successUrl__margin : ""
+              } ${SuccessStyle.successUrl}`}
             >
-              <span className={SuccessStyle.copy__span}>Copy</span>
-              <span
-                className={`${SuccessStyle.copy__tooltip} ${
-                  isCopied[link.id]
-                    ? SuccessStyle.copied__tooltip__color
-                    : SuccessStyle.copy__tooltip__color
-                }`}
+              <img className={SuccessStyle.link__icon} src={link.icon} />
+              <div className={SuccessStyle.link__div}>
+                <a href={link.link} rel="noreferrer" target="_blank">
+                  {link.link}
+                </a>
+              </div>
+              <div
+                onClick={() => link.linkCopy(link.id)}
+                className={SuccessStyle.copy__div}
               >
-                {isCopied[link.id] ? "Link Copied" : "Copy Link"}
-              </span>
+                <span className={SuccessStyle.copy__span}>Copy</span>
+                <span
+                  className={`${SuccessStyle.copy__tooltip} ${
+                    isCopied[link.id]
+                      ? SuccessStyle.copied__tooltip__color
+                      : SuccessStyle.copy__tooltip__color
+                  }`}
+                >
+                  {isCopied[link.id] ? "Link Copied" : "Copy Link"}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div className={SuccessStyle.button__div}>
+          <FilledPrimaryButton
+            title={"Go to Home"}
+            loading={false}
+            disabled={false}
+            handleClick={() => navigate("/nft-upload/select-provider")}
+          />
+        </div>
       </div>
-      <div className={SuccessStyle.button__div}>
-        <FilledPrimaryButton
-          title={"Go to Home"}
-          loading={false}
-          disabled={false}
-          handleClick={() => navigate("/nft-upload/select-provider")}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 

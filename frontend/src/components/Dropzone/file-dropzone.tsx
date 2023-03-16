@@ -1,14 +1,13 @@
 import React, { useCallback } from "react";
-import { Accept, FileRejection, useDropzone } from "react-dropzone";
 import { ReactComponent as ImageIcon } from "../../assets/icons/image-icon.svg";
 import FileBar from "../Misc/file-bar";
 import { FileType } from "../../common/utils";
 import DropzoneStyles from "../../styles/dropzone.module.css";
 
 interface IProps {
+  inputId: string;
   files: File[];
   setFiles: (files: File[]) => void;
-  setBadFiles: (files: FileRejection[]) => void;
   uploadWarning: boolean;
   title: string;
   description: string;
@@ -16,38 +15,22 @@ interface IProps {
 }
 
 const ImageDropzone = ({
+  inputId,
   files,
   setFiles,
-  setBadFiles,
   uploadWarning,
   title,
   description,
   fileType,
 }: IProps) => {
-  const onDrop = useCallback(
-    (acceptedFiles: File[], fileRejections: FileRejection[]) => {
-      setFiles(acceptedFiles);
-      setBadFiles(fileRejections);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [setFiles]
-  );
+  // Normal e type = `React.ChangeEvent<HTMLInputElement>` is showing error. So infer better type from usage.
+  const handleFileChange = (e: any) => {
+    if (e.target.files?.length > 0) {
+      setFiles([...files, ...e.target.files]);
+    }
+  };
+
   const fileConvertorNumber = fileType === FileType.IMAGES ? 1024 * 1024 : 1024;
-  const acceptFiles: Accept =
-    fileType === FileType.IMAGES
-      ? {
-          "image/jpeg": [],
-          "image/png": [],
-          "image/jpg": [],
-        }
-      : { "application/json": [".json"] };
-
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: acceptFiles,
-  });
-
-  const otherAttr = { directory: "", webkitdirectory: "", mozdirectory: "" };
 
   const removeFile = (id: string) => {
     setFiles(files.filter((file: File) => file.name !== id));
@@ -69,12 +52,11 @@ const ImageDropzone = ({
     <>
       <div className={DropzoneStyles.container}>
         <h3 className={DropzoneStyles.heading}>{title}</h3>
-        <div
+        <label
+          htmlFor={inputId}
           className={DropzoneStyles.container__content__div}
-          {...getRootProps()}
         >
           <div className={DropzoneStyles.container__content}>
-            <input {...getInputProps()} {...otherAttr} type="file" />
             <ImageIcon />
             <div className={DropzoneStyles.container__content__text}>
               <span className={DropzoneStyles.container__content__link}>
@@ -83,8 +65,19 @@ const ImageDropzone = ({
               {description}
             </div>
           </div>
-        </div>
-
+        </label>
+        <input
+          id={inputId}
+          accept={
+            fileType === FileType.IMAGES
+              ? `image/jpeg,image/png,image/jpg`
+              : `application/JSON`
+          }
+          type="file"
+          multiple
+          onChange={(e) => handleFileChange(e)}
+          style={{ display: "none" }}
+        />
         {files.length > 0 && (
           <div className={DropzoneStyles.filebar__container}>
             <div className={DropzoneStyles.filebar__title__div}>
@@ -112,6 +105,7 @@ const ImageDropzone = ({
           </div>
         )}
       </div>
+
       {uploadWarning && (
         <>
           {fileType === FileType.IMAGES ? (
