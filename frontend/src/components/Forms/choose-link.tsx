@@ -17,7 +17,6 @@ interface Iprops {
 }
 const ChooseLink = ({ accessToken }: Iprops) => {
   const navigate = useNavigate();
-  const [selectedUrl, setSelectedUrl] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [focusedValue, setFocusedValue] = useState<FocusedProvider>(
     FocusedProvider.SPHERON
@@ -41,6 +40,9 @@ const ChooseLink = ({ accessToken }: Iprops) => {
         (response: IUploadMetadataResponse) => void
       ]
     >();
+  const [selectedUrl, setSelectedUrl] = useState<string>(
+    uploadResponse.spheronUrl
+  );
 
   const handleNext = async () => {
     setLoading(true);

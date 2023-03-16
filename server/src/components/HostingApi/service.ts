@@ -5,9 +5,8 @@ import {
   ApiErrorTypeEnum,
 } from "../middlewares/error-handling-middleware";
 import config from "../../config/config";
-import IDeployment, { DeploymentStatusEnum } from "./deployment-interface";
+import IDeployment from "./deployment-interface";
 import Logger from "../../logger/logger";
-import { IProject } from "./project-interface";
 
 enum HttpMethods {
   GET = "GET",
@@ -41,7 +40,10 @@ export default abstract class HostingApi {
       Logger.error(
         `Error in ${__filename} - sendRequest - url: ${config.hostingApi.hostAddress}${url} - ${error.message}`
       );
-      throw error;
+      return {
+        error: true,
+        message: error?.response?.data.message ?? error.message,
+      };
     }
   }
 
