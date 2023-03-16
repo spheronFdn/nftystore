@@ -26,6 +26,8 @@ const ContentUrlCard = ({
   const protocolName =
     contentProvider === Providers.IPFS
       ? contentProvider.toUpperCase()
+      : contentProvider === Providers.FILECOIN
+      ? "Filecoin"
       : contentProvider.charAt(0).toUpperCase() + contentProvider.slice(1);
 
   return (

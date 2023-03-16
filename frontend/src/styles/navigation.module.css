@@ -63,12 +63,14 @@
   margin-left: -6px;
   border: 1px solid rgba(210, 213, 218, 0.1);
   border-radius: 2px;
-  width: 30rem;
+  width: -webkit-fill-available;
 }
 .step__divider__none {
   display: none;
 }
-
+.logo {
+  cursor: pointer;
+}
 @media (max-width: 800px) {
   .navbar {
     padding-left: 1rem;
