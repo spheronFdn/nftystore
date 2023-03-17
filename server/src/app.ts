@@ -4,6 +4,7 @@ import { Application } from "express";
 import { Server } from "http";
 import config from "./config/config";
 import Logger from "./logger/logger";
+import cors from "cors";
 import {
   errorHandlingMiddleware,
   errorLoggingMiddleware,
@@ -21,25 +22,9 @@ class App {
 
     this.app = express();
     this.port = appInit.port;
+
     this.middlewares(appInit.middlewares);
     this.routes(appInit.controllers);
-
-    this.app.use((req, res, next) => {
-      res.header(
-        "Access-Control-Allow-Methods",
-        "GET, POST, PUT, DELETE, OPTIONS "
-      );
-      res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With," +
-          " Content-Type, Accept," +
-          " Authorization," +
-          " Access-Control-Allow-Credentials"
-      );
-      // res.header("Access-Control-Allow-Origin", config.uiUrl);
-      res.header("Access-Control-Allow-Credentials", "true");
-      next();
-    });
 
     this.app.use(express.json({ limit: "500mb" }));
     this.app.use(express.urlencoded({ limit: "500mb" }));
@@ -57,11 +42,28 @@ class App {
   private routes(controllers: {
     forEach: (arg0: (controller: any) => void) => void;
   }) {
-    controllers.forEach((controller) => {
-      this.app.use("/", controller.router);
-    });
-    this.app.use("/status", (req, res) => {
+    this.app.get("/status", (req, res) => {
       res.status(200).json({ number: 1000 });
+    });
+
+    controllers.forEach((controller) => {
+      this.app.use(
+        "/",
+        cors({
+          origin: (origin, callback) => {
+            if (config.uiUrl !== origin) {
+              return callback(
+                new Error(
+                  "CORS policy for this site does not allow access from the specified Origin."
+                ),
+                false
+              );
+            }
+            return callback(null, true);
+          },
+        }),
+        controller.router
+      );
     });
   }
 

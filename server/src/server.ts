@@ -13,7 +13,6 @@ const app = new App({
       extended: false,
     }),
     bodyParser.json(),
-    cors(),
   ],
 });
 
