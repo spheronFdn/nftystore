@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 10rem;
+  margin-top: 8rem;
 }
 
 .title {
@@ -204,6 +204,9 @@
   .successUrl a {
     font-weight: 600;
     font-size: 14px;
+  }
+  .container {
+    overflow-y: scroll;
   }
 }
 

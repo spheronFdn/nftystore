@@ -4,11 +4,7 @@ import { uploadFiles } from "../../api";
 import FilledPrimaryButton from "../Buttons/filled-primary";
 import Dropzone from "../Dropzone/file-dropzone";
 import { checkUploadFileValidity, FileType } from "../../common/utils";
-import { ReactComponent as DisableCheckbox } from "../../assets/icons/disable-checkbox.svg";
-import { ReactComponent as EnableCheckbox } from "../../assets/icons/enable-checkbox.svg";
-import { FileRejection } from "react-dropzone";
 import { IUploadResponse } from "../../common/types";
-import BadFiles from "../Misc/bad-files";
 import HeroPrimaryButton from "../Buttons/hero-primary";
 import Modal from "../Modal/modal";
 import Input from "../Input/input";
@@ -26,9 +22,7 @@ const UploadFiles = ({ accessToken, setAccessToken }: IProps) => {
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [images, setImages] = useState<File[]>([]);
-  const [badImages, setBadImages] = useState<FileRejection[]>([]);
   const [metadata, setMetadata] = useState<File[]>([]);
-  const [badMetaData, setBadMetaData] = useState<FileRejection[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [uploadWarning, setUploadWarning] = useState<boolean>(false);
   const [collectionName, setCollectionName] = useState<string>("");
@@ -143,9 +137,9 @@ const UploadFiles = ({ accessToken, setAccessToken }: IProps) => {
       <div className={DropzoneStyle.content__container}>
         <div className={DropzoneStyle.image__container__margin}>
           <Dropzone
+            inputId="imageNft"
             files={images}
             setFiles={setImages}
-            setBadFiles={setBadImages}
             uploadWarning={uploadWarning}
             title={"NFT collection"}
             description={"NFT collection"}
@@ -154,20 +148,14 @@ const UploadFiles = ({ accessToken, setAccessToken }: IProps) => {
         </div>
         <div className={DropzoneStyle.file__container__margin}>
           <Dropzone
+            inputId="jsonNft"
             files={metadata}
             setFiles={setMetadata}
-            setBadFiles={setBadMetaData}
             uploadWarning={uploadWarning}
             title={"Metadata JSON Files"}
             description={"corresponding JSON files"}
             fileType={FileType.METADATA}
           />
-        </div>
-        <div className={DropzoneStyle.errorFile}>
-          <BadFiles badFiles={badImages} />
-        </div>
-        <div className={DropzoneStyle.errorFile}>
-          <BadFiles badFiles={badMetaData} />
         </div>
       </div>
       <div className={DropzoneStyle.errorFile}>
