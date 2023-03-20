@@ -23,6 +23,27 @@ class App {
     this.app = express();
     this.port = appInit.port;
 
+    this.app.use((_req, res, next) => {
+      res.header(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS "
+      );
+      res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With," +
+          " Content-Type, Accept," +
+          " Authorization," +
+          " Access-Control-Allow-Credentials"
+      );
+      const origin = _req.headers["origin"] as string;
+
+      if (config.uiUrl === origin) {
+        res.header("Access-Control-Allow-Origin", origin);
+      }
+      res.header("Access-Control-Allow-Credentials", "true");
+      next();
+    });
+
     this.middlewares(appInit.middlewares);
     this.routes(appInit.controllers);
 
@@ -47,23 +68,7 @@ class App {
     });
 
     controllers.forEach((controller) => {
-      this.app.use(
-        "/",
-        cors({
-          origin: (origin, callback) => {
-            if (config.uiUrl !== origin) {
-              return callback(
-                new Error(
-                  "CORS policy for this site does not allow access from the specified Origin."
-                ),
-                false
-              );
-            }
-            return callback(null, true);
-          },
-        }),
-        controller.router
-      );
+      this.app.use("/", controller.router);
     });
   }
 
