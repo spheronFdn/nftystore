@@ -23,7 +23,7 @@ class App {
     this.app = express();
     this.port = appInit.port;
 
-    this.app.use((_req, res, next) => {
+    this.app.use((req, res, next) => {
       res.header(
         "Access-Control-Allow-Methods",
         "GET, POST, PUT, DELETE, OPTIONS "
@@ -35,7 +35,7 @@ class App {
           " Authorization," +
           " Access-Control-Allow-Credentials"
       );
-      const origin = _req.headers["origin"] as string;
+      const origin = req.headers["origin"] as string;
 
       if (config.uiUrl === origin) {
         res.header("Access-Control-Allow-Origin", origin);
