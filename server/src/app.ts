@@ -4,6 +4,7 @@ import { Application } from "express";
 import { Server } from "http";
 import config from "./config/config";
 import Logger from "./logger/logger";
+import cors from "cors";
 import {
   errorHandlingMiddleware,
   errorLoggingMiddleware,
@@ -21,8 +22,6 @@ class App {
 
     this.app = express();
     this.port = appInit.port;
-    this.middlewares(appInit.middlewares);
-    this.routes(appInit.controllers);
 
     this.app.use((req, res, next) => {
       res.header(
@@ -36,10 +35,17 @@ class App {
           " Authorization," +
           " Access-Control-Allow-Credentials"
       );
-      // res.header("Access-Control-Allow-Origin", config.uiUrl);
+      const origin = req.headers["origin"] as string;
+
+      if (config.uiUrl === origin) {
+        res.header("Access-Control-Allow-Origin", origin);
+      }
       res.header("Access-Control-Allow-Credentials", "true");
       next();
     });
+
+    this.middlewares(appInit.middlewares);
+    this.routes(appInit.controllers);
 
     this.app.use(express.json({ limit: "500mb" }));
     this.app.use(express.urlencoded({ limit: "500mb" }));
@@ -57,11 +63,12 @@ class App {
   private routes(controllers: {
     forEach: (arg0: (controller: any) => void) => void;
   }) {
+    this.app.get("/status", (req, res) => {
+      res.status(200).json({ number: 1000 });
+    });
+
     controllers.forEach((controller) => {
       this.app.use("/", controller.router);
-    });
-    this.app.use("/status", (req, res) => {
-      res.status(200).json({ number: 1000 });
     });
   }
 

@@ -15,7 +15,7 @@ interface IEnvironmentConfig {
 }
 const development: IEnvironmentConfig = {
   port: process.env.PORT || 8088,
-  uiUrl: process.env.UI_URL,
+  uiUrl: process.env.UI_URL || "https://nft-widget-40346d.spheron.app/",
   maxUploadSize: process.env.MAX_UPLOAD_SIZE || 1024 * 1024 * 1024,
   maxUploadTimeout: process.env.MAX_UPLOAD_TIMEOUT || 1000 * 60 * 30,
   rootUploadDirectory:
