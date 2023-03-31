@@ -1,0 +1,225 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8rem;
+}
+
+.title {
+  /* font-family: 'Manrope'; */
+  font-style: normal;
+  font-weight: 800;
+  font-size: 54px;
+  line-height: 114%;
+  text-align: center;
+  color: white;
+}
+
+.container > a {
+  color: var(--text-gray-500);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.subtitle {
+  /* font-family: 'Open Sans'; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.subtitle__span {
+  font-weight: 800;
+}
+
+.successUrl__div {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 0rem 1.8rem 1.8rem 1.8rem;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.successUrl {
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: rgba(246, 245, 253, 0.04);
+  border-radius: 4px;
+  width: 500px;
+  overflow: hidden;
+  height: 1.8rem;
+  /* border: 4px solid #006be9; */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.successUrl__margin {
+  margin-top: 1rem;
+}
+.successUrl:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.successUrl a {
+  /* font-family: 'Inter'; */
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 17px;
+  color: #56a1ff;
+  text-decoration: none;
+  margin-right: 32px;
+  margin-left: 0.5rem;
+  display: flex;
+  flex-grow: 1;
+}
+
+.link__div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 470px;
+  margin-right: 1rem;
+  display: inline-block;
+}
+.copy__div {
+  position: relative;
+  min-width: 4rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 4px;
+}
+.copy__span {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+  color: #006be9;
+  /* position: relative; */
+}
+
+.copy__div:hover {
+  background: #0959b7;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+.copy__div:hover .copy__span {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.copied__tooltip__color {
+  background: #0f3875;
+}
+
+.copy__tooltip__color {
+  background: #0f3875;
+}
+
+.copy__tooltip {
+  visibility: hidden;
+  max-width: 100px;
+  border-radius: 8px;
+  color: black;
+  z-index: 1;
+  text-align: center;
+  padding: 9px 5px 1px 6px;
+  position: fixed;
+  height: 25px;
+  margin-top: -90px;
+  margin-right: 10px;
+}
+
+.copy__div .copy__tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: 0px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: #0f3875 transparent transparent transparent;
+}
+.copy__div:hover .copy__tooltip {
+  visibility: visible;
+  /* font-family: 'Inter'; */
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  color: white;
+}
+
+.link__icon {
+  max-width: 2rem;
+  max-height: 2rem;
+  stroke: #56a1ff;
+}
+
+.button__div {
+  text-align: right;
+  justify-content: right;
+  display: flex;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+@media (max-width: 800px) {
+  .title {
+    font-size: 24px;
+  }
+  .subtitle {
+    font-size: 12px;
+  }
+  .successUrl {
+    width: min-content;
+  }
+  .link__div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 250px;
+    display: inline-block;
+  }
+  .successUrl a {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .container {
+    overflow-y: scroll;
+  }
+}
+
+@media (max-width: 500px) {
+  .link__div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 150px;
+    display: inline-block;
+  }
+  .successUrl a {
+    font-weight: 600;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,18 @@
+.footer {
+  background: #040e31;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.footer__text {
+  /* font-family: 'Poppins'; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 180%;
+  color: rgba(255, 255, 255, 0.56);
+}
