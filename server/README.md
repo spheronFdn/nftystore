@@ -34,6 +34,8 @@ You can follow these steps to setup the server:
 - Create a .env file in the server directory with the following configuration:
   ```
   HOSTING_API_HOST_ADDRESS=https://api-dev.spheron.network
+  API_TOKEN=xxxx
+  UI_URL=http://localhost:3000
   ```
 - Start the server
   ```
@@ -46,6 +48,8 @@ You can follow these steps to setup the server:
 - Create a .env file in the server directory with the following configuration:
   ```
   HOSTING_API_HOST_ADDRESS=https://api-dev.spheron.network
+  API_TOKEN=xxxx
+  UI_URL=http://localhost:3000
   ```
 - Start the server
   ```
