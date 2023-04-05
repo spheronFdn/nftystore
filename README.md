@@ -75,7 +75,7 @@ You can follow these steps to setup the server:
   yarn dev
   ```
   
- You can access the server at: [http://localhost:8000](http://localhost:8000)
+ You can access the server at: [http://localhost:8088](http://localhost:8088)
 
 ## Contribution
 We encourage you to read the [contribution guidelines](https://github.com/spheronFdn/nftystore/blob/main/.github/contribution-guidelines.md) to learn about our development process and how to propose bug fixes and improvements before submitting a pull request.
