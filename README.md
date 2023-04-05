@@ -25,7 +25,8 @@
 </p>
 
 ## Installation
-You can follow these steps for installation:
+### Frontend
+You can follow these steps to setup the frontend:
 
 **Using NPM**
 - Clone this repo: `https://github.com/spheronFdn/nftystore.git`
@@ -44,6 +45,37 @@ You can follow these steps for installation:
   ```
 
 You can access the frontend at: [http://localhost:3000](http://localhost:3000)
+
+---
+
+### Server
+You can follow these steps to setup the server:
+
+**Using NPM**
+- Clone this repo: `https://github.com/spheronFdn/nftystore.git`
+- Run `npm i` to install dependencies
+- Create a .env file in the server directory with the following configuration:
+  ```
+  HOSTING_API_HOST_ADDRESS=https://api-dev.spheron.network
+  ```
+- Start the server
+  ```
+  npm run dev
+  ```
+  
+**Using Yarn**
+- Clone this repo: `https://github.com/spheronFdn/nftystore.git`
+- Run `yarn` to install dependencies
+- Create a .env file in the server directory with the following configuration:
+  ```
+  HOSTING_API_HOST_ADDRESS=https://api-dev.spheron.network
+  ```
+- Start the server
+  ```
+  yarn dev
+  ```
+  
+ You can access the server at: [http://localhost:8000](http://localhost:8000)
 
 ## Contribution
 We encourage you to read the [contribution guidelines](https://github.com/spheronFdn/nftystore/blob/main/.github/contribution-guidelines.md) to learn about our development process and how to propose bug fixes and improvements before submitting a pull request.
