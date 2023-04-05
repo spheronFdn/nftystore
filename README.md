@@ -9,7 +9,7 @@
 <h2 align="center">Nftystore</h2>
 
 <p align="center">
-  🚀 Ship your NFT collection instantly with Spheron's Infrastructure.
+  🚀 Upload your NFT collection assets faster via Spheron multi-chain upload!
 </p>
 
 <p align="center">
