@@ -30,6 +30,7 @@ You can follow these steps to setup the server:
 
 **Using NPM**
 - Clone this repo: `https://github.com/spheronFdn/nftystore.git`
+- Go inside the `server` directory
 - Run `npm i` to install dependencies
 - Create a .env file in the server directory with the following configuration:
   ```
@@ -44,6 +45,7 @@ You can follow these steps to setup the server:
   
 **Using Yarn**
 - Clone this repo: `https://github.com/spheronFdn/nftystore.git`
+- Go inside the `server` directory
 - Run `yarn` to install dependencies
 - Create a .env file in the server directory with the following configuration:
   ```
