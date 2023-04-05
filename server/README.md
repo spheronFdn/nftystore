@@ -52,4 +52,4 @@ You can follow these steps to setup the server:
   yarn dev
   ```
   
- You can access the server at: [http://localhost:8000](http://localhost:8000)
+ You can access the server at: [http://localhost:8088](http://localhost:8088)
