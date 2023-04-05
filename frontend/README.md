@@ -30,6 +30,7 @@ You can follow these steps to setup the frontend:
 
 **Using NPM**
 - Clone this repo: `https://github.com/spheronFdn/nftystore.git`
+- Go inside the `frontend` directory
 - Run `npm i` to install dependencies
 - Start Nftystore
   ```
@@ -38,6 +39,7 @@ You can follow these steps to setup the frontend:
   
 **Using Yarn**
 - Clone this repo: `https://github.com/spheronFdn/nftystore.git`
+- Go inside the `frontend` directory
 - Run `yarn` to install dependencies
 - Start Nftystore
   ```
