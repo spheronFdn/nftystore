@@ -117,7 +117,7 @@ const UploadFiles = ({ accessToken, setAccessToken }: IProps) => {
           heading="Access Token"
           placeholder="Enter your access token"
           description="Please create an access token from Spheron platform to upload and manage the bandwidth billing."
-          descriptionLink="https://docs.spheron.network/api/rest-api-references/#creating-an-access-token"
+          descriptionLink="https://docs.spheron.network/rest-api/#creating-an-access-token"
           descriptionLinkText="Learn More"
           inputValue={accessToken}
           setInputValue={setAccessToken}
