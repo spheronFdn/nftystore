@@ -21,7 +21,7 @@ workflows:
           extra-build-args: --build-arg CODE_VERSION=${CIRCLE_SHA1:0:7}
           filters:
             branches:
-              only: ilija/sph-1494
+              only: dev
       # - aws-ecr/build-and-push-image:
       #     context: production
       #     region: "${AWS_REGION_PROD}"
@@ -48,7 +48,7 @@ workflows:
             - aws-ecr-build-push-dev
           filters:
             branches:
-              only: ilija/sph-1494
+              only: dev
       # # deploy - PROD
       # - aws-ecs/deploy-service-update:
       #     context: production
