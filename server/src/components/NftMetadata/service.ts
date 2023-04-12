@@ -30,11 +30,11 @@ class MetadataService {
     try {
       Logger.info(`Uploading metadata files for : ${uploadId}`);
 
-      const deployment: IDeployment = await HostingApi.getDeployment(
-        uploadId,
-        apiToken
+      const metadata = JSON.parse(
+        fs.readFileSync(`${config.rootUploadDirectory}/.${uploadId}`).toString()
       );
-      uploadDir = deployment.project.name;
+
+      uploadDir = metadata.projectName;
 
       const form = new FormData();
 
@@ -62,7 +62,7 @@ class MetadataService {
       }
 
       const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
-        deployment.protocol,
+        metadata.protocol,
         uploadDir.replace(
           `${IMAGE_UPLOAD_PREFIX}-`,
           `${METADATA_UPLOAD_PREFIX}-`
@@ -82,7 +82,12 @@ class MetadataService {
       );
       throw error;
     } finally {
-      safePromise(FileUtils.deleteDir(uploadDir));
+      await safePromise(
+        FileUtils.deleteDir(`${config.rootUploadDirectory}/.${uploadId}`)
+      );
+      await safePromise(
+        FileUtils.deleteDir(`${config.rootUploadDirectory}/${uploadDir}`)
+      );
     }
   }
 }
