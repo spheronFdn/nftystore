@@ -6,6 +6,8 @@ import config from "./config/config";
 import Logger from "./logger/logger";
 import cors from "cors";
 import {
+  ApiError,
+  ApiErrorTypeEnum,
   errorHandlingMiddleware,
   errorLoggingMiddleware,
 } from "./components/middlewares/error-handling-middleware";
@@ -23,26 +25,29 @@ class App {
     this.app = express();
     this.port = appInit.port;
 
-    this.app.use((req, res, next) => {
-      res.header(
-        "Access-Control-Allow-Methods",
-        "GET, POST, PUT, DELETE, OPTIONS "
-      );
-      res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With," +
-          " Content-Type, Accept," +
-          " Authorization," +
-          " Access-Control-Allow-Credentials"
-      );
-      const origin = req.headers["origin"] as string;
-
-      if (config.uiUrl === origin) {
-        res.header("Access-Control-Allow-Origin", origin);
-      }
-      res.header("Access-Control-Allow-Credentials", "true");
-      next();
-    });
+    this.app.use(
+      cors({
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+        origin: (origin, callback) => {
+          if (!origin || config.uiUrl !== origin) {
+            callback(null, true);
+          } else {
+            callback(
+              new ApiError(ApiErrorTypeEnum.FORBIDDEN, "Not allowed by CORS")
+            );
+          }
+        },
+        allowedHeaders: [
+          "Origin",
+          "X-Requested-With",
+          "Content-Type",
+          "Accept",
+          "Authorization",
+          "Access-Control-Allow-Credentials",
+        ],
+        credentials: true,
+      })
+    );
 
     this.middlewares(appInit.middlewares);
     this.routes(appInit.controllers);
