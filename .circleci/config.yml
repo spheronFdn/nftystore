@@ -22,21 +22,21 @@ workflows:
           filters:
             branches:
               only: dev
-      # - aws-ecr/build-and-push-image:
-      #     context: production
-      #     region: "${AWS_REGION_PROD}"
-      #     registry-id: AWS_REGISTRY_ID_PROD
-      #     aws-access-key-id: AWS_ACCESS_KEY_ID
-      #     aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-      #     create-repo: false
-      #     dockerfile: Dockerfile
-      #     name: aws-ecr-build-push-prod-premium
-      #     repo: nft-meta-widget
-      #     tag: prod-premium
-      #     extra-build-args: --build-arg CODE_VERSION=${CIRCLE_SHA1:0:7}
-      #     filters:
-      #       branches:
-      #         only: main
+      - aws-ecr/build-and-push-image:
+          context: production
+          region: "${AWS_REGION_PROD}"
+          registry-id: AWS_REGISTRY_ID_PROD
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: false
+          dockerfile: server/Dockerfile
+          name: aws-ecr-build-push-prod-premium
+          repo: nft-meta-widget
+          tag: prod-premium
+          extra-build-args: --build-arg CODE_VERSION=${CIRCLE_SHA1:0:7}
+          filters:
+            branches:
+              only: main
       # deploy - DEV
       - aws-ecs/deploy-service-update:
           context: develop
@@ -50,14 +50,14 @@ workflows:
             branches:
               only: dev
       # # deploy - PROD
-      # - aws-ecs/deploy-service-update:
-      #     context: production
-      #     cluster-name: "nft-meta-widget-prod-premium"
-      #     container-image-name-updates: "container=nft-meta-widget-prod-premium,tag=prod-premium"
-      #     family: "nft-meta-widget-prod-premium-akash-logs-check"
-      #     aws-region: AWS_REGION_PROD
-      #     requires:
-      #       - aws-ecr-build-push-prod-premium
-      #     filters:
-      #       branches:
-      #         only: main
+      - aws-ecs/deploy-service-update:
+          context: production
+          cluster-name: "nft-meta-widget-prod-premium"
+          container-image-name-updates: "container=nft-meta-widget-prod-premium,tag=prod-premium"
+          family: "nft-meta-widget-prod-premium-api"
+          aws-region: AWS_REGION_PROD
+          requires:
+            - aws-ecr-build-push-prod-premium
+          filters:
+            branches:
+              only: main

@@ -60,9 +60,17 @@ class UploadService {
         apiToken
       );
 
+      FileUtils.createFile(
+        `${config.rootUploadDirectory}/.${deploymentId}`,
+        JSON.stringify({ projectName, protocol })
+      );
+
       setTimeout(() => {
         Logger.info(`File cleanup - ${uploadDir}`);
         safePromise(FileUtils.deleteDir(uploadDir));
+        safePromise(
+          FileUtils.deleteDir(`${config.rootUploadDirectory}/.${deploymentId}`)
+        );
       }, Number(config.maxUploadTimeout));
 
       return {

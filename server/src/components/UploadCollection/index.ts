@@ -8,6 +8,7 @@ import {
 import HostingApi from "../HostingApi/service";
 import IDeployment from "../HostingApi/deployment-interface";
 import { getTokenFromHeader } from "../Utils/helpers";
+import { FileUtils } from "../Utils/file-utils";
 
 export async function uploadCollection(
   req: Request,
