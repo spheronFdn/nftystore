@@ -1,24 +1,24 @@
 interface IEnvironmentConfig {
   api: {
-    BASE_URI: string;
+    API_URL: string;
   };
 }
 const NODE_ENV: string = process.env.REACT_APP_STAGE || "local";
 const development: IEnvironmentConfig = {
   api: {
-    BASE_URI: process.env.REACT_APP_BASE_URI || "",
+    API_URL: process.env.REACT_APP_API_URL || "",
   },
 };
 
 const local: IEnvironmentConfig = {
   api: {
-    BASE_URI: process.env.REACT_APP_BASE_URI || "",
+    API_URL: process.env.REACT_APP_API_URL || "",
   },
 };
 
 const production: IEnvironmentConfig = {
   api: {
-    BASE_URI: process.env.REACT_APP_BASE_URI || "",
+    API_URL: process.env.REACT_APP_API_URL || "",
   },
 };
 

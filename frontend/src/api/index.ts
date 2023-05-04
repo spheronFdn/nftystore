@@ -19,7 +19,7 @@ export const uploadFiles = async (
   formData.append("projectName", projectName);
   try {
     const response = await axios({
-      url: `${config.api.BASE_URI}/uploadCollection?protocol=${protocol}&projectName=${projectName}`,
+      url: `${config.api.API_URL}/uploadCollection?protocol=${protocol}&projectName=${projectName}`,
       data: formData,
       method: "POST",
       headers: {
@@ -43,7 +43,7 @@ export const uploadMetadata = async (
 ): Promise<IUploadMetadataResponse> => {
   try {
     const response = await axios({
-      url: `${config.api.BASE_URI}/uploadMetadata?protocol=${protocol}&uploadId=${uploadId}`,
+      url: `${config.api.API_URL}/uploadMetadata?protocol=${protocol}&uploadId=${uploadId}`,
       data: { uploadId, fileNames, baseUrl: url },
       method: "POST",
       headers: {
