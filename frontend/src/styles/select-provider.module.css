@@ -24,6 +24,7 @@
   justify-content: right;
   display: flex;
   margin-top: 2rem;
+  margin-bottom: 4rem;
 }
 
 @media (max-width: 800px) {
