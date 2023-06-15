@@ -1,11 +1,8 @@
 import fs from "fs";
 import Logger from "../../logger/logger";
 import { FileUtils } from "../Utils/file-utils";
-import { Request } from "express";
 import FormData from "form-data";
-import { v4 as uuidv4 } from "uuid";
 import HostingApi from "../HostingApi/service";
-import { IProject } from "../HostingApi/project-interface";
 import IDeployment from "../HostingApi/deployment-interface";
 import config from "../../config/config";
 import {
@@ -36,30 +33,7 @@ class MetadataService {
 
       uploadDir = metadata.projectName;
 
-      const form = new FormData();
-
-      for (let image of fileNames) {
-        const fileName = image.split(".")[0];
-        const fullPathMetaFile = `${config.rootUploadDirectory}/${uploadDir}/${fileName}.json`;
-
-        let rawdata = fs.readFileSync(fullPathMetaFile);
-
-        if (!rawdata) {
-          throw new Error(`Missing json file for ${image}`);
-        }
-
-        let metadata = JSON.parse(rawdata.toString());
-        metadata.image = `${
-          baseUrl.includes("https://") ? "" : "https://"
-        }${baseUrl}/${image}`;
-
-        fs.writeFileSync(fullPathMetaFile, JSON.stringify(metadata));
-
-        form.append(
-          `${fileName}.${JSON_EXTENSION}`,
-          fs.createReadStream(fullPathMetaFile)
-        );
-      }
+      const form = this.createMetadataForm(fileNames, baseUrl, uploadDir);
 
       const { deploymentId, url, spheronUrl } = await HostingApi.uploadFiles(
         metadata.protocol,
@@ -90,6 +64,40 @@ class MetadataService {
       );
     }
   }
+
+  private createMetadataForm(
+    fileNames: string[],
+    baseUrl: string,
+    uploadDir: string
+  ): FormData {
+    const form = new FormData();
+
+    for (let image of fileNames) {
+      const fileName = image.split(".")[0];
+      const fullPathMetaFile = `${config.rootUploadDirectory}/${uploadDir}/${fileName}.json`;
+
+      let rawdata = fs.readFileSync(fullPathMetaFile);
+
+      if (!rawdata) {
+        throw new Error(`Missing json file for ${image}`);
+      }
+
+      let metadata = JSON.parse(rawdata.toString());
+      metadata.image = `${
+        baseUrl.includes("https://") ? "" : "https://"
+      }${baseUrl}/${image}`;
+
+      fs.writeFileSync(fullPathMetaFile, JSON.stringify(metadata));
+
+      form.append(
+        `${fileName}.${JSON_EXTENSION}`,
+        fs.createReadStream(fullPathMetaFile)
+      );
+    }
+
+    return form;
+  }
 }
+
 
 export default new MetadataService();
